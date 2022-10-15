@@ -31,6 +31,7 @@ public class PlayerInput : MonoBehaviour
         {
              Debug.Log("Dodge Right");
         }
+        GameManager.Instance.TileManager.MoveToTile((int)dir);
     }
 
     public void OnAttack()

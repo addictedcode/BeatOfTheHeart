@@ -18,6 +18,11 @@ public class Forte : MonoBehaviour
     {
 
     }
+
+    public void Stutter()
+    {
+
+    }
     #endregion
 
     #region Health

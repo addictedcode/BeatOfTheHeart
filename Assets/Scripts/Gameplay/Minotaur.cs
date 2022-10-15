@@ -26,10 +26,19 @@ public class Minotaur : MonoBehaviour
 
         if(currentCombo < 4)
         {
-            if (Random.Range(0, 2) == 0)
-                MeleeAttack();
-            else
-                ProjectileAttack();
+            int rand = Random.Range(0, 3);
+            switch (rand)
+            {
+                case 0:
+                    MeleeAttack();
+                    break;
+                case 1:
+                    ProjectileAttack();
+                    break;
+                case 2:
+                    MultiAttack();
+                    break;
+            }
 
             currentCombo++;
         }
@@ -53,12 +62,12 @@ public class Minotaur : MonoBehaviour
 
     }
 
-    private void SpecialAttack()
+    private void MultiAttack()
     {
 
     }
 
-    private void MultiAttack()
+    private void SpecialAttack()
     {
 
     }

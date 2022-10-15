@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
 
     public Forte Player => player;
     public Minotaur Minotaur => minotaur;
+    public TileManager TileManager => tileManager;
 
     private void Awake()
     {
