@@ -1,0 +1,40 @@
+using System;
+using UnityEngine;
+
+public class SFXManager : MonoBehaviour
+{
+    public static SFXManager Instance { get; private set; }
+
+    [SerializeField] private SFXFile[] _SFX;
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+            Destroy(gameObject);
+        else
+            Instance = this;
+        DontDestroyOnLoad(gameObject);
+
+        foreach (SFXFile s in _SFX)
+        {
+            s.source = gameObject.AddComponent<AudioSource>();
+            s.source.clip = s.clip;
+
+            s.source.volume = s.volume;
+            s.source.pitch = s.pitch;
+            s.source.loop = s.loop;
+        }
+    }
+
+    public void Play(string name)
+    {
+        SFXFile s = Array.Find(_SFX, audio => audio.name == name);
+        if (s == null)
+        {
+            Debug.LogWarning("SFX: " + name + " not found!");
+            return;
+        }
+
+        s.source.PlayOneShot(s.clip);
+    }
+}
