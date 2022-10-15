@@ -6,7 +6,6 @@ using UnityEngine;
 public class BeatsManagerObject : MonoBehaviour
 {
     [SerializeField] private float windowBeatTime = 0.1f;
-    [SerializeField] private float offsetBeatTime = 0.1f;
     private float secondsPerBeat;
     private float currentLoopTime;
 
@@ -16,7 +15,6 @@ public class BeatsManagerObject : MonoBehaviour
     private void Awake()
     {
         BeatsManager.windowBeatTime = windowBeatTime;
-        BeatsManager.offsetBeatTime = offsetBeatTime;
         MusicManager.OnPlayMusic += OnPlayMusic;
         MusicManager.OnStopMusic += OnStopMusic;
     }
