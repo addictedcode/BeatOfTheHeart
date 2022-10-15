@@ -73,7 +73,7 @@ public class Minotaur : MonoBehaviour
 
     private void Death()
     {
-
+        GameManager.Instance.EndGame(false);
     }
     #endregion
 }
