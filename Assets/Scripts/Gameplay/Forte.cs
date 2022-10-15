@@ -9,8 +9,6 @@ public class Forte : MonoBehaviour
     [SerializeField] private int reflectDamage = 5;
 
     #region Actions
-    
-
     public void Attack()
     {
 
@@ -31,7 +29,7 @@ public class Forte : MonoBehaviour
 
     private void Death()
     {
-
+        GameManager.Instance.EndGame(true);
     }
     #endregion
 }

@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Forte player;
     [SerializeField] private Minotaur minotaur;
 
+    public static bool IsPlaying = true;
+
     public Forte Player => player;
     public Minotaur Minotaur => minotaur;
 
@@ -20,5 +22,10 @@ public class GameManager : MonoBehaviour
         else
             Instance = this;
         DontDestroyOnLoad(gameObject);
+    }
+
+    public void EndGame(bool isVictory)
+    {
+        IsPlaying = false;
     }
 }
