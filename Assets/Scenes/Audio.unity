@@ -153,7 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   windowBeatTime: 0.1
-  offSetBeatTime: 0
+  offsetBeatTime: 0.05
 --- !u!4 &734743435
 Transform:
   m_ObjectHideFlags: 0

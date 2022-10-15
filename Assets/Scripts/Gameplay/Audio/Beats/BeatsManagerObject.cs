@@ -41,6 +41,7 @@ public class BeatsManagerObject : MonoBehaviour
     {
         secondsPerBeat = 60.0f / BeatsManager.BPM;
         window = BeatWindow.OnBeforeBeatWindow;
+        currentMusicDuration = -offsetBeatTime;
         isPlayingMusic = true;
         
     }
