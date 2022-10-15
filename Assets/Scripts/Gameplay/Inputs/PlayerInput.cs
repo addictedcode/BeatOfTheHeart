@@ -6,8 +6,6 @@ using UnityEngine.InputSystem;
 
 public class PlayerInput : MonoBehaviour
 {
-    public GameObject beatIndication;
-
     private void Awake()
     {
         BeatsManager.OnBeat += OnBeat;
