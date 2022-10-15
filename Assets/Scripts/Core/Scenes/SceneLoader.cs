@@ -11,7 +11,7 @@ public static class SceneLoader
     public static AsyncOperation currentOp;
     public static Action onStartSceneLoad;
 
-    public static void LoadScene(string scene)
+    public static void LoadSceneWithLoadingBar(string scene)
     {
         currentScene = scene;
         _ = LoadLoadingBarAsync();
@@ -32,6 +32,15 @@ public static class SceneLoader
             await Task.Delay(10);
         }
 
-        //SceneManager.UnloadSceneAsync("LoadingScene");
+        SceneManager.UnloadSceneAsync("LoadingScene");
+    }
+
+    public static void LoadScene(string scene)
+    {
+        SceneManager.LoadSceneAsync(scene, LoadSceneMode.Additive);        
+    }
+    public static void UnloadScene(string scene)
+    {
+        SceneManager.UnloadSceneAsync(scene);
     }
 }
