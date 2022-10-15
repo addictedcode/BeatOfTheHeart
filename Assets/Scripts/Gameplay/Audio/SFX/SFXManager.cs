@@ -1,11 +1,13 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class SFXManager : MonoBehaviour
 {
     public static SFXManager Instance { get; private set; }
 
-    [SerializeField] private SFXFile[] _SFX;
+    [SerializeField] private SFXFile[] _SFXFiles;
+    private readonly Dictionary<string, SFXFile> _SFX = new();
 
     private void Awake()
     {
@@ -15,7 +17,7 @@ public class SFXManager : MonoBehaviour
             Instance = this;
         DontDestroyOnLoad(gameObject);
 
-        foreach (SFXFile s in _SFX)
+        foreach (SFXFile s in _SFXFiles)
         {
             s.source = gameObject.AddComponent<AudioSource>();
             s.source.clip = s.clip;
@@ -23,12 +25,13 @@ public class SFXManager : MonoBehaviour
             s.source.volume = s.volume;
             s.source.pitch = s.pitch;
             s.source.loop = s.loop;
+            _SFX.Add(s.name, s);
         }
     }
 
     public void Play(string name)
     {
-        SFXFile s = Array.Find(_SFX, audio => audio.name == name);
+        SFXFile s = _SFX[name];
         if (s == null)
         {
             Debug.LogWarning("SFX: " + name + " not found!");
