@@ -450,7 +450,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 612bf3ebc81ee24468be16c9a9258e0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  testhealth: 100
+  health: 100
+  minotaurState: 0
+  windupState: 0
 --- !u!1 &182641453
 GameObject:
   m_ObjectHideFlags: 0
