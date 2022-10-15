@@ -363,6 +363,7 @@ GameObject:
   m_Component:
   - component: {fileID: 89210820}
   - component: {fileID: 89210819}
+  - component: {fileID: 89210821}
   m_Layer: 0
   m_Name: BOSS_BASE
   m_TagString: Untagged
@@ -437,6 +438,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: -7.979, z: 0}
+--- !u!95 &89210821
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 89210818}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2358ccb207fb2a24f8d975e22d9a740f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &182641453
 GameObject:
   m_ObjectHideFlags: 0
@@ -2072,6 +2093,53 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 900761605}
   m_Mesh: {fileID: 607603000665971326, guid: e740f209dc0f735459aa404feac30b1a, type: 3}
+--- !u!1 &911686400
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 911686402}
+  - component: {fileID: 911686401}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &911686401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 911686400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44e58a4270b27f24e8a735c8b7ba2abf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tileManager: {fileID: 1526022661}
+  player: {fileID: 2012985068}
+  minotaur: {fileID: 0}
+--- !u!4 &911686402
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 911686400}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.2885301, y: -2.300956, z: 7.243334}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &942184783
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3358,11 +3426,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a296581add55a94eafe0387356810be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 2012985063}
   tiles:
   - {fileID: 1527397169}
   - {fileID: 952703814}
   - {fileID: 1534484221}
+  currentTile: 1
 --- !u!4 &1526022662
 Transform:
   m_ObjectHideFlags: 0
@@ -4764,6 +4832,8 @@ GameObject:
   - component: {fileID: 2012985065}
   - component: {fileID: 2012985064}
   - component: {fileID: 2012985066}
+  - component: {fileID: 2012985067}
+  - component: {fileID: 2012985068}
   m_Layer: 0
   m_Name: Square
   m_TagString: Untagged
@@ -4932,6 +5002,33 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &2012985067
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2012985063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: beac165b8f7429448b2ac62868c9c200, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2012985068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2012985063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99fa79ee20f9fbb45a807a0ade4668e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 3
+  attackDamage: 10
+  reflectDamage: 5
 --- !u!1 &2030319649
 GameObject:
   m_ObjectHideFlags: 0

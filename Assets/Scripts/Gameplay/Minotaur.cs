@@ -4,57 +4,119 @@ using UnityEngine;
 
 public class Minotaur : MonoBehaviour
 {
+    private enum MinotaurState
+    {
+        Idle,
+        Windup,
+        Attack,
+        Cooldown
+    }
+
+    private enum WindupState
+    {
+        None,
+        LeftWindup,
+        RightWindup,
+    }
+
     [SerializeField] private int health = 100;
 
     private int currentCombo;
-    private bool canAttack;
+
+    [SerializeField] private MinotaurState minotaurState = MinotaurState.Idle;
+    [SerializeField] private WindupState windupState = WindupState.None;
+    private Animator animator;
 
     private void Awake()
     {
-        BeatsManager.OnBeat += DecideMove;
+        animator = GetComponent<Animator>();
+        BeatsManager.OnBeat += DoMove;
     }
 
     private void OnDestroy()
     {
-        BeatsManager.OnBeat -= DecideMove;
+        BeatsManager.OnBeat -= DoMove;
     }
 
     #region Actions
-    private void DecideMove(float num)
+    private void DoMove(float num)
     {
-        if (!canAttack) return;
-
-        if(currentCombo < 4)
+        switch (minotaurState)
         {
-            int rand = Random.Range(0, 3);
-            switch (rand)
-            {
-                case 0:
-                    MeleeAttack();
-                    break;
-                case 1:
-                    ProjectileAttack();
-                    break;
-                case 2:
-                    MultiAttack();
-                    break;
-            }
-
-            currentCombo++;
+            case MinotaurState.Idle:
+                DecideAttack();
+                break;
+            case MinotaurState.Windup:
+                DoAttack();
+                break;
+            case MinotaurState.Attack:
+                DecideAttack();
+                break;
+            case MinotaurState.Cooldown:
+                break;
         }
-        else
+        
+    }
+
+    private void DecideAttack()
+    {
+        MeleeAttack();
+        //if (currentCombo < 4)
+        //{
+        //    int rand = Random.Range(0, 3);
+        //    switch (rand)
+        //    {
+        //        case 0:
+        //            MeleeAttack();
+        //            break;
+        //        case 1:
+        //            ProjectileAttack();
+        //            break;
+        //        case 2:
+        //            MultiAttack();
+        //            break;
+        //    }
+
+        //    currentCombo++;
+        //}
+        //else
+        //{
+        //    SpecialAttack();
+
+        //    currentCombo = 0;
+        //}
+
+        minotaurState = MinotaurState.Windup;
+    }
+
+    private void DoAttack()
+    {
+        switch (windupState)
         {
-            SpecialAttack();
-
-            currentCombo = 0;
+            case WindupState.LeftWindup:
+                animator.Play("LeftSwing");
+                break;
+            case WindupState.RightWindup:
+                animator.Play("RightSwing");
+                break;
         }
 
-        canAttack = false;
+        minotaurState = MinotaurState.Attack;
+        windupState = WindupState.None;
     }
 
     private void MeleeAttack()
     {
-
+        if (Random.Range(0, 2) == 0)
+        {
+            animator.Play("LeftWindup");
+            windupState = WindupState.LeftWindup;
+        }
+        else
+        {
+            animator.Play("RightWindup");
+            windupState = WindupState.RightWindup;
+        }
     }
 
     private void ProjectileAttack()
