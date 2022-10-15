@@ -7,9 +7,17 @@ public class MusicPlayer : MonoBehaviour
 {
     private AudioSource audioSource;
 
+    //TEMP
+    [SerializeField] private MusicFile musicFile;
+
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
+    }
+
+    private void Start()
+    {
+        PlayMusic(musicFile);
     }
 
     public void PlayMusic(MusicFile music)

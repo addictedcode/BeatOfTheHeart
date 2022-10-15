@@ -153,6 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   windowBeatTime: 0.1
+  offSetBeatTime: 0
 --- !u!4 &734743435
 Transform:
   m_ObjectHideFlags: 0
@@ -253,6 +254,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9be153adbb36e2b48ba20bed8de5fae3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  musicFile: {fileID: 11400000, guid: 342da0686d88ad649adfb617286d45db, type: 2}
 --- !u!82 &1814582738
 AudioSource:
   m_ObjectHideFlags: 0
@@ -267,7 +269,7 @@ AudioSource:
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
