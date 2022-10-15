@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Minotaur : MonoBehaviour
 {
-    private int health = 100;
+    [SerializeField] private int health = 100;
 
     private int currentCombo;
     private bool canAttack;
@@ -19,6 +19,7 @@ public class Minotaur : MonoBehaviour
         BeatsManager.OnBeat -= DecideMove;
     }
 
+    #region Actions
     private void DecideMove(float num)
     {
         if (!canAttack) return;
@@ -57,6 +58,13 @@ public class Minotaur : MonoBehaviour
 
     }
 
+    private void MultiAttack()
+    {
+
+    }
+    #endregion
+
+    #region Health
     public void TakeDamage(int damage)
     {
         health -= damage;
@@ -67,4 +75,5 @@ public class Minotaur : MonoBehaviour
     {
 
     }
+    #endregion
 }

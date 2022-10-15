@@ -4,29 +4,14 @@ using UnityEngine;
 
 public class TileManager : MonoBehaviour
 {
-    public static TileManager Instance { get; private set; }
-
-    [SerializeField] private GameObject player;
     [SerializeField] private Transform[] tiles;
 
-    private int currentTile = 1;
-
-    private void Awake()
-    {
-        if (Instance != null && Instance != this)
-            Destroy(gameObject);
-        else
-            Instance = this;
-        DontDestroyOnLoad(gameObject);
-    }
+    public int currentTile = 1;
 
     public void MoveToTile(int dir)
     {
         if (CheckValidTile(dir))
-        {
-            player.transform.position = tiles[currentTile += dir].transform.position;
-        }
-            
+            GameManager.Instance.Player.transform.position = tiles[currentTile += dir].transform.position;
         else
             Debug.Log("Failed Jump");
     }
