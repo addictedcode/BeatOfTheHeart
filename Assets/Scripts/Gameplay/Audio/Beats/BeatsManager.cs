@@ -11,6 +11,7 @@ public static class BeatsManager
     public static float offsetBeatTime = 0.1f;
 
     public static Action<float> OnBeat;
+    public static Action<float> OnHalfBeat;
 
     public static bool CalculateIfTimeIsInWindow(float time)
     {

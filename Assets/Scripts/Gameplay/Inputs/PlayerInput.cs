@@ -6,41 +6,69 @@ using UnityEngine.InputSystem;
 
 public class PlayerInput : MonoBehaviour
 {
+    private bool hadInputThisBeat = false;
+
     private void Awake()
     {
-        BeatsManager.OnBeat += OnBeat;
+        BeatsManager.OnHalfBeat += OnHalfBeat;
     }
 
     private void OnDestroy()
     {
-        BeatsManager.OnBeat -= OnBeat;
+        BeatsManager.OnHalfBeat -= OnHalfBeat;
     }
 
-    private void OnBeat(float time)
+    private void OnHalfBeat(float time)
     {
+        hadInputThisBeat = false;
     }
 
     public void OnDodge(InputValue value)
     {
         float dir = value.Get<float>();
-        if (dir < 0)
+        if (dir != 0)
         {
-            Debug.Log("Dodge Left");
+            if (hadInputThisBeat)
+                return; //Maybe add consequence
+            if (BeatsManager.CalculateIfTimeIsInWindow(MusicManager.audioSource.time))
+            {
+                hadInputThisBeat = true;
+                GameManager.Instance.TileManager.MoveToTile((int)dir);
+            }
+            else
+            {
+                //Punish
+            }
         }
-        else if (dir > 0)
-        {
-             Debug.Log("Dodge Right");
-        }
-        GameManager.Instance.TileManager.MoveToTile((int)dir);
     }
 
     public void OnAttack()
     {
-        Debug.Log(BeatsManager.CalculateIfTimeIsInWindow(MusicManager.audioSource.time));
+        if (hadInputThisBeat)
+            return; //Maybe add consequence
+        if (BeatsManager.CalculateIfTimeIsInWindow(MusicManager.audioSource.time))
+        {
+            hadInputThisBeat = true;
+            //Attack
+        }
+        else
+        {
+            //Punish
+        }
     }
 
     public void OnReflect()
     {
-        Debug.Log("Reflecting");
+        if (hadInputThisBeat)
+            return; //Maybe add consequence
+        if (BeatsManager.CalculateIfTimeIsInWindow(MusicManager.audioSource.time))
+        {
+            hadInputThisBeat = true;
+            //Reflect
+        }
+        else
+        {
+            //Punish
+        }
     }
 }
