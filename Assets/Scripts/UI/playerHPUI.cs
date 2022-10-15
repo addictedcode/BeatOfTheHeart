@@ -8,7 +8,12 @@ public class playerHPUI : MonoBehaviour
     [SerializeField] private GameObject fillImage;
     [SerializeField] private GameObject bgImage;
 
-    public void startAnims()
+    public void Awake()
+    {
+        BeatsManager.OnBeat += startAnims;
+    }
+
+    public void startAnims(float num)
     {
         fillImage.GetComponent<Animator>().enabled = true;
         bgImage.GetComponent<Animator>().enabled = true;
