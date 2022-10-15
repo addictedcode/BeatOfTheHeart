@@ -7,7 +7,7 @@ public static class BeatsManager
 {
     public static uint BPM = 120;
 
-    public static Action OnBeat;
+    public static Action<float> OnBeat;
     public static Action OnBeforeBeatWindow;
     public static Action OnAfterBeatWindow;
 

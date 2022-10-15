@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 public class PlayerInput : MonoBehaviour
 {
     private bool isInBeatWindow = false;
+    private float onBeatTime;
 
     private void Awake()
     {
@@ -22,9 +23,9 @@ public class PlayerInput : MonoBehaviour
         BeatsManager.OnBeat -= OnBeat;
     }
 
-    private void OnBeat()
+    private void OnBeat(float time)
     {
-        //Debug.Log("Beat");
+        onBeatTime = time;
     }
 
     private void OnBeforeBeatWindow() 
@@ -66,14 +67,15 @@ public class PlayerInput : MonoBehaviour
 
     public void OnAttack()
     {
-        if (isInBeatWindow)
+        Debug.Log(Time.time - onBeatTime);
+        /*if (isInBeatWindow)
         {
             Debug.Log("Attacking");
         }
         else
         {
             Debug.Log("Fail Attack");
-        }
+        }*/
     }
 
     public void OnReflect()

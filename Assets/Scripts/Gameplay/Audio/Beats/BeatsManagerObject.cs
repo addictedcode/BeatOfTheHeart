@@ -10,9 +10,10 @@ public class BeatsManagerObject : MonoBehaviour
     private float secondsPerBeat;
     private float secondsPerBeatWindow;
 
-    private float currentMusicDuration = 0.0f;
     private float currentLoopTime = 0.0f;
     private bool isPlayingMusic = false;
+
+    public AudioSource source;
 
     enum BeatWindow
     {
@@ -41,7 +42,6 @@ public class BeatsManagerObject : MonoBehaviour
     {
         secondsPerBeat = 60.0f / BeatsManager.BPM;
         window = BeatWindow.OnBeforeBeatWindow;
-        currentMusicDuration = -offsetBeatTime;
         isPlayingMusic = true;
         
     }
@@ -49,15 +49,13 @@ public class BeatsManagerObject : MonoBehaviour
     void OnStopMusic() 
     {
         isPlayingMusic = false;
-        currentMusicDuration = 0.0f;
     }
 
     private void Update()
     {
         if (isPlayingMusic)
         {
-            currentMusicDuration += Time.deltaTime;
-            currentLoopTime = currentMusicDuration % secondsPerBeat;
+            currentLoopTime = source.time % secondsPerBeat;
             if (window == BeatWindow.NotOnBeatWindow)
             {
                 if (currentLoopTime > secondsPerBeat - secondsPerBeatWindow)
@@ -70,7 +68,7 @@ public class BeatsManagerObject : MonoBehaviour
             {
                 if (currentLoopTime > 0.0f && currentLoopTime < secondsPerBeatWindow)
                 {
-                    BeatsManager.OnBeat?.Invoke();
+                    BeatsManager.OnBeat?.Invoke(Time.time);
                     window = BeatWindow.OnAfterBeatWindow;
                 }
             }
