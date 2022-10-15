@@ -13,6 +13,7 @@ public class MusicPlayer : MonoBehaviour
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
+        MusicManager.audioSource = audioSource;
     }
 
     private void Start()
