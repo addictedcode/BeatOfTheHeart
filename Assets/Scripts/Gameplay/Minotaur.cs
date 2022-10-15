@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Minotaur : MonoBehaviour
 {
+    private int health = 100;
+
     private int currentCombo;
     private bool canAttack;
 
@@ -51,6 +53,17 @@ public class Minotaur : MonoBehaviour
     }
 
     private void SpecialAttack()
+    {
+
+    }
+
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+        if (health <= 0) Death();
+    }
+
+    private void Death()
     {
 
     }
