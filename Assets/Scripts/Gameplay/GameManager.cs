@@ -29,4 +29,9 @@ public class GameManager : MonoBehaviour
     {
         IsPlaying = false;
     }
+
+    public void spawnIndicator(int num)
+    {
+        tileManager.activateIndicator(num);
+    }
 }

@@ -5,6 +5,7 @@ using UnityEngine;
 public class TileManager : MonoBehaviour
 {
     [SerializeField] private Transform[] tiles;
+    [SerializeField] private GameObject attackIndicator;
 
     public int currentTile = 1;
 
@@ -17,4 +18,10 @@ public class TileManager : MonoBehaviour
     }
 
     private bool CheckValidTile(int dir) => currentTile + dir >= 0 && currentTile + dir < tiles.Length;
+
+    public void activateIndicator(int num)
+    {
+        if(num == 0 || num == 1)
+            Instantiate(attackIndicator, tiles[num].position, tiles[num].rotation);
+    }
 }
