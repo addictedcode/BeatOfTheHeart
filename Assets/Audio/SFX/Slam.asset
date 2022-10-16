@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Slam
   m_EditorClassIdentifier: 
   clip: {fileID: 8300000, guid: c66b3edf213f1124c9a7ad72eedad0bb, type: 3}
-  volume: 1
+  volume: 0.5
   pitch: 1
   loop: 0
   source: {fileID: 0}

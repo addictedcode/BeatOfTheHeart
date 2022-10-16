@@ -95,9 +95,11 @@ public class Minotaur : MonoBehaviour
         {
             case WindupState.LeftWindup:
                 animator.Play("LeftSwing");
+                SFXManager.Instance.PlayOneShot("Slam");
                 break;
             case WindupState.RightWindup:
                 animator.Play("RightSwing");
+                SFXManager.Instance.PlayOneShot("Slam");
                 break;
         }
 

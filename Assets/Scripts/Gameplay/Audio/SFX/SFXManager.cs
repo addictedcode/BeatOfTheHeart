@@ -29,7 +29,7 @@ public class SFXManager : MonoBehaviour
         }
     }
 
-    public void Play(string name)
+    public void PlayOneShot(string name)
     {
         SFXFile s = _SFX[name];
         if (s == null)
