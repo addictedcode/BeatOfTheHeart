@@ -13,13 +13,8 @@ MonoBehaviour:
   m_Name: Combo1
   m_EditorClassIdentifier: 
   combo:
-  - MeleeLeft
-  - MeleeLeft
-  - MeleeLeft
-  - MeleeRight
-  - MeleeRight
-  - MeleeRight
-  - MeleeLeft
-  - MeleeRight
-  - MeleeLeft
-  - MeleeRight
+  - ProjectileLeft
+  - ProjectileRight
+  - ProjectileRight
+  - ProjectileRight
+  - ProjectileRight
