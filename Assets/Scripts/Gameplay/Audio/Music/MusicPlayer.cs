@@ -16,6 +16,7 @@ public class MusicPlayer : MonoBehaviour
 
     public void PlayMusic(MusicFile music)
     {
+        audioSource.Stop();
         BeatsManager.BPM = music.BPM;
         audioSource.clip = music.Clip;
         audioSource.Play();

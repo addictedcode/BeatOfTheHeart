@@ -8,6 +8,13 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private Stage gameStage;
     [SerializeField][Scene] private string settingsScene;
 
+    [SerializeField] private MusicFile mainMenuMusic;
+
+    private void Start()
+    {
+        MusicManager.player.PlayMusic(mainMenuMusic);
+    }
+
     public void OnStartPress()
     {
         SceneLoader.onFinishSceneLoad += () => { MusicManager.player.PlayMusic(gameStage.musicFile); };
