@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class MinoAttackIndicator : MonoBehaviour
+public class minoAttackIndicator : MonoBehaviour
 {
     private readonly WaitForSeconds lifespan = new(0.5f);
 
