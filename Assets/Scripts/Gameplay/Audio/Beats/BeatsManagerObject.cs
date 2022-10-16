@@ -48,6 +48,7 @@ public class BeatsManagerObject : MonoBehaviour
             {
                 BeatsManager.OnBeat?.Invoke(Time.time);
                 hasPlayedHalfBeat = false;
+                hasPlayedAfterWindowBeat = false;
                 currentLoopTime -= secondsPerBeat;
             }
             if (currentLoopTime >= secondsPerBeat / 2 && !hasPlayedHalfBeat)
