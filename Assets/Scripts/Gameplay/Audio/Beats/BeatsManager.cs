@@ -12,6 +12,7 @@ public static class BeatsManager
 
     public static Action<float> OnBeat;
     public static Action<float> OnHalfBeat;
+    public static Action<float> OnAfterWindowBeat;
 
     public static bool CalculateIfTimeIsInWindow(float time)
     {

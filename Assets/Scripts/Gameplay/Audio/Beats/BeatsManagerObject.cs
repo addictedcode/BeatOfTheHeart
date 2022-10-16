@@ -11,6 +11,7 @@ public class BeatsManagerObject : MonoBehaviour
 
     private bool isPlayingMusic = false;
     private bool hasPlayedHalfBeat = false;
+    private bool hasPlayedAfterWindowBeat = false;
 
     private void Awake()
     {
@@ -49,10 +50,15 @@ public class BeatsManagerObject : MonoBehaviour
                 hasPlayedHalfBeat = false;
                 currentLoopTime -= secondsPerBeat;
             }
-            else if (currentLoopTime >= secondsPerBeat / 2 && !hasPlayedHalfBeat)
+            if (currentLoopTime >= secondsPerBeat / 2 && !hasPlayedHalfBeat)
             {
                 BeatsManager.OnHalfBeat?.Invoke(Time.time);
                 hasPlayedHalfBeat = true;
+            }
+            if (currentLoopTime >= windowBeatTime / 2 && !hasPlayedAfterWindowBeat)
+            {
+                BeatsManager.OnAfterWindowBeat?.Invoke(Time.time);
+                hasPlayedAfterWindowBeat = true;
             }
         }
     }
