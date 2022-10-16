@@ -23,6 +23,29 @@ public class MusicPlayer : MonoBehaviour
         MusicManager.OnPlayMusic.Invoke();
     }
 
+    public void PlayMusicAfterDelay(MusicFile music, float delay)
+    {
+        StartCoroutine(Delay());
+        IEnumerator Delay()
+        {
+            yield return new WaitForSeconds(delay);
+            PlayMusic(music);
+        }
+    }
+
+    public void PauseMusic(bool pause)
+    {
+        if (pause)
+            audioSource.Pause();
+        else
+            audioSource.UnPause();
+    }
+
+    public void StopMusic()
+    {
+        audioSource.Stop();
+    }
+
     public IEnumerator FadeMusic(string name, float duration, float targetVolume)
     {
         float currentTime = 0;

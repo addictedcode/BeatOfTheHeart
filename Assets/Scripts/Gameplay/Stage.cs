@@ -5,6 +5,6 @@ using UnityEngine;
 public class Stage : ScriptableObject
 {
     public MusicFile musicFile;
-    public uint numberOfInitialBeats = 0;
+    public float timeBeforeGameActuallyStarts = 0.0f;
     [Scene] public List<string> gameScene;
 }

@@ -21,11 +21,11 @@ EditorBuildSettings:
     path: Assets/Scenes/Audio.unity
     guid: 5a5b937275c126746882e051a4d3b9d1
   - enabled: 1
-    path: Assets/Scenes/Player.unity
-    guid: 1442a59bde2fbe04ab74b48672dd7651
-  - enabled: 1
     path: Assets/Scenes/HUD.unity
     guid: 2235090eb5183f54ea5f214e0e0f1dcb
+  - enabled: 1
+    path: Assets/Scenes/Pause.unity
+    guid: da4caf946329e5344a1f99fb19b52e17
   - enabled: 1
     path: Assets/Scenes/MainGameplayScene.unity
     guid: 30f6be687fa53ac40abf914c6219edb5

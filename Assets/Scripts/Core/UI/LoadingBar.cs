@@ -25,7 +25,7 @@ public class LoadingBar : MonoBehaviour
     {
         while (!SceneLoader.CheckCurrentOpsIsDone())
         {
-            if (SceneLoader.GetAverageProgress() >= 0.9f && !SceneLoader.CheckAllowSceneActivation())
+            if (SceneLoader.GetAverageProgress() >= 0.89f && !SceneLoader.CheckAllowSceneActivation())
             {
                 pressAnyKeyToContinueText.SetActive(true);
             }
