@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class MainMenu : MonoBehaviour
 {
+    [SerializeField][Scene] private string gameScene;
     [SerializeField][Scene] private string settingsScene;
 
     public void OnStartPress()
     {
-
+        SceneLoader.LoadSceneWithLoadingBar(gameScene, true);
     }
 
     public void OnSettingsPress()
