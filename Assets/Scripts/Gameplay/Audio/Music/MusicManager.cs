@@ -7,4 +7,5 @@ public static class MusicManager
     public static Action OnStopMusic;
 
     public static AudioSource audioSource;
+    public static MusicPlayer player;
 }

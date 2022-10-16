@@ -7,18 +7,11 @@ public class MusicPlayer : MonoBehaviour
 {
     private AudioSource audioSource;
 
-    //TEMP
-    [SerializeField] private MusicFile musicFile;
-
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
         MusicManager.audioSource = audioSource;
-    }
-
-    private void Start()
-    {
-        PlayMusic(musicFile);
+        MusicManager.player = this;
     }
 
     public void PlayMusic(MusicFile music)

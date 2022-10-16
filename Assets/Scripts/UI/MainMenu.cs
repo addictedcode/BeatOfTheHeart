@@ -10,6 +10,7 @@ public class MainMenu : MonoBehaviour
 
     public void OnStartPress()
     {
+        SceneLoader.onFinishSceneLoad += () => { MusicManager.player.PlayMusic(gameStage.musicFile); };
         SceneLoader.LoadSceneWithLoadingBar(gameStage.gameScene, true);
         SceneManager.UnloadSceneAsync(gameObject.scene);
     }

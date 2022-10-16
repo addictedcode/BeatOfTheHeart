@@ -10,6 +10,7 @@ public static class SceneLoader
     public static string currentScene;
     public static AsyncOperation currentOp;
     public static Action onStartSceneLoad;
+    public static Action onFinishSceneLoad;
 
     public static void LoadSceneWithLoadingBar(string scene, bool shouldWait = false)
     {
@@ -33,6 +34,7 @@ public static class SceneLoader
             await Task.Delay(10);
         }
 
+        onFinishSceneLoad?.Invoke();
         SceneManager.UnloadSceneAsync("LoadingScene");
     }
 }

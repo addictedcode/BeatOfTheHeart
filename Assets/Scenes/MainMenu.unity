@@ -337,7 +337,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6aeb7d4da0577a440b6df7d46a067187, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameScene: testTile
+  gameStage: {fileID: 11400000, guid: 9feab2097cc1b0a40b20b560a3edba01, type: 2}
   settingsScene: Settings
 --- !u!1 &840376052
 GameObject:
