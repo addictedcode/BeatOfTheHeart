@@ -32,10 +32,7 @@ public class GameManager : MonoBehaviour
             player.TakeDamage(damage);
     }
 
-    public void ActivateIndicator(int num)
-    {
-        tileManager.ActivateIndicator(num);
-    }
+    public void ActivateIndicator(int num) => tileManager.ActivateIndicator(num);
     #endregion
 
     public void EndGame(bool isVictory)

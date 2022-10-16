@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Attack
   m_EditorClassIdentifier: 
   clip: {fileID: 8300000, guid: a6f43882aa7677642ac7a26a28df71ad, type: 3}
-  volume: 1
+  volume: 0.5
   pitch: 1
   loop: 0
   source: {fileID: 0}

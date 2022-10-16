@@ -55,8 +55,5 @@ public class Forte : MonoBehaviour
     }
     #endregion
 
-    private void AddSuperMeterValue(int value)
-    {
-        superMeterValue = Mathf.Clamp(superMeterValue += value, 0, maxSuperMeter);
-    }
+    private void AddSuperMeterValue(int value) => superMeterValue = Mathf.Clamp(superMeterValue += value, 0, maxSuperMeter);
 }

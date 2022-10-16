@@ -472,8 +472,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
+  meleeDamage: 1
+  projectileDamage: 1
+  specialDamage: 2
+  minotaurComboSOs:
+  - {fileID: 11400000, guid: 74a538a54a8069c4ea32d38b0ff5000b, type: 2}
   minotaurState: 0
-  windupState: 0
 --- !u!1 &182641453
 GameObject:
   m_ObjectHideFlags: 0
@@ -3415,8 +3419,8 @@ MonoBehaviour:
   - {fileID: 1527397169}
   - {fileID: 1534484221}
   attackIndicatorPrefab: {fileID: 6084252938587236089, guid: f6ef2393f8f322f4ebd34f3a4a3e3225, type: 3}
-  attackIndicators: []
   currentTile: 1
+  attackIndicators: []
 --- !u!4 &1526022662
 Transform:
   m_ObjectHideFlags: 0
@@ -5012,8 +5016,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 3
-  attackDamage: 10
+  attackDamage: 5
   reflectDamage: 5
+  attackAddSuper: 3
+  reflectAddSuper: 10
+  superMeterValue: 0
 --- !u!1 &2030319649
 GameObject:
   m_ObjectHideFlags: 0

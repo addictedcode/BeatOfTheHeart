@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Hurt
   m_EditorClassIdentifier: 
   clip: {fileID: 8300000, guid: c5d9555084875a7469c07fa4c7305f63, type: 3}
-  volume: 1
+  volume: 0.5
   pitch: 1
   loop: 0
   source: {fileID: 0}

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Roar
   m_EditorClassIdentifier: 
   clip: {fileID: 8300000, guid: aec3c070807ecdb4cba7f5984389f0e2, type: 3}
-  volume: 1
+  volume: 0.5
   pitch: 1
   loop: 0
   source: {fileID: 0}

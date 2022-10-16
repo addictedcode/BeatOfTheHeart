@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Select
   m_EditorClassIdentifier: 
   clip: {fileID: 8300000, guid: f1fdca4742a4f8a4b836f7426f5a9262, type: 3}
-  volume: 1
+  volume: 0.5
   pitch: 1
   loop: 0
   source: {fileID: 0}
