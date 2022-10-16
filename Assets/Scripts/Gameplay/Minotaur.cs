@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -33,6 +34,7 @@ public class Minotaur : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         BeatsManager.OnBeat += DoMove;
+        animator.Play("Idle");
     }
 
     private void OnDestroy()
@@ -77,10 +79,10 @@ public class Minotaur : MonoBehaviour
                     WindupMeleeRight();
                     break;
                 case "ProjectileLeft":
-                    WindupProjectileLeft();
+                    WindupProjectile(0);
                     break;
                 case "ProjectileRight":
-                    WindupProjectileRight();
+                    WindupProjectile(1);
                     break;
                 default:
                     WindupMeleeLeft();
@@ -98,10 +100,10 @@ public class Minotaur : MonoBehaviour
                     WindupMeleeRight();
                     break;
                 case 2:
-                    WindupProjectileLeft();
+                    WindupProjectile(0);
                     break;
                 case 3:
-                    WindupProjectileRight();
+                    WindupProjectile(1);
                     break;
             }
 
@@ -137,32 +139,32 @@ public class Minotaur : MonoBehaviour
         switch (minotaurState)
         {
             case MinotaurState.LeftWindup:
-                animator.Play("LeftSwing");
-                if(GameManager.Instance.Player.lastAction != Forte.PlayerActions.MoveToLeft)
-                    GameManager.Instance.CheckPlayerTakeDamage(meleeDamage, 1);
-                SFXManager.Instance.PlayOneShot("Slam");
+                StartCoroutine(DoAttack(meleeDamage, 1, "LeftSwing", "Slam"));
                 break;
             case MinotaurState.RightWindup:
-                animator.Play("RightSwing");
-                if (GameManager.Instance.Player.lastAction != Forte.PlayerActions.MoveToRight)
-                    GameManager.Instance.CheckPlayerTakeDamage(meleeDamage, 0);
-                SFXManager.Instance.PlayOneShot("Slam");
+                StartCoroutine(DoAttack(meleeDamage, 0, "RightSwing", "Slam"));
                 break;
             case MinotaurState.LeftWindupProjectile:
-                animator.Play("LeftSwing");
-                GameManager.Instance.CheckPlayerTakeDamage(projectileDamage, 1);
-                SFXManager.Instance.PlayOneShot("Fireball");
+                StartCoroutine(DoAttack(projectileDamage, 1, "Idle", "Fireball"));
+                GameManager.Instance.ActivateExplosion(1);
                 break;
             case MinotaurState.RightWindupProjectile:
-                animator.Play("RightSwing");
-                GameManager.Instance.CheckPlayerTakeDamage(projectileDamage, 0);
-                SFXManager.Instance.PlayOneShot("Fireball");
+                StartCoroutine(DoAttack(projectileDamage, 0, "Idle", "Fireball"));
+                GameManager.Instance.ActivateExplosion(0);
                 break;
             default:
                 break;
         }
 
         minotaurState = MinotaurState.Attack;
+    }
+
+    private IEnumerator DoAttack(int damage, int tile, string anim, string sfx)
+    {
+        animator.Play(anim);
+        SFXManager.Instance.PlayOneShot(sfx);
+        yield return new WaitForSeconds(0.18f);
+        GameManager.Instance.CheckPlayerTakeDamage(damage, tile);
     }
 
     private void WindupMeleeLeft()
@@ -179,16 +181,12 @@ public class Minotaur : MonoBehaviour
         minotaurState = MinotaurState.LeftWindup;
     }
 
-    private void WindupProjectileLeft()
+    private void WindupProjectile(int tile)
     {
-        GameManager.Instance.ActivateIndicator(0);
-        minotaurState = MinotaurState.RightWindupProjectile;
-    }
-
-    private void WindupProjectileRight()
-    {
-        GameManager.Instance.ActivateIndicator(1);
-        minotaurState = MinotaurState.LeftWindupProjectile;
+        animator.Play("WindupProjectile");
+        GameManager.Instance.ActivateIndicator(tile);
+        GameManager.Instance.ActivateFireball(tile);
+        minotaurState = tile == 0 ? MinotaurState.RightWindupProjectile : MinotaurState.LeftWindupProjectile;
     }
     #endregion
 
