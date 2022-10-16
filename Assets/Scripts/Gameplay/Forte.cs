@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Forte : MonoBehaviour
@@ -16,6 +17,7 @@ public class Forte : MonoBehaviour
 
     private readonly int maxSuperMeter = 100;
     public PlayerActions lastAction;
+    public bool isReflect;
 
     public enum PlayerActions
     {
@@ -26,29 +28,21 @@ public class Forte : MonoBehaviour
         Reflect
     }
 
-    private void Awake()
-    {
-        BeatsManager.OnBeat += GoIdle;
-    }
-
     #region Actions
-    public void GoIdle(float num)
+    private IEnumerator turnOffReflectCoroutine()
     {
-        lastAction = PlayerActions.Idle;
+        yield return new WaitForSeconds(.35f);
+        isReflect = false;
     }
 
     public void Move(int dir)
     {
-        if (dir == 0) lastAction = PlayerActions.MoveToLeft;
-        else if (dir == 1) lastAction = PlayerActions.MoveToRight;
-
         GameManager.Instance.TileManager.MoveToTile(dir);
         SFXManager.Instance.PlayOneShot("Jump");
     }
 
     public void Attack()
     {
-        lastAction = PlayerActions.Attack;
         GameManager.Instance.Minotaur.TakeDamage(attackDamage);
         AddSuperMeterValue(attackAddSuper);
         SFXManager.Instance.PlayOneShot("Attack");
@@ -56,9 +50,10 @@ public class Forte : MonoBehaviour
 
     public void Reflect()
     {
-        lastAction = PlayerActions.Reflect;
+        isReflect = true;
         AddSuperMeterValue(reflectAddSuper);
         SFXManager.Instance.PlayOneShot("Reflect");
+        StartCoroutine(turnOffReflectCoroutine());
     }
 
     public void Stutter()
@@ -81,10 +76,10 @@ public class Forte : MonoBehaviour
         GameManager.Instance.EndGame(true);
     }
 
-    void Update()
-    {
-        Debug.Log(lastAction);
-    }
+    //void Update()
+    //{
+    //    Debug.Log(lastAction);
+    //}
     #endregion
 
     private void AddSuperMeterValue(int value) => superMeterValue = Mathf.Clamp(superMeterValue += value, 0, maxSuperMeter);
