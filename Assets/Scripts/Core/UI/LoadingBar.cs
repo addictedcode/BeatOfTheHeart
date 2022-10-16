@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class LoadingBar : MonoBehaviour
 {
+    [SerializeField] private GameObject pressAnyKeyToContinueText;
     private AsyncOperation sceneOp;
     private Slider loadingBar;
 
@@ -26,8 +27,16 @@ public class LoadingBar : MonoBehaviour
     {
         while (!sceneOp.isDone)
         {
+            if (sceneOp.progress >= 0.9f && !sceneOp.allowSceneActivation)
+            {
+                pressAnyKeyToContinueText.SetActive(true);
+            }
             float progress = Mathf.Clamp01(sceneOp.progress / 0.9f);
             loadingBar.value = progress;
+            if (Input.anyKeyDown && !sceneOp.allowSceneActivation)
+            {
+                sceneOp.allowSceneActivation = true;
+            }
             yield return null;
         }
     }

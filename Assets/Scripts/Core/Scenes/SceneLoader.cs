@@ -11,13 +11,13 @@ public static class SceneLoader
     public static AsyncOperation currentOp;
     public static Action onStartSceneLoad;
 
-    public static void LoadSceneWithLoadingBar(string scene)
+    public static void LoadSceneWithLoadingBar(string scene, bool shouldWait = false)
     {
         currentScene = scene;
-        _ = LoadLoadingBarAsync();
+        _ = LoadLoadingBarAsync(shouldWait);
     }
 
-    static async Task LoadLoadingBarAsync()
+    static async Task LoadLoadingBarAsync(bool shouldWait)
     {
         SceneManager.LoadScene("LoadingScene", LoadSceneMode.Additive);
         await Task.Delay(5);
@@ -25,7 +25,8 @@ public static class SceneLoader
         currentOp.allowSceneActivation = false;
         onStartSceneLoad.Invoke();
 
-        currentOp.allowSceneActivation = true;
+        if(!shouldWait)
+            currentOp.allowSceneActivation = true;
 
         while (!currentOp.isDone)
         {
