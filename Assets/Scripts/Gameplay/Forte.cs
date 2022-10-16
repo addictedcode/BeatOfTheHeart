@@ -92,6 +92,7 @@ public class Forte : MonoBehaviour
 
     private void Death()
     {
+        animator.Play("PC_Death");
         GameManager.Instance.EndGame(false);
     }
 
