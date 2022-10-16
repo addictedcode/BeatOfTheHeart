@@ -150,17 +150,17 @@ public class Minotaur : MonoBehaviour
         switch (minotaurState)
         {
             case MinotaurState.LeftWindup:
-                StartCoroutine(DoAttack(meleeDamage, 1, "LeftSwing", "Slam"));
+                StartCoroutine(DoMeleeAttack(meleeDamage, 1, "LeftSwing", "Slam"));
                 break;
             case MinotaurState.RightWindup:
-                StartCoroutine(DoAttack(meleeDamage, 0, "RightSwing", "Slam"));
+                StartCoroutine(DoMeleeAttack(meleeDamage, 0, "RightSwing", "Slam"));
                 break;
             case MinotaurState.LeftWindupProjectile:
-                StartCoroutine(DoAttack(projectileDamage, 1, "Idle", "Fireball"));
+                StartCoroutine(DoProjectileAttack(projectileDamage, 1, "Idle", "Fireball"));
                 GameManager.Instance.ActivateExplosion(1);
                 break;
             case MinotaurState.RightWindupProjectile:
-                StartCoroutine(DoAttack(projectileDamage, 0, "Idle", "Fireball"));
+                StartCoroutine(DoProjectileAttack(projectileDamage, 0, "Idle", "Fireball"));
                 GameManager.Instance.ActivateExplosion(0);
                 break;
             default:
@@ -170,12 +170,26 @@ public class Minotaur : MonoBehaviour
         minotaurState = MinotaurState.Attack;
     }
 
-    private IEnumerator DoAttack(int damage, int tile, string anim, string sfx)
+    private IEnumerator DoMeleeAttack(int damage, int tile, string anim, string sfx)
     {
         animator.Play(anim);
         SFXManager.Instance.PlayOneShot(sfx);
         yield return new WaitForSeconds(0.18f);
         GameManager.Instance.CheckPlayerTakeDamage(damage, tile);
+    }
+
+    private IEnumerator DoProjectileAttack(int damage, int tile, string anim, string sfx)
+    {
+        animator.Play(anim);
+        SFXManager.Instance.PlayOneShot(sfx);
+        yield return new WaitForSeconds(0.18f);
+        if (!GameManager.Instance.Player.isReflect)
+            GameManager.Instance.CheckPlayerTakeDamage(damage, tile);
+        else
+        {
+            //put REFLECT FX here
+            TakeDamage(GameManager.Instance.Player.GetReflectDamage());
+        }
     }
 
     private void WindupMelee(int tile)
