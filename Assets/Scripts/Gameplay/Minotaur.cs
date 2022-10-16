@@ -34,12 +34,22 @@ public class Minotaur : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         BeatsManager.OnBeat += DoMove;
-        animator.Play("Idle");
+    }
+
+    private void Start()
+    {
+        animator.Play("Spawn");
+        SFXManager.Instance.PlayOneShot("Spawn");
     }
 
     private void OnDestroy()
     {
         BeatsManager.OnBeat -= DoMove;
+    }
+
+    public void StartMinotaur()
+    {
+        animator.Play("Idle");
     }
 
     #region Actions
@@ -60,6 +70,7 @@ public class Minotaur : MonoBehaviour
                 DecideAttack();
                 break;
             case MinotaurState.Cooldown:
+                animator.Play("Idle");
                 break;
             default:
                 break;

@@ -37,6 +37,16 @@ public class GameManager : MonoBehaviour
     public void ActivateExplosion(int num) => tileManager.ActivateExplosion(num);
     #endregion
 
+    public void PlayGameAfterDelay(float delay)
+    {
+        StartCoroutine(Delay());
+        IEnumerator Delay()
+        {
+            yield return new WaitForSeconds(delay);
+            minotaur.StartMinotaur();
+        }
+    }
+
     public void EndGame(bool isVictory)
     {
         IsPlaying = false;

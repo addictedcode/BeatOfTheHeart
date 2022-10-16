@@ -9,12 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a220b32a7fa965c4784d6cd81b0dc374, type: 3}
-  m_Name: Stage
+  m_Script: {fileID: 11500000, guid: c1560a9b9c20a6945918038e2fe9af60, type: 3}
+  m_Name: Spawn
   m_EditorClassIdentifier: 
-  musicFile: {fileID: 11400000, guid: 342da0686d88ad649adfb617286d45db, type: 2}
-  timeBeforeGameActuallyStarts: 2.5
-  gameScene:
-  - HUD
-  - MainGameplayScene
-  - Pause
+  clip: {fileID: 8300000, guid: 83052b63bf5e0fd46be6650f6ec8bdb2, type: 3}
+  volume: 0.5
+  pitch: 1
+  loop: 0
+  source: {fileID: 0}

@@ -15,11 +15,11 @@ public class Explosion : MonoBehaviour
     private void OnEnable()
     {
         StartCoroutine(DisableGameObjectTimer());
-        ps.Play();
     }
 
     private IEnumerator DisableGameObjectTimer()
     {
+        ps.Play();
         yield return lifespan;
         gameObject.SetActive(false);
     }

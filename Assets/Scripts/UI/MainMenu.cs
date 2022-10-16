@@ -19,7 +19,9 @@ public class MainMenu : MonoBehaviour
     {
         SceneLoader.onFinishSceneLoad += () => {
             MusicManager.player.StopMusic();
-            MusicManager.player.PlayMusicAfterDelay(gameStage.musicFile, gameStage.timeBeforeGameActuallyStarts); };
+            MusicManager.player.PlayMusicAfterDelay(gameStage.musicFile, gameStage.timeBeforeGameActuallyStarts);
+            GameManager.Instance.PlayGameAfterDelay(gameStage.timeBeforeGameActuallyStarts);
+        };
         SceneLoader.LoadScenesWithLoadingBar(gameStage.gameScene, true);
         SceneManager.UnloadSceneAsync(gameObject.scene);
     }
