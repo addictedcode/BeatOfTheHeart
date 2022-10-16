@@ -176,12 +176,7 @@ public class Minotaur : MonoBehaviour
     #endregion
 
     #region Combo
-    private void LoadCombo(int set)
-    {
-        foreach (string combo in minotaurComboSOs[set].combo)
-            currentComboSet.Enqueue(combo);
-    }
-
+    private void LoadCombo(int set) => minotaurComboSOs[set].combo.ForEach(o => currentComboSet.Enqueue(o));
     private void LoadRandomCombo() => LoadCombo(Random.Range(0, minotaurComboSOs.Length));
     #endregion
 }
