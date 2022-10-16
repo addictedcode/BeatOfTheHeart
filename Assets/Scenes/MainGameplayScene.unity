@@ -3292,6 +3292,7 @@ MonoBehaviour:
   attackIndicatorPrefab: {fileID: 6084252938587236089, guid: f6ef2393f8f322f4ebd34f3a4a3e3225, type: 3}
   fireballPrefab: {fileID: 7029301760088092306, guid: cab67b02ce8bf3140a41426c78f0c302, type: 3}
   explosionPrefab: {fileID: 1809022330002312, guid: ed511b7776af6174e9b1255c7a81e59c, type: 3}
+  reflectFireballPrefab: {fileID: 7029301760088092306, guid: e88321309f6c35a49898ea5f7a47999e, type: 3}
   currentTile: 1
 --- !u!4 &906844258
 Transform:

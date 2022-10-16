@@ -39,6 +39,7 @@ public class GameManager : MonoBehaviour
     public void ActivateIndicator(int num) => tileManager.ActivateIndicator(num);
     public void ActivateFireball(int num) => tileManager.ActivateFireball(num);
     public void ActivateExplosion(int num) => tileManager.ActivateExplosion(num);
+    public void ActivateReflectFireball(int num) => tileManager.ActivateReflectFireball(num);
     #endregion
 
     public void PlayGameAfterDelay(float delay)

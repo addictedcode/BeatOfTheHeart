@@ -10,12 +10,14 @@ public class TileManager : MonoBehaviour
     [Header("Fireball FX")]
     [SerializeField] private GameObject fireballPrefab;
     [SerializeField] private GameObject explosionPrefab;
+    [SerializeField] private GameObject reflectFireballPrefab;
 
     public int currentTile = 1;
 
     private GameObject[] attackIndicators;
     private GameObject[] fireballs;
     private GameObject[] explosions;
+    private GameObject[] reflectFireball;
 
     private void Awake()
     {
@@ -30,6 +32,10 @@ public class TileManager : MonoBehaviour
         explosions = new GameObject[tiles.Length];
         for (int i = 0; i < tiles.Length; i++)
             explosions[i] = Instantiate(explosionPrefab, tiles[i].transform);
+
+        reflectFireball = new GameObject[tiles.Length];
+        for (int i = 0; i < tiles.Length; i++)
+            reflectFireball[i] = Instantiate(reflectFireballPrefab, tiles[i].transform);
     }
 
     public void MoveToTile(int dir)
@@ -55,5 +61,10 @@ public class TileManager : MonoBehaviour
     public void ActivateExplosion(int num)
     {
         if (CheckValidTile(num)) explosions[num].SetActive(true);
+    }
+
+    public void ActivateReflectFireball(int num)
+    {
+        if (CheckValidTile(num)) reflectFireball[num].SetActive(true);
     }
 }
