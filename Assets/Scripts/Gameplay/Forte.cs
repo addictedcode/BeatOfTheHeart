@@ -3,7 +3,9 @@ using UnityEngine;
 public class Forte : MonoBehaviour
 {
     [Header("General")]
-    [SerializeField] private int health = 10;
+    [SerializeField] private int health = 4;
+
+    public int Health => health;
     [SerializeField] private int attackDamage = 5;
     [SerializeField] private int reflectDamage = 2;
 
@@ -53,6 +55,7 @@ public class Forte : MonoBehaviour
     {
         GameManager.Instance.EndGame(true);
     }
+
     #endregion
 
     private void AddSuperMeterValue(int value) => superMeterValue = Mathf.Clamp(superMeterValue += value, 0, maxSuperMeter);
