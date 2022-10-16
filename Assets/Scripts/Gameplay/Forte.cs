@@ -73,7 +73,7 @@ public class Forte : MonoBehaviour
 
     private void Death()
     {
-        GameManager.Instance.EndGame(true);
+        GameManager.Instance.EndGame(false);
     }
 
     //void Update()

@@ -211,7 +211,14 @@ public class Minotaur : MonoBehaviour
 
     private void Death()
     {
-        GameManager.Instance.EndGame(false);
+        GameManager.Instance.EndGame(true);
+        animator.Play("Death");
+    }
+
+    public void PlayerDeath()
+    {
+        animator.Play("Idle");
+        Destroy(this);
     }
     #endregion
 

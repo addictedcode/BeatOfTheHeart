@@ -10,11 +10,15 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Forte player;
     [SerializeField] private Minotaur minotaur;
 
-    public static bool IsPlaying = true;
+    [Header("End Screen")]
+    [SerializeField] private GameObject endCanvas;
+    [SerializeField] private GameObject victoryText;
+    [SerializeField] private GameObject defeatText;
 
     public Forte Player => player;
     public Minotaur Minotaur => minotaur;
     public TileManager TileManager => tileManager;
+    public UnityEngine.InputSystem.PlayerInput PlayerInput => player.GetComponent<UnityEngine.InputSystem.PlayerInput>();
 
     private void Awake()
     {
@@ -39,16 +43,31 @@ public class GameManager : MonoBehaviour
 
     public void PlayGameAfterDelay(float delay)
     {
+        PlayerInput.enabled = false;
         StartCoroutine(Delay());
         IEnumerator Delay()
         {
             yield return new WaitForSeconds(delay);
             minotaur.StartMinotaur();
+            PlayerInput.enabled = true;
         }
     }
 
     public void EndGame(bool isVictory)
     {
-        IsPlaying = false;
+        PlayerInput.enabled = false;
+        if (!isVictory)
+            minotaur.PlayerDeath();
+        StartCoroutine(EndScreen());
+
+        IEnumerator EndScreen()
+        {
+            yield return new WaitForSeconds(2);
+            endCanvas.SetActive(true);
+            if (isVictory)
+                victoryText.SetActive(true);
+            else
+                defeatText.SetActive(true);
+        }
     }
 }
