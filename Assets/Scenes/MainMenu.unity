@@ -1539,7 +1539,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameStage: {fileID: 11400000, guid: 9feab2097cc1b0a40b20b560a3edba01, type: 2}
   settingsScene: Settings
-  mainMenuMusic: {fileID: 0}
+  mainMenuMusic: {fileID: 11400000, guid: 2366450c554005e419ca7aa759c09d2c, type: 2}
 --- !u!1001 &655510766
 PrefabInstance:
   m_ObjectHideFlags: 0
