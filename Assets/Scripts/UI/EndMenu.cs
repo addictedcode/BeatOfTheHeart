@@ -7,6 +7,7 @@ public class EndMenu : MonoBehaviour
     {
         Destroy(SFXManager.Instance.gameObject);
         Destroy(GameManager.Instance.gameObject);
-        SceneManager.LoadScene(0, LoadSceneMode.Single);
+        MusicManager.OnStopMusic.Invoke();
+        SceneManager.LoadSceneAsync(0, LoadSceneMode.Single);
     }
 }

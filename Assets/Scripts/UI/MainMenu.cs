@@ -17,13 +17,18 @@ public class MainMenu : MonoBehaviour
 
     public void OnStartPress()
     {
-        SceneLoader.onFinishSceneLoad += () => {
-            MusicManager.player.StopMusic();
-            MusicManager.player.PlayMusicAfterDelay(gameStage.musicFile, gameStage.timeBeforeGameActuallyStarts);
-            GameManager.Instance.PlayGameAfterDelay(gameStage.timeBeforeGameActuallyStarts);
-        };
+        SceneLoader.onFinishSceneLoad += FinishSceneLoad;
         SceneLoader.LoadScenesWithLoadingBar(gameStage.gameScene, true);
         SceneManager.UnloadSceneAsync(gameObject.scene);
+    }
+
+    private void FinishSceneLoad()
+    {
+        MusicManager.player.StopMusic();
+        MusicManager.player.PlayMusicAfterDelay(gameStage.musicFile, gameStage.timeBeforeGameActuallyStarts);
+        GameManager.Instance.PlayGameAfterDelay(gameStage.timeBeforeGameActuallyStarts);
+
+        SceneLoader.onFinishSceneLoad -= FinishSceneLoad;
     }
 
     public void OnSettingsPress()

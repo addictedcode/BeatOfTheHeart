@@ -153,8 +153,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_scenes:
-  - MainMenu
   - Audio
+  - MainMenu
 --- !u!4 &510659441
 Transform:
   m_ObjectHideFlags: 0
