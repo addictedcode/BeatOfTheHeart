@@ -7,25 +7,21 @@ public class Minotaur : MonoBehaviour
     private enum MinotaurState
     {
         Idle,
-        Windup,
+        LeftWindup,
+        RightWindup,
         Attack,
         Cooldown
     }
 
-    private enum WindupState
-    {
-        None,
-        LeftWindup,
-        RightWindup,
-    }
-
     [SerializeField] private int health = 100;
+    [SerializeField] private MinotaurComboSO[] minotaurComboSOs;
 
     private int currentCombo;
 
+    //Debugging States
     [SerializeField] private MinotaurState minotaurState = MinotaurState.Idle;
-    [SerializeField] private WindupState windupState = WindupState.None;
     private Animator animator;
+    private Queue<string> currentComboSet = new();
 
     private void Awake()
     {
@@ -46,7 +42,8 @@ public class Minotaur : MonoBehaviour
             case MinotaurState.Idle:
                 DecideAttack();
                 break;
-            case MinotaurState.Windup:
+            case MinotaurState.LeftWindup:
+            case MinotaurState.RightWindup:
                 DoAttack();
                 break;
             case MinotaurState.Attack:
@@ -54,13 +51,36 @@ public class Minotaur : MonoBehaviour
                 break;
             case MinotaurState.Cooldown:
                 break;
+            default:
+                break;
         }
-        
     }
 
     private void DecideAttack()
     {
-        MeleeAttack();
+        if (currentComboSet.TryDequeue(out string combo))
+        {
+            switch (combo)
+            {
+                case "MeleeLeft":
+                    MeleeLeft();
+                    break;
+                case "MeleeRight":
+                    MeleeRight();
+                    break;
+                default:
+                    MeleeLeft();
+                    break;
+            }
+        }
+        else
+        {
+            if (Random.Range(0, 2) == 0)
+                MeleeLeft();
+            else
+                MeleeRight();
+        }
+        
         //if (currentCombo < 4)
         //{
         //    int rand = Random.Range(0, 3);
@@ -85,42 +105,37 @@ public class Minotaur : MonoBehaviour
 
         //    currentCombo = 0;
         //}
-
-        minotaurState = MinotaurState.Windup;
     }
 
     private void DoAttack()
     {
-        switch (windupState)
+        switch (minotaurState)
         {
-            case WindupState.LeftWindup:
+            case MinotaurState.LeftWindup:
                 animator.Play("LeftSwing");
                 SFXManager.Instance.PlayOneShot("Slam");
                 break;
-            case WindupState.RightWindup:
+            case MinotaurState.RightWindup:
                 animator.Play("RightSwing");
                 SFXManager.Instance.PlayOneShot("Slam");
                 break;
         }
 
         minotaurState = MinotaurState.Attack;
-        windupState = WindupState.None;
     }
 
-    private void MeleeAttack()
+    private void MeleeLeft()
     {
-        if (Random.Range(0, 2) == 0)
-        {
-            GameManager.Instance.ActivateIndicator(1);
-            animator.Play("LeftWindup");
-            windupState = WindupState.LeftWindup;
-        }
-        else
-        {
-            GameManager.Instance.ActivateIndicator(0);
-            animator.Play("RightWindup");
-            windupState = WindupState.RightWindup;
-        }
+        animator.Play("RightWindup");
+        GameManager.Instance.ActivateIndicator(0);
+        minotaurState = MinotaurState.RightWindup;
+    }
+
+    private void MeleeRight()
+    {
+        animator.Play("LeftWindup");
+        GameManager.Instance.ActivateIndicator(1);
+        minotaurState = MinotaurState.LeftWindup;
     }
 
     private void ProjectileAttack()
@@ -149,6 +164,14 @@ public class Minotaur : MonoBehaviour
     private void Death()
     {
         GameManager.Instance.EndGame(false);
+    }
+    #endregion
+
+    #region Combo
+    private void LoadCombo(int set)
+    {
+        foreach (string combo in minotaurComboSOs[set].combo)
+            currentComboSet.Enqueue(combo);
     }
     #endregion
 }
