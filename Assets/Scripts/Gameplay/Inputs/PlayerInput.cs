@@ -6,10 +6,12 @@ using UnityEngine.InputSystem;
 
 public class PlayerInput : MonoBehaviour
 {
+    private Forte player;
     private bool hadInputThisBeat = false;
 
     private void Awake()
     {
+        player = GetComponent<Forte>();
         BeatsManager.OnHalfBeat += OnHalfBeat;
     }
 
@@ -33,7 +35,7 @@ public class PlayerInput : MonoBehaviour
             if (BeatsManager.CalculateIfTimeIsInWindow(MusicManager.audioSource.time))
             {
                 hadInputThisBeat = true;
-                GameManager.Instance.TileManager.MoveToTile((int)dir);
+                player.Move((int)dir);
             }
             else
             {
@@ -49,7 +51,7 @@ public class PlayerInput : MonoBehaviour
         if (BeatsManager.CalculateIfTimeIsInWindow(MusicManager.audioSource.time))
         {
             hadInputThisBeat = true;
-            //Attack
+            player.Attack();
         }
         else
         {
@@ -64,7 +66,7 @@ public class PlayerInput : MonoBehaviour
         if (BeatsManager.CalculateIfTimeIsInWindow(MusicManager.audioSource.time))
         {
             hadInputThisBeat = true;
-            //Reflect
+            player.Reflect();
         }
         else
         {

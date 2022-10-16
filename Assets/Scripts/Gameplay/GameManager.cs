@@ -25,13 +25,21 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    public void EndGame(bool isVictory)
+    #region Minotaur
+    public void CheckPlayerTakeDamage(int damage, int tile)
     {
-        IsPlaying = false;
+        if (tileManager.currentTile == tile)
+            player.TakeDamage(damage);
     }
 
     public void ActivateIndicator(int num)
     {
         tileManager.ActivateIndicator(num);
+    }
+    #endregion
+
+    public void EndGame(bool isVictory)
+    {
+        IsPlaying = false;
     }
 }
