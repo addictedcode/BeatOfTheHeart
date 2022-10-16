@@ -35,13 +35,4 @@ public static class SceneLoader
 
         SceneManager.UnloadSceneAsync("LoadingScene");
     }
-
-    public static void LoadScene(string scene)
-    {
-        SceneManager.LoadSceneAsync(scene, LoadSceneMode.Additive);        
-    }
-    public static void UnloadScene(string scene)
-    {
-        SceneManager.UnloadSceneAsync(scene);
-    }
 }

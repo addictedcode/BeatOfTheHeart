@@ -1,12 +1,14 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class SFXManager : MonoBehaviour
 {
     public static SFXManager Instance { get; private set; }
 
     [SerializeField] private SFXFile[] _SFXFiles;
+    [SerializeField] private AudioMixerGroup mixerGroup;
     private readonly Dictionary<string, SFXFile> _SFX = new();
 
     private void Awake()
@@ -20,6 +22,7 @@ public class SFXManager : MonoBehaviour
         foreach (SFXFile s in _SFXFiles)
         {
             s.source = gameObject.AddComponent<AudioSource>();
+            s.source.outputAudioMixerGroup = mixerGroup;
             s.source.clip = s.clip;
 
             s.source.volume = s.volume;

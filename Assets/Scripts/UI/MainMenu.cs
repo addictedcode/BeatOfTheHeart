@@ -1,21 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    [SerializeField][Scene] private string gameScene;
+    [SerializeField] private Stage gameStage;
     [SerializeField][Scene] private string settingsScene;
 
     public void OnStartPress()
     {
-        SceneLoader.LoadSceneWithLoadingBar(gameScene, true);
+        SceneLoader.LoadSceneWithLoadingBar(gameStage.gameScene, true);
+        SceneManager.UnloadSceneAsync(gameObject.scene);
     }
 
     public void OnSettingsPress()
     {
-        SceneLoader.UnloadScene(gameObject.scene.name);
-        SceneLoader.LoadScene(settingsScene);
+        SceneManager.LoadSceneAsync(settingsScene, LoadSceneMode.Additive); ;
     }
 
     public void OnQuitPress()

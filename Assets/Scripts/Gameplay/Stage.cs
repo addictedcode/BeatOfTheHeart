@@ -5,4 +5,5 @@ public class Stage : ScriptableObject
 {
     MusicFile musicFile;
     public uint numberOfInitialBeats = 0;
+    [Scene] public string gameScene;
 }
