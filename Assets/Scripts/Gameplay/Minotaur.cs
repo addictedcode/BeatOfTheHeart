@@ -117,12 +117,14 @@ public class Minotaur : MonoBehaviour
         {
             case MinotaurState.LeftWindup:
                 animator.Play("LeftSwing");
-                GameManager.Instance.CheckPlayerTakeDamage(meleeDamage, 1);
+                if(GameManager.Instance.Player.lastAction != Forte.PlayerActions.MoveToLeft)
+                    GameManager.Instance.CheckPlayerTakeDamage(meleeDamage, 1);
                 SFXManager.Instance.PlayOneShot("Slam");
                 break;
             case MinotaurState.RightWindup:
                 animator.Play("RightSwing");
-                GameManager.Instance.CheckPlayerTakeDamage(meleeDamage, 0);
+                if (GameManager.Instance.Player.lastAction != Forte.PlayerActions.MoveToRight)
+                    GameManager.Instance.CheckPlayerTakeDamage(meleeDamage, 0);
                 SFXManager.Instance.PlayOneShot("Slam");
                 break;
             default:
