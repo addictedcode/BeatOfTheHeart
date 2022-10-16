@@ -73,10 +73,10 @@ public class Minotaur : MonoBehaviour
             switch (combo)
             {
                 case "MeleeLeft":
-                    WindupMeleeLeft();
+                    WindupMelee(0);
                     break;
                 case "MeleeRight":
-                    WindupMeleeRight();
+                    WindupMelee(1);
                     break;
                 case "ProjectileLeft":
                     WindupProjectile(0);
@@ -85,7 +85,7 @@ public class Minotaur : MonoBehaviour
                     WindupProjectile(1);
                     break;
                 default:
-                    WindupMeleeLeft();
+                    WindupMelee(0);
                     break;
             }
         }
@@ -94,10 +94,10 @@ public class Minotaur : MonoBehaviour
             switch (Random.Range(0, 4))
             {
                 case 0:
-                    WindupMeleeLeft();
+                    WindupMelee(0);
                     break;
                 case 1:
-                    WindupMeleeRight();
+                    WindupMelee(1);
                     break;
                 case 2:
                     WindupProjectile(0);
@@ -167,18 +167,19 @@ public class Minotaur : MonoBehaviour
         GameManager.Instance.CheckPlayerTakeDamage(damage, tile);
     }
 
-    private void WindupMeleeLeft()
+    private void WindupMelee(int tile)
     {
-        animator.Play("RightWindup");
-        GameManager.Instance.ActivateIndicator(0);
-        minotaurState = MinotaurState.RightWindup;
-    }
-
-    private void WindupMeleeRight()
-    {
-        animator.Play("LeftWindup");
-        GameManager.Instance.ActivateIndicator(1);
-        minotaurState = MinotaurState.LeftWindup;
+        if (tile == 0)
+        {
+            animator.Play("RightWindup");
+            minotaurState = MinotaurState.RightWindup;
+        }
+        else
+        {
+            animator.Play("LeftWindup");
+            minotaurState = MinotaurState.LeftWindup;
+        }
+        GameManager.Instance.ActivateIndicator(tile);
     }
 
     private void WindupProjectile(int tile)
