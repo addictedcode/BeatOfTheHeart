@@ -712,7 +712,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3b9df2978854cc42b8dbaedf9b23082, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onEnterSound: Select
+  onEnterSound: Hover
 --- !u!1 &630731926
 GameObject:
   m_ObjectHideFlags: 0
@@ -1676,7 +1676,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3b9df2978854cc42b8dbaedf9b23082, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onEnterSound: Select
+  onEnterSound: Hover
 --- !u!1 &1404242934
 GameObject:
   m_ObjectHideFlags: 0
@@ -2518,7 +2518,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3b9df2978854cc42b8dbaedf9b23082, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onEnterSound: Select
+  onEnterSound: Hover
 --- !u!1 &1898396494
 GameObject:
   m_ObjectHideFlags: 0
