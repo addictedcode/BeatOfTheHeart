@@ -2937,7 +2937,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 612bf3ebc81ee24468be16c9a9258e0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
+  health: 200
   meleeDamage: 1
   projectileDamage: 1
   specialDamage: 2

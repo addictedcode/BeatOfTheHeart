@@ -188,7 +188,7 @@ public class Minotaur : MonoBehaviour
             GameManager.Instance.CheckPlayerTakeDamage(damage, tile);
         else
         {
-            //put REFLECT FX here
+            GameManager.Instance.ActivateReflectFireball(tile);
             TakeDamage(GameManager.Instance.Player.GetReflectDamage());
         }
     }
@@ -228,6 +228,7 @@ public class Minotaur : MonoBehaviour
     {
         GameManager.Instance.EndGame(true);
         animator.Play("Death");
+        Destroy(this);
     }
 
     public void PlayerDeath()

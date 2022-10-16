@@ -56,9 +56,13 @@ public class GameManager : MonoBehaviour
 
     public void EndGame(bool isVictory)
     {
+        MusicManager.player.StopMusic();
+        SFXManager.Instance.PlayOneShot("Lose");
         PlayerInput.enabled = false;
+
         if (!isVictory)
             minotaur.PlayerDeath();
+
         StartCoroutine(EndScreen());
 
         IEnumerator EndScreen()
