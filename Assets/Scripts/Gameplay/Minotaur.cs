@@ -109,13 +109,13 @@ public class Minotaur : MonoBehaviour
     {
         if (Random.Range(0, 2) == 0)
         {
-            GameManager.Instance.spawnIndicator(1);
+            GameManager.Instance.ActivateIndicator(1);
             animator.Play("LeftWindup");
             windupState = WindupState.LeftWindup;
         }
         else
         {
-            GameManager.Instance.spawnIndicator(0);
+            GameManager.Instance.ActivateIndicator(0);
             animator.Play("RightWindup");
             windupState = WindupState.RightWindup;
         }

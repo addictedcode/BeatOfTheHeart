@@ -3414,6 +3414,8 @@ MonoBehaviour:
   tiles:
   - {fileID: 1527397169}
   - {fileID: 1534484221}
+  attackIndicatorPrefab: {fileID: 6084252938587236089, guid: f6ef2393f8f322f4ebd34f3a4a3e3225, type: 3}
+  attackIndicators: []
   currentTile: 1
 --- !u!4 &1526022662
 Transform:

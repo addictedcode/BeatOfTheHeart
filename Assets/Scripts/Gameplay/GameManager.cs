@@ -30,8 +30,8 @@ public class GameManager : MonoBehaviour
         IsPlaying = false;
     }
 
-    public void spawnIndicator(int num)
+    public void ActivateIndicator(int num)
     {
-        tileManager.activateIndicator(num);
+        tileManager.ActivateIndicator(num);
     }
 }

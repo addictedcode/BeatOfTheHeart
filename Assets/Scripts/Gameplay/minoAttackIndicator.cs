@@ -1,26 +1,18 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class minoAttackIndicator : MonoBehaviour
+public class MinoAttackIndicator : MonoBehaviour
 {
+    private readonly WaitForSeconds lifespan = new(0.5f);
 
-    private float lifespan = .5f;
-    private float lifetime = 0f;
-
-    // Start is called before the first frame update
-    void Awake()
+    private void OnEnable()
     {
-        lifetime = 0f;
+        StartCoroutine(DisableGameObjectTimer());
     }
 
-    // Update is called once per frame
-    void Update()
+    private IEnumerator DisableGameObjectTimer()
     {
-        lifetime += Time.deltaTime;
-        if (lifetime >= lifespan)
-        {
-            Destroy(this.gameObject);
-        }
+        yield return lifespan;
+        gameObject.SetActive(false);
     }
 }
