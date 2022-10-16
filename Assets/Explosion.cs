@@ -9,7 +9,7 @@ public class Explosion : MonoBehaviour
 
     private void Awake()
     {
-        ps = GetComponent<ParticleSystem>();
+        ps = GetComponentInChildren<ParticleSystem>();
     }
 
     private void OnEnable()

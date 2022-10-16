@@ -152,9 +152,11 @@ public class Minotaur : MonoBehaviour
         {
             case MinotaurState.LeftWindup:
                 StartCoroutine(DoMeleeAttack(meleeDamage, 1, "LeftSwing", "Slam"));
+                GameManager.Instance.ActivateGroundSmash(1);
                 break;
             case MinotaurState.RightWindup:
                 StartCoroutine(DoMeleeAttack(meleeDamage, 0, "RightSwing", "Slam"));
+                GameManager.Instance.ActivateGroundSmash(0);
                 break;
             case MinotaurState.LeftWindupProjectile:
                 StartCoroutine(DoProjectileAttack(projectileDamage, 1, "Idle", "Fireball"));

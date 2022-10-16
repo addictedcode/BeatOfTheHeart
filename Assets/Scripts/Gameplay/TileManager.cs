@@ -12,12 +12,15 @@ public class TileManager : MonoBehaviour
     [SerializeField] private GameObject explosionPrefab;
     [SerializeField] private GameObject reflectFireballPrefab;
 
+    [SerializeField] private GameObject groundSmashPrefab;
+
     public int currentTile = 1;
 
     private GameObject[] attackIndicators;
     private GameObject[] fireballs;
     private GameObject[] explosions;
     private GameObject[] reflectFireball;
+    private GameObject[] groundSmash;
 
     private void Awake()
     {
@@ -36,6 +39,10 @@ public class TileManager : MonoBehaviour
         reflectFireball = new GameObject[tiles.Length];
         for (int i = 0; i < tiles.Length; i++)
             reflectFireball[i] = Instantiate(reflectFireballPrefab, tiles[i].transform);
+
+        groundSmash = new GameObject[tiles.Length];
+        for (int i = 0; i < tiles.Length; i++)
+            groundSmash[i] = Instantiate(groundSmashPrefab, tiles[i].transform);
     }
 
     public void MoveToTile(int dir)
@@ -66,5 +73,10 @@ public class TileManager : MonoBehaviour
     public void ActivateReflectFireball(int num)
     {
         if (CheckValidTile(num)) reflectFireball[num].SetActive(true);
+    }
+
+    public void ActivateGroundSmash(int num)
+    {
+        if (CheckValidTile(num)) groundSmash[num].SetActive(true);
     }
 }
