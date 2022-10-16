@@ -24,6 +24,7 @@ public class Minotaur : MonoBehaviour
     [SerializeField] private MinotaurComboSO[] minotaurComboSOs;
 
     private int currentCombo;
+    public int Health => health;
 
     //Debugging States
     [SerializeField] private MinotaurState minotaurState = MinotaurState.Idle;

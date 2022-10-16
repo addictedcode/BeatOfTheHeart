@@ -19,6 +19,17 @@ public class Forte : MonoBehaviour
     public PlayerActions lastAction;
     public bool isReflect;
 
+    private Animator animator;
+    private void Awake()
+    {
+        animator = GetComponent<Animator>();
+    }
+
+    private void OnDisable()
+    {
+        BeatsManager.OnBeat -= backToIdle;
+    }
+
     public enum PlayerActions
     {
         Idle,
@@ -26,6 +37,11 @@ public class Forte : MonoBehaviour
         MoveToRight,
         Attack,
         Reflect
+    }
+
+    private void backToIdle(float num)
+    {
+        animator.Play("PC_Idle");
     }
 
     #region Actions
@@ -37,12 +53,14 @@ public class Forte : MonoBehaviour
 
     public void Move(int dir)
     {
+        animator.Play("PC_Fear");
         GameManager.Instance.TileManager.MoveToTile(dir);
         SFXManager.Instance.PlayOneShot("Jump");
     }
 
     public void Attack()
     {
+        animator.Play("PC_Anger");
         GameManager.Instance.Minotaur.TakeDamage(attackDamage);
         AddSuperMeterValue(attackAddSuper);
         SFXManager.Instance.PlayOneShot("Attack");
@@ -50,6 +68,7 @@ public class Forte : MonoBehaviour
 
     public void Reflect()
     {
+        animator.Play("PC_Happy");
         isReflect = true;
         AddSuperMeterValue(reflectAddSuper);
         SFXManager.Instance.PlayOneShot("Reflect");
