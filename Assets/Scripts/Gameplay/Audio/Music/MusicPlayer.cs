@@ -44,6 +44,7 @@ public class MusicPlayer : MonoBehaviour
     public void StopMusic()
     {
         audioSource.Stop();
+        MusicManager.OnStopMusic.Invoke();
     }
 
     public IEnumerator FadeMusic(string name, float duration, float targetVolume)

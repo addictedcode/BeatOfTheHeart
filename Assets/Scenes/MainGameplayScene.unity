@@ -161,6 +161,7 @@ MonoBehaviour:
   attackAddSuper: 3
   reflectAddSuper: 10
   superMeterValue: 0
+  lastAction: 0
 --- !u!114 &3298463
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2497,8 +2498,9 @@ MonoBehaviour:
   - {fileID: 570613641}
   - {fileID: 583592976}
   attackIndicatorPrefab: {fileID: 6084252938587236089, guid: f6ef2393f8f322f4ebd34f3a4a3e3225, type: 3}
+  fireballPrefab: {fileID: 7029301760088092306, guid: cab67b02ce8bf3140a41426c78f0c302, type: 3}
+  explosionPrefab: {fileID: 1809022330002312, guid: ed511b7776af6174e9b1255c7a81e59c, type: 3}
   currentTile: 1
-  attackIndicators: []
 --- !u!4 &906844258
 Transform:
   m_ObjectHideFlags: 0
