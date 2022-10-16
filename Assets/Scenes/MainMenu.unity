@@ -1539,6 +1539,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameStage: {fileID: 11400000, guid: 9feab2097cc1b0a40b20b560a3edba01, type: 2}
   settingsScene: Settings
+  mainMenuMusic: {fileID: 0}
 --- !u!1001 &655510766
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2098,7 +2099,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3b9df2978854cc42b8dbaedf9b23082, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onEnterSound: Select
+  onEnterSound: Hover
 --- !u!1001 &864712146
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4992,7 +4993,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3b9df2978854cc42b8dbaedf9b23082, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onEnterSound: Select
+  onEnterSound: Hover
 --- !u!1 &1819895807
 GameObject:
   m_ObjectHideFlags: 0
@@ -5571,7 +5572,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3b9df2978854cc42b8dbaedf9b23082, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onEnterSound: Select
+  onEnterSound: Hover
 --- !u!1001 &1928326062
 PrefabInstance:
   m_ObjectHideFlags: 0
