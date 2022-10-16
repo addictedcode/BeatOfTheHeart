@@ -7,14 +7,20 @@ using UnityEngine.SceneManagement;
 
 public static class SceneLoader
 {
-    public static string currentScene;
-    public static AsyncOperation currentOp;
+    public static List<string> currentScenes;
+    public static List<AsyncOperation> currentOps = new();
     public static Action onStartSceneLoad;
     public static Action onFinishSceneLoad;
 
     public static void LoadSceneWithLoadingBar(string scene, bool shouldWait = false)
     {
-        currentScene = scene;
+        currentScenes = new();
+        currentScenes.Add(scene);
+        _ = LoadLoadingBarAsync(shouldWait);
+    }
+    public static void LoadScenesWithLoadingBar(List<string> scenes, bool shouldWait = false)
+    {
+        currentScenes = scenes;
         _ = LoadLoadingBarAsync(shouldWait);
     }
 
@@ -22,19 +28,68 @@ public static class SceneLoader
     {
         SceneManager.LoadScene("LoadingScene", LoadSceneMode.Additive);
         await Task.Delay(5);
-        currentOp = SceneManager.LoadSceneAsync(currentScene, LoadSceneMode.Additive);
-        currentOp.allowSceneActivation = false;
+        currentOps.Clear();
+        foreach (var scene in currentScenes)
+        {
+            var currentOp = SceneManager.LoadSceneAsync(scene, LoadSceneMode.Additive);
+            currentOp.allowSceneActivation = false;
+            currentOps.Add(currentOp);
+        }
         onStartSceneLoad.Invoke();
 
-        if(!shouldWait)
-            currentOp.allowSceneActivation = true;
+        if (!shouldWait)
+        {
+            SetAllowSceneActivation(true);
+        }
 
-        while (!currentOp.isDone)
+        while (!CheckCurrentOpsIsDone())
         {
             await Task.Delay(10);
         }
 
         onFinishSceneLoad?.Invoke();
         SceneManager.UnloadSceneAsync("LoadingScene");
+    }
+
+    public static bool CheckCurrentOpsIsDone()
+    {
+        foreach (AsyncOperation op in currentOps)
+        {
+            if (!op.isDone)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static bool CheckAllowSceneActivation()
+    {
+        foreach (AsyncOperation op in currentOps)
+        {
+            if (!op.allowSceneActivation)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static float GetAverageProgress()
+    {
+        float avgProgress = 0.0f;
+        foreach (AsyncOperation op in currentOps)
+        {
+            avgProgress += op.progress;
+        }
+        return avgProgress /= currentOps.Count;
+    }
+
+    public static void SetAllowSceneActivation(bool value)
+    {
+        foreach (var op in currentOps)
+        {
+            op.allowSceneActivation = value;
+        }
     }
 }

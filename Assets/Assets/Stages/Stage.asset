@@ -14,4 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   musicFile: {fileID: 11400000, guid: 342da0686d88ad649adfb617286d45db, type: 2}
   numberOfInitialBeats: 0
-  gameScene: testTile
+  gameScene:
+  - HUD
+  - testTile

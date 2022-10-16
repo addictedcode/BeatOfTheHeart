@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class LoadingBar : MonoBehaviour
 {
     [SerializeField] private GameObject pressAnyKeyToContinueText;
-    private AsyncOperation sceneOp;
     private Slider loadingBar;
 
     private void Awake()
@@ -18,24 +17,23 @@ public class LoadingBar : MonoBehaviour
     {
         SceneLoader.onStartSceneLoad += () =>
         {
-            sceneOp = SceneLoader.currentOp;
             StartCoroutine(UpdateLoadingBar());
         };
     }
 
     IEnumerator UpdateLoadingBar() 
     {
-        while (!sceneOp.isDone)
+        while (!SceneLoader.CheckCurrentOpsIsDone())
         {
-            if (sceneOp.progress >= 0.9f && !sceneOp.allowSceneActivation)
+            if (SceneLoader.GetAverageProgress() >= 0.9f && !SceneLoader.CheckAllowSceneActivation())
             {
                 pressAnyKeyToContinueText.SetActive(true);
             }
-            float progress = Mathf.Clamp01(sceneOp.progress / 0.9f);
+            float progress = Mathf.Clamp01(SceneLoader.GetAverageProgress() / 0.9f);
             loadingBar.value = progress;
-            if (Input.anyKeyDown && !sceneOp.allowSceneActivation)
+            if (Input.anyKeyDown && !SceneLoader.CheckAllowSceneActivation())
             {
-                sceneOp.allowSceneActivation = true;
+                SceneLoader.SetAllowSceneActivation(true);
             }
             yield return null;
         }
