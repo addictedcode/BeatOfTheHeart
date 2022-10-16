@@ -16,4 +16,4 @@ MonoBehaviour:
   numberOfInitialBeats: 0
   gameScene:
   - HUD
-  - testTile
+  - MainGameplayScene
