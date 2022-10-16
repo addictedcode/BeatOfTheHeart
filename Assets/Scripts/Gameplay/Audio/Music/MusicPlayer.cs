@@ -28,4 +28,18 @@ public class MusicPlayer : MonoBehaviour
         audioSource.Play();
         MusicManager.OnPlayMusic.Invoke();
     }
+
+    public IEnumerator FadeMusic(string name, float duration, float targetVolume)
+    {
+        float currentTime = 0;
+        float startVolume = audioSource.volume;
+
+        while (currentTime < duration)
+        {
+            currentTime += Time.deltaTime;
+            audioSource.volume = Mathf.Lerp(startVolume, targetVolume, currentTime / duration);
+            yield return null;
+        }
+        yield break;
+    }
 }
