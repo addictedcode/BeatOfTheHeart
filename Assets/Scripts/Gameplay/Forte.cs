@@ -7,8 +7,8 @@ public class Forte : MonoBehaviour
     [SerializeField] private int health = 4;
 
     public int Health => health;
-    [SerializeField] private int attackDamage = 5;
-    [SerializeField] private int reflectDamage = 2;
+    [SerializeField] private int attackDamage = 2;
+    [SerializeField] private int reflectDamage = 5;
 
     [Header("Super")]
     [SerializeField] private int attackAddSuper = 3;
@@ -82,5 +82,9 @@ public class Forte : MonoBehaviour
     //}
     #endregion
 
+    public int GetReflectDamage()
+    {
+        return reflectDamage;
+}
     private void AddSuperMeterValue(int value) => superMeterValue = Mathf.Clamp(superMeterValue += value, 0, maxSuperMeter);
 }
