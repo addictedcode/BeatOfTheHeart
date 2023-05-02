@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: Stage
   m_EditorClassIdentifier: 
   musicFile: {fileID: 11400000, guid: 342da0686d88ad649adfb617286d45db, type: 2}
-  timeBeforeGameActuallyStarts: 10
+  timeBeforeGameActuallyStarts: 2.5
   gameScene:
   - HUD
   - MainGameplayScene
-  - Pause

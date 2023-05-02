@@ -15,10 +15,17 @@ public class LoadingBar : MonoBehaviour
 
     private void Start()
     {
-        SceneLoader.onStartSceneLoad += () =>
-        {
-            StartCoroutine(UpdateLoadingBar());
-        };
+        SceneLoader.onStartSceneLoad += LoadingBarUpdate;
+    }
+
+    private void OnDisable()
+    {
+        SceneLoader.onStartSceneLoad -= LoadingBarUpdate;
+    }
+
+    private void LoadingBarUpdate()
+    {
+        StartCoroutine(UpdateLoadingBar());
     }
 
     IEnumerator UpdateLoadingBar() 

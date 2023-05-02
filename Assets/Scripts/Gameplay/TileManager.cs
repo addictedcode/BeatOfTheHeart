@@ -6,16 +6,43 @@ public class TileManager : MonoBehaviour
 {
     [SerializeField] private Transform[] tiles;
     [SerializeField] private GameObject attackIndicatorPrefab;
-    
+
+    [Header("Fireball FX")]
+    [SerializeField] private GameObject fireballPrefab;
+    [SerializeField] private GameObject explosionPrefab;
+    [SerializeField] private GameObject reflectFireballPrefab;
+
+    [SerializeField] private GameObject groundSmashPrefab;
+
     public int currentTile = 1;
 
-    [SerializeField]private GameObject[] attackIndicators;
+    private GameObject[] attackIndicators;
+    private GameObject[] fireballs;
+    private GameObject[] explosions;
+    private GameObject[] reflectFireball;
+    private GameObject[] groundSmash;
 
     private void Awake()
     {
         attackIndicators = new GameObject[tiles.Length];
         for(int i = 0; i < tiles.Length; i++)
             attackIndicators[i] = Instantiate(attackIndicatorPrefab, tiles[i].transform);
+
+        fireballs = new GameObject[tiles.Length];
+        for (int i = 0; i < tiles.Length; i++)
+            fireballs[i] = Instantiate(fireballPrefab, tiles[i].transform);
+
+        explosions = new GameObject[tiles.Length];
+        for (int i = 0; i < tiles.Length; i++)
+            explosions[i] = Instantiate(explosionPrefab, tiles[i].transform);
+
+        reflectFireball = new GameObject[tiles.Length];
+        for (int i = 0; i < tiles.Length; i++)
+            reflectFireball[i] = Instantiate(reflectFireballPrefab, tiles[i].transform);
+
+        groundSmash = new GameObject[tiles.Length];
+        for (int i = 0; i < tiles.Length; i++)
+            groundSmash[i] = Instantiate(groundSmashPrefab, tiles[i].transform);
     }
 
     public void MoveToTile(int dir)
@@ -26,10 +53,30 @@ public class TileManager : MonoBehaviour
             Debug.Log("Failed Jump");
     }
 
-    private bool CheckValidSideTile(int dir) => currentTile + dir >= 0 && currentTile + dir < tiles.Length;
-    private bool CheckValidTile(int tile) => tile >= 0 && tile < tiles.Length;
+    public bool CheckValidSideTile(int dir) => currentTile + dir >= 0 && currentTile + dir < tiles.Length;
+    public bool CheckValidTile(int tile) => tile >= 0 && tile < tiles.Length;
     public void ActivateIndicator(int num)
     {
         if (CheckValidTile(num)) attackIndicators[num].SetActive(true);
+    }
+
+    public void ActivateFireball(int num)
+    {
+        if (CheckValidTile(num)) fireballs[num].SetActive(true);
+    }
+
+    public void ActivateExplosion(int num)
+    {
+        if (CheckValidTile(num)) explosions[num].SetActive(true);
+    }
+
+    public void ActivateReflectFireball(int num)
+    {
+        if (CheckValidTile(num)) reflectFireball[num].SetActive(true);
+    }
+
+    public void ActivateGroundSmash(int num)
+    {
+        if (CheckValidTile(num)) groundSmash[num].SetActive(true);
     }
 }

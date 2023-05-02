@@ -13,6 +13,11 @@ public class playerHPUI : MonoBehaviour
         BeatsManager.OnBeat += startAnims;
     }
 
+    private void OnDisable()
+    {
+        BeatsManager.OnBeat -= startAnims;
+    }
+
     public void startAnims(float num)
     {
         fillImage.GetComponent<Animator>().enabled = true;

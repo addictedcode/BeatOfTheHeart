@@ -10,6 +10,12 @@ public class enemyHPUI : MonoBehaviour
 
     public void setHP(float HP)
     {
-        fillImage.GetComponent<Image>().fillAmount = HP / 100f;
+        fillImage.GetComponent<Image>().fillAmount = HP / 200f;
+    }
+
+    void Update()
+    {
+        if (GameManager.Instance != null)
+            setHP(GameManager.Instance.Minotaur.Health);
     }
 }

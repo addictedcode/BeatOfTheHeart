@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,6 +9,8 @@ public class Minotaur : MonoBehaviour
         Idle,
         LeftWindup,
         RightWindup,
+        LeftWindupProjectile,
+        RightWindupProjectile,
         Attack,
         Cooldown
     }
@@ -21,6 +24,7 @@ public class Minotaur : MonoBehaviour
     [SerializeField] private MinotaurComboSO[] minotaurComboSOs;
 
     private int currentCombo;
+    public int Health => health;
 
     //Debugging States
     [SerializeField] private MinotaurState minotaurState = MinotaurState.Idle;
@@ -33,9 +37,20 @@ public class Minotaur : MonoBehaviour
         BeatsManager.OnBeat += DoMove;
     }
 
+    private void Start()
+    {
+        animator.Play("Spawn");
+        SFXManager.Instance.PlayOneShot("Spawn");
+    }
+
     private void OnDestroy()
     {
         BeatsManager.OnBeat -= DoMove;
+    }
+
+    public void StartMinotaur()
+    {
+        animator.Play("Idle");
     }
 
     #region Actions
@@ -48,12 +63,15 @@ public class Minotaur : MonoBehaviour
                 break;
             case MinotaurState.LeftWindup:
             case MinotaurState.RightWindup:
+            case MinotaurState.LeftWindupProjectile:
+            case MinotaurState.RightWindupProjectile:
                 DoAttack();
                 break;
             case MinotaurState.Attack:
                 DecideAttack();
                 break;
             case MinotaurState.Cooldown:
+                animator.Play("Idle");
                 break;
             default:
                 break;
@@ -67,22 +85,39 @@ public class Minotaur : MonoBehaviour
             switch (combo)
             {
                 case "MeleeLeft":
-                    WindupMeleeLeft();
+                    WindupMelee(0);
                     break;
                 case "MeleeRight":
-                    WindupMeleeRight();
+                    WindupMelee(1);
+                    break;
+                case "ProjectileLeft":
+                    WindupProjectile(0);
+                    break;
+                case "ProjectileRight":
+                    WindupProjectile(1);
                     break;
                 default:
-                    WindupMeleeLeft();
+                    WindupMelee(0);
                     break;
             }
         }
         else
         {
-            if (Random.Range(0, 2) == 0)
-                WindupMeleeLeft();
-            else
-                WindupMeleeRight();
+            switch (Random.Range(0, 4))
+            {
+                case 0:
+                    WindupMelee(0);
+                    break;
+                case 1:
+                    WindupMelee(1);
+                    break;
+                case 2:
+                    WindupProjectile(0);
+                    break;
+                case 3:
+                    WindupProjectile(1);
+                    break;
+            }
 
             //if (currentCombo < 4)
             //{
@@ -116,14 +151,20 @@ public class Minotaur : MonoBehaviour
         switch (minotaurState)
         {
             case MinotaurState.LeftWindup:
-                animator.Play("LeftSwing");
-                GameManager.Instance.CheckPlayerTakeDamage(meleeDamage, 1);
-                SFXManager.Instance.PlayOneShot("Slam");
+                StartCoroutine(DoMeleeAttack(meleeDamage, 1, "LeftSwing", "Slam"));
+                GameManager.Instance.ActivateGroundSmash(1);
                 break;
             case MinotaurState.RightWindup:
-                animator.Play("RightSwing");
-                GameManager.Instance.CheckPlayerTakeDamage(meleeDamage, 0);
-                SFXManager.Instance.PlayOneShot("Slam");
+                StartCoroutine(DoMeleeAttack(meleeDamage, 0, "RightSwing", "Slam"));
+                GameManager.Instance.ActivateGroundSmash(0);
+                break;
+            case MinotaurState.LeftWindupProjectile:
+                StartCoroutine(DoProjectileAttack(projectileDamage, 1, "Idle", "Fireball"));
+                GameManager.Instance.ActivateExplosion(1);
+                break;
+            case MinotaurState.RightWindupProjectile:
+                StartCoroutine(DoProjectileAttack(projectileDamage, 0, "Idle", "Fireball"));
+                GameManager.Instance.ActivateExplosion(0);
                 break;
             default:
                 break;
@@ -132,33 +173,49 @@ public class Minotaur : MonoBehaviour
         minotaurState = MinotaurState.Attack;
     }
 
-    private void WindupMeleeLeft()
+    private IEnumerator DoMeleeAttack(int damage, int tile, string anim, string sfx)
     {
-        animator.Play("RightWindup");
-        GameManager.Instance.ActivateIndicator(0);
-        minotaurState = MinotaurState.RightWindup;
+        animator.Play(anim);
+        SFXManager.Instance.PlayOneShot(sfx);
+        yield return new WaitForSeconds(0.18f);
+        GameManager.Instance.CheckPlayerTakeDamage(damage, tile);
     }
 
-    private void WindupMeleeRight()
+    private IEnumerator DoProjectileAttack(int damage, int tile, string anim, string sfx)
     {
-        animator.Play("LeftWindup");
-        GameManager.Instance.ActivateIndicator(1);
-        minotaurState = MinotaurState.LeftWindup;
+        animator.Play(anim);
+        SFXManager.Instance.PlayOneShot(sfx);
+        yield return new WaitForSeconds(0.18f);
+        if (!GameManager.Instance.Player.isReflect)
+            GameManager.Instance.CheckPlayerTakeDamage(damage, tile);
+        else
+        {
+            GameManager.Instance.ActivateReflectFireball(tile);
+            TakeDamage(GameManager.Instance.Player.GetReflectDamage());
+        }
     }
 
-    private void WindupProjectileAttack()
+    private void WindupMelee(int tile)
     {
-
+        if (tile == 0)
+        {
+            animator.Play("RightWindup");
+            minotaurState = MinotaurState.RightWindup;
+        }
+        else
+        {
+            animator.Play("LeftWindup");
+            minotaurState = MinotaurState.LeftWindup;
+        }
+        GameManager.Instance.ActivateIndicator(tile);
     }
 
-    private void WindupMultiAttack()
+    private void WindupProjectile(int tile)
     {
-
-    }
-
-    private void WindupSpecialAttack()
-    {
-
+        animator.Play("WindupProjectile");
+        GameManager.Instance.ActivateIndicator(tile);
+        GameManager.Instance.ActivateFireball(tile);
+        minotaurState = tile == 0 ? MinotaurState.RightWindupProjectile : MinotaurState.LeftWindupProjectile;
     }
     #endregion
 
@@ -171,7 +228,15 @@ public class Minotaur : MonoBehaviour
 
     private void Death()
     {
-        GameManager.Instance.EndGame(false);
+        GameManager.Instance.EndGame(true);
+        animator.Play("Death");
+        Destroy(this);
+    }
+
+    public void PlayerDeath()
+    {
+        animator.Play("Idle");
+        Destroy(this);
     }
     #endregion
 
