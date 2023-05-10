@@ -12,9 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad2c1315029da85488ee5c2cacceac31, type: 3}
   m_Name: Combo1
   m_EditorClassIdentifier: 
-  combo:
-  - ProjectileLeft
-  - ProjectileRight
-  - ProjectileRight
-  - ProjectileRight
-  - ProjectileRight
+  combo: 0100000001000000010000000100000001000000

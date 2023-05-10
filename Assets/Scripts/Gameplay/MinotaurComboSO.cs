@@ -4,5 +4,5 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "MinotaurComboSO", menuName = "Minotaur/MinotaurComboSO", order = 1)]
 public class MinotaurComboSO : ScriptableObject
 {
-    public List<string> combo;
+    public List<Minotaur.MinotaurAttacks> combo;
 }
