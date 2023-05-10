@@ -2,6 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum GameState
+{
+    Playing,
+    GameOver,
+    Paused
+}
+
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
@@ -19,6 +26,7 @@ public class GameManager : MonoBehaviour
     public Minotaur Minotaur => minotaur;
     public TileManager TileManager => tileManager;
     public UnityEngine.InputSystem.PlayerInput PlayerInput => player.GetComponent<UnityEngine.InputSystem.PlayerInput>();
+    public GameState GameState;
 
     private void Awake()
     {
@@ -50,6 +58,7 @@ public class GameManager : MonoBehaviour
         IEnumerator Delay()
         {
             yield return new WaitForSeconds(delay);
+            
             minotaur.StartMinotaur();
             PlayerInput.enabled = true;
         }
@@ -60,6 +69,7 @@ public class GameManager : MonoBehaviour
         MusicManager.player.StopMusic();
         SFXManager.Instance.PlayOneShot("Lose");
         PlayerInput.enabled = false;
+        GameState = GameState.GameOver;
 
         if (!isVictory)
             minotaur.PlayerDeath();
