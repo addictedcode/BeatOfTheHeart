@@ -13,9 +13,15 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-    [SerializeField] private TileManager tileManager;
+    //[SerializeField] private TileManager tileManager;
     [SerializeField] private Forte player;
-    [SerializeField] private Minotaur minotaur;
+    //[SerializeField] private Minotaur minotaur;
+
+    private TileManager tileManager;
+    //private Forte player;
+    private Minotaur minotaur;
+
+    private PhasesManager phasesManager;
 
     [Header("End Screen")]
     [SerializeField] private GameObject endCanvas;
@@ -35,6 +41,8 @@ public class GameManager : MonoBehaviour
         else
             Instance = this;
         DontDestroyOnLoad(gameObject);
+        phasesManager = PhasesManager.Instance;
+        phasesManager.InitPhase(0);
     }
 
     #region Minotaur
@@ -64,26 +72,62 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void UpdatePhase(Minotaur newMinotaur, Forte newPlayer, TileManager newTiles)
+    {
+        minotaur = newMinotaur;
+        //player = newPlayer;
+        tileManager = newTiles;
+    }
+
+
     public void EndGame(bool isVictory)
     {
-        MusicManager.player.StopMusic();
-        SFXManager.Instance.PlayOneShot("Lose");
-        PlayerInput.enabled = false;
-        GameState = GameState.GameOver;
-
-        if (!isVictory)
-            minotaur.PlayerDeath();
-
-        StartCoroutine(EndScreen());
-
-        IEnumerator EndScreen()
+        if (PhasesManager.Instance != null)
         {
-            yield return new WaitForSeconds(2);
-            endCanvas.SetActive(true);
-            if (isVictory)
-                victoryText.SetActive(true);
-            else
-                defeatText.SetActive(true);
+
         }
+        //MusicManager.player.StopMusic();
+        //SFXManager.Instance.PlayOneShot("Lose");
+        PlayerInput.enabled = false;
+
+        if (isVictory)
+        {
+            if(phasesManager.currentPhase + 1 < phasesManager.Phases.Count)
+            {
+                phasesManager.currentPhase++;
+                phasesManager.InitPhase(phasesManager.currentPhase);
+                PlayGameAfterDelay(0.0f);
+            }
+            else
+            {
+                StartCoroutine(EndScreen());
+
+                IEnumerator EndScreen()
+                {
+                    yield return new WaitForSeconds(2);
+                    endCanvas.SetActive(true);
+                    if (isVictory)
+                        victoryText.SetActive(true);
+                    else
+                        defeatText.SetActive(true);
+                }
+            }
+
+        }
+
+        //if (!isVictory)
+        //    minotaur.PlayerDeath();
+
+        //StartCoroutine(EndScreen());
+
+        //IEnumerator EndScreen()
+        //{
+        //    yield return new WaitForSeconds(2);
+        //    endCanvas.SetActive(true);
+        //    if (isVictory)
+        //        victoryText.SetActive(true);
+        //    else
+        //        defeatText.SetActive(true);
+        //}
     }
 }
