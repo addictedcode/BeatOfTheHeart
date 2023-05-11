@@ -8,8 +8,14 @@ public struct Phase
 {
     public Minotaur minotaur;
     public TileManager tileManager;
-    public Forte player;
     public Camera camera;
+}
+public enum PhaseState
+{
+    Spawning,
+    Combat,
+    CombatEnd,
+    Transition
 }
 
 public class PhasesManager : MonoBehaviour
@@ -19,6 +25,7 @@ public class PhasesManager : MonoBehaviour
     [SerializeField] private List<Phase> phases = new List<Phase>();
     public List<Phase> Phases => phases;
     public int currentPhase = 0;
+    public PhaseState currentPhaseState = PhaseState.Spawning;
 
 
     private void Awake()
@@ -27,19 +34,13 @@ public class PhasesManager : MonoBehaviour
             Destroy(gameObject);
         else
             Instance = this;
-        DontDestroyOnLoad(gameObject);
-    }
-
-    public void MoveToNextPhase()
-    {
     }
 
     public void InitPhase(int newPhase)
     {
-        phases[currentPhase].minotaur.gameObject.SetActive(false);
-        //phases[currentPhase].player.gameObject.SetActive(false);
-        phases[currentPhase].tileManager.gameObject.SetActive(false);
-        phases[currentPhase].camera.gameObject.SetActive(false);
+        Phases[currentPhase].minotaur.gameObject.SetActive(false);
+        Phases[currentPhase].tileManager.gameObject.SetActive(false);
+        Phases[currentPhase].camera.gameObject.SetActive(false);
 
         if (newPhase >= phases.Count)
         {
@@ -51,15 +52,14 @@ public class PhasesManager : MonoBehaviour
         }
 
         GameManager.Instance.UpdatePhase(phases[currentPhase].minotaur, 
-                                            phases[currentPhase].player, 
                                             phases[currentPhase].tileManager);
-        phases[currentPhase].minotaur.gameObject.SetActive(true);
-        //phases[currentPhase].player.gameObject.SetActive(true);
-        phases[currentPhase].tileManager.gameObject.SetActive(true);
-        phases[currentPhase].camera.gameObject.SetActive(true);
+        Phases[currentPhase].minotaur.gameObject.SetActive(true);
+        Phases[currentPhase].tileManager.gameObject.SetActive(true);
+        Phases[currentPhase].camera.gameObject.SetActive(true);
 
 
-        phases[currentPhase].tileManager.MoveToTile(0);
+        Phases[currentPhase].minotaur.StartMinotaur();
+        Phases[currentPhase].tileManager.MoveToTile(0); 
     }
 
 

@@ -79,6 +79,11 @@ public class Forte : MonoBehaviour
     {
 
     }
+
+    public void PlayAnimation(string anim)
+    {
+        animator.Play(anim);
+    }
     #endregion
 
     #region Health
@@ -93,7 +98,7 @@ public class Forte : MonoBehaviour
     private void Death()
     {
         animator.Play("PC_Death");
-        GameManager.Instance.EndGame(false);
+        GameManager.Instance.EndCombat(false);
     }
 
     //void Update()

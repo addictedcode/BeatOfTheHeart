@@ -16,6 +16,7 @@ public class enemyHPUI : MonoBehaviour
     void Update()
     {
         if (GameManager.Instance != null)
-            setHP(GameManager.Instance.Minotaur.Health);
+            if(GameManager.Instance.Minotaur != null)
+                 setHP(GameManager.Instance.Minotaur.Health);
     }
 }

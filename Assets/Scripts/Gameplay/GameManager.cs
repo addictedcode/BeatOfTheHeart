@@ -41,8 +41,9 @@ public class GameManager : MonoBehaviour
         else
             Instance = this;
         DontDestroyOnLoad(gameObject);
+
+
         phasesManager = PhasesManager.Instance;
-        phasesManager.InitPhase(0);
     }
 
     #region Minotaur
@@ -62,72 +63,106 @@ public class GameManager : MonoBehaviour
     public void PlayGameAfterDelay(float delay)
     {
         PlayerInput.enabled = false;
+        phasesManager.InitPhase(phasesManager.currentPhase);
+        phasesManager.currentPhaseState = PhaseState.Spawning;
+
+        // delayed to allow for spawn animation to play
         StartCoroutine(Delay());
         IEnumerator Delay()
         {
             yield return new WaitForSeconds(delay);
-            
-            minotaur.StartMinotaur();
+            phasesManager.currentPhaseState = PhaseState.Combat;
             PlayerInput.enabled = true;
+            minotaur.StartCombat();
         }
     }
 
-    public void UpdatePhase(Minotaur newMinotaur, Forte newPlayer, TileManager newTiles)
+    public void UpdatePhase(Minotaur newMinotaur, TileManager newTiles)
     {
         minotaur = newMinotaur;
-        //player = newPlayer;
         tileManager = newTiles;
     }
 
-
-    public void EndGame(bool isVictory)
+    public void StartTransition()
     {
-        if (PhasesManager.Instance != null)
+        phasesManager.currentPhaseState = PhaseState.Transition;
+        phasesManager.Phases[phasesManager.currentPhase].camera.transform.SetParent(player.transform);
+        player.PlayAnimation("PC_Transition1"); 
+        phasesManager.currentPhase++;
+
+        StartCoroutine(Delay());
+
+        IEnumerator Delay()
         {
+            yield return new WaitForSeconds(5);
+
+            PlayGameAfterDelay(2.0f); // to accomodate for Minotaur's death animation
+        }
+    }
+
+    public void EndCombat(bool isVictory)
+    {
+
+        //MusicManager.player.StopMusic();
+        //SFXManager.Instance.PlayOneShot("Lose");
+        PlayerInput.enabled = false;
+        phasesManager.currentPhaseState = PhaseState.CombatEnd;
+
+        if (isVictory)
+        {
+            if (phasesManager.currentPhase + 1 < phasesManager.Phases.Count)
+            {
+                //transition logic here
+                StartCoroutine(Delay());
+
+                IEnumerator Delay()
+                {
+                    yield return new WaitForSeconds(5);
+                    StartTransition();
+                }
+            }
+            else
+            {
+                EndGame(isVictory);
+            }
 
         }
+        else
+        {
+            EndGame(isVictory);
+        }
+    }
+    public void EndGame(bool isVictory)
+    {
+
         //MusicManager.player.StopMusic();
         //SFXManager.Instance.PlayOneShot("Lose");
         PlayerInput.enabled = false;
 
         if (isVictory)
         {
-            if(phasesManager.currentPhase + 1 < phasesManager.Phases.Count)
-            {
-                phasesManager.currentPhase++;
-                phasesManager.InitPhase(phasesManager.currentPhase);
-                PlayGameAfterDelay(0.0f);
-            }
-            else
-            {
-                StartCoroutine(EndScreen());
+            StartCoroutine(EndScreen());
 
-                IEnumerator EndScreen()
-                {
-                    yield return new WaitForSeconds(2);
-                    endCanvas.SetActive(true);
-                    if (isVictory)
-                        victoryText.SetActive(true);
-                    else
-                        defeatText.SetActive(true);
-                }
+            IEnumerator EndScreen()
+            {
+                yield return new WaitForSeconds(2);
+                endCanvas.SetActive(true);
+                victoryText.SetActive(true);
             }
+        }
+        else
+        {
+            StartCoroutine(EndScreen());
 
+            IEnumerator EndScreen()
+            {
+                yield return new WaitForSeconds(2);
+                endCanvas.SetActive(true);
+                defeatText.SetActive(true);
+            }
         }
 
-        //if (!isVictory)
-        //    minotaur.PlayerDeath();
-
-        //StartCoroutine(EndScreen());
-
-        //IEnumerator EndScreen()
-        //{
-        //    yield return new WaitForSeconds(2);
-        //    endCanvas.SetActive(true);
-        //    if (isVictory)
-        //        victoryText.SetActive(true);
-        //    else
-        //        defeatText.SetActive(true);
-        //}
+        phasesManager.currentPhase = 0;
     }
+
 }

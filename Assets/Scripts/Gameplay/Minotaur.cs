@@ -33,6 +33,8 @@ public class Minotaur : MonoBehaviour
 
     [SerializeField] private MinotaurComboSO[] minotaurComboSOs;
 
+    private bool isCombat = false;
+
     private int currentCombo;
     public int Health => health;
 
@@ -49,12 +51,6 @@ public class Minotaur : MonoBehaviour
         BeatsManager.OnBeat += DoMove;
     }
 
-    private void Start()
-    {
-        animator.Play("Spawn");
-        SFXManager.Instance.PlayOneShot("Spawn");
-    }
-
     private void OnDestroy()
     {
         BeatsManager.OnBeat -= DoMove;
@@ -62,14 +58,24 @@ public class Minotaur : MonoBehaviour
 
     public void StartMinotaur()
     {
-        animator.Play("Idle");
+        isCombat = false;
+        animator.Play("Spawn");
+        SFXManager.Instance.PlayOneShot("Spawn");
     }
+
+    public void StartCombat()
+    {
+        isCombat = true;
+    }
+
+
     #endregion
 
     #region Actions
     //Runs whenever On Beat is invoked
     private void DoMove(float num)
     {
+        if (!isCombat) return;
         //If has nothing queued up, load a random combo
         if (currentComboSet.Count <= 0 && queuedAttacks.Count <= 0)
         {
@@ -226,7 +232,7 @@ public class Minotaur : MonoBehaviour
 
     private void Death()
     {
-        GameManager.Instance.EndGame(true);
+        GameManager.Instance.EndCombat(true);
         animator.Play("Death");
         Destroy(this);
     }
