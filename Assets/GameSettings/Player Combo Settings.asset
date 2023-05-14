@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd3a06f5ca4e11f43b67da5f56af875b, type: 3}
+  m_Name: Player Combo Settings
+  m_EditorClassIdentifier: 
+  levels:
+  - threshold: 4
+    damageMultipler: 1
+    meterColor: {r: 1, g: 1, b: 1, a: 1}
+  - threshold: 16
+    damageMultipler: 1.25
+    meterColor: {r: 1, g: 0.99260557, b: 0.3915094, a: 1}
+  - threshold: 32
+    damageMultipler: 1.5
+    meterColor: {r: 0.39215684, g: 0.87894046, b: 1, a: 1}
+  hasUniqueTextOnMiss: 0
+  uniqueMissText: MISS
+  missComboColor: {r: 0.4339623, g: 0.4339623, b: 0.4339623, a: 1}
+  hasUniqueTextOnMax: 0
+  uniqueMaxText: MAX
+  maxComboColor: {r: 1, g: 0.39215687, b: 0.98039216, a: 1}
+  maxDamageMultiplier: 2

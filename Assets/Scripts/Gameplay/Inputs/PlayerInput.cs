@@ -34,12 +34,14 @@ public class PlayerInput : MonoBehaviour
                 return; //Maybe add consequence
             if (BeatsManager.CalculateIfTimeIsInWindow(MusicManager.audioSource.time))
             {
+                GameManager.Instance.IncrementComboCount();
                 hadInputThisBeat = true;
                 player.Move((int)dir);
             }
             else
             {
                 //Punish
+                GameManager.Instance.ResetComboMeter();
             }
         }
     }
@@ -50,12 +52,15 @@ public class PlayerInput : MonoBehaviour
             return; //Maybe add consequence
         if (BeatsManager.CalculateIfTimeIsInWindow(MusicManager.audioSource.time))
         {
+            GameManager.Instance.IncrementComboCount();
+            
             hadInputThisBeat = true;
             player.Attack();
         }
         else
         {
             //Punish
+            GameManager.Instance.ResetComboMeter();
         }
     }
 
@@ -65,12 +70,14 @@ public class PlayerInput : MonoBehaviour
             return; //Maybe add consequence
         if (BeatsManager.CalculateIfTimeIsInWindow(MusicManager.audioSource.time))
         {
+            GameManager.Instance.IncrementComboCount();
             hadInputThisBeat = true;
             player.Reflect();
         }
         else
         {
             //Punish
+            GameManager.Instance.ResetComboMeter();
         }
     }
 }

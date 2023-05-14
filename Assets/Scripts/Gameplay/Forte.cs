@@ -61,7 +61,8 @@ public class Forte : MonoBehaviour
     public void Attack()
     {
         animator.Play("PC_Anger");
-        GameManager.Instance.Minotaur.TakeDamage(attackDamage);
+        int totalDamage = Mathf.RoundToInt(attackDamage * GameManager.Instance.GetPlayerComboDamageMultiplier());
+        GameManager.Instance.Minotaur.TakeDamage(totalDamage);
         AddSuperMeterValue(attackAddSuper);
         SFXManager.Instance.PlayOneShot("Attack");
     }
@@ -104,7 +105,8 @@ public class Forte : MonoBehaviour
 
     public int GetReflectDamage()
     {
-        return reflectDamage;
+        int totalDamage = Mathf.RoundToInt(reflectDamage * GameManager.Instance.GetPlayerComboDamageMultiplier());
+        return totalDamage;
 }
     private void AddSuperMeterValue(int value) => superMeterValue = Mathf.Clamp(superMeterValue += value, 0, maxSuperMeter);
 }

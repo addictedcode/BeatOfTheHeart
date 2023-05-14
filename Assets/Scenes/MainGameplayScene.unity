@@ -339,7 +339,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &3298467
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -356,7 +356,8 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &33785308
 GameObject:
   m_ObjectHideFlags: 0
@@ -2808,7 +2809,7 @@ MonoBehaviour:
   minotaurState: 0
 --- !u!95 &838692118
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -2825,7 +2826,8 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!212 &838692119
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -6254,6 +6256,8 @@ MonoBehaviour:
   endCanvas: {fileID: 104432212}
   victoryText: {fileID: 751997531}
   defeatText: {fileID: 438220904}
+  playerComboSettings: {fileID: 11400000, guid: 7fd80264be4fc0840a3406dc1f2cd9ca, type: 2}
+  GameState: 0
 --- !u!4 &2135332381
 Transform:
   m_ObjectHideFlags: 0

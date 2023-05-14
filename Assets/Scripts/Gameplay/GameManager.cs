@@ -22,11 +22,17 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject victoryText;
     [SerializeField] private GameObject defeatText;
 
+    [Header("Game Settings")]
+    [SerializeField] private PlayerComboSettingsSO playerComboSettings;
+    
     public Forte Player => player;
     public Minotaur Minotaur => minotaur;
     public TileManager TileManager => tileManager;
     public UnityEngine.InputSystem.PlayerInput PlayerInput => player.GetComponent<UnityEngine.InputSystem.PlayerInput>();
     public GameState GameState;
+    
+    public int PlayerComboCount { get; private set; }
+    public int PlayerComboCurrentLevel { get; private set; }
 
     private void Awake()
     {
@@ -49,6 +55,34 @@ public class GameManager : MonoBehaviour
     public void ActivateExplosion(int num) => tileManager.ActivateExplosion(num);
     public void ActivateReflectFireball(int num) => tileManager.ActivateReflectFireball(num);
     public void ActivateGroundSmash(int num) => tileManager.ActivateGroundSmash(num);
+    #endregion
+    
+    #region Combo Meter
+
+    public void IncrementComboCount()
+    {
+        PlayerComboCount++;
+        
+        if (playerComboSettings.CheckIfAtMaxLevel(PlayerComboCurrentLevel))
+            return;
+
+        PlayerComboLevel level = playerComboSettings.Levels[PlayerComboCurrentLevel];
+        if (PlayerComboCount >= level.Threshold)
+            PlayerComboCurrentLevel++;
+    }
+
+    public void ResetComboMeter()
+    {
+        PlayerComboCount = 0;
+        PlayerComboCurrentLevel = 0;
+    }
+
+    public float GetPlayerComboDamageMultiplier()
+    {
+        bool atMaxLevel = playerComboSettings.CheckIfAtMaxLevel(PlayerComboCurrentLevel);
+        return atMaxLevel ? playerComboSettings.MaxDamageMultiplier : playerComboSettings.Levels[PlayerComboCurrentLevel].DamageMultipler;
+    }
+    
     #endregion
 
     public void PlayGameAfterDelay(float delay)
