@@ -117,7 +117,7 @@ public class GameManager : MonoBehaviour
 
                 IEnumerator Delay()
                 {
-                    yield return new WaitForSeconds(5);
+                    yield return new WaitForSeconds(2.0f);
                     StartTransition();
                 }
             }
