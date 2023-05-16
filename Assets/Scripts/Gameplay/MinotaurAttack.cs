@@ -1,10 +1,11 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class Fireball : MonoBehaviour
+public class MinotaurAttack : MonoBehaviour
 {
-    private readonly WaitForSeconds lifespan = new(0.75f);
-    private Animator animator;
+    protected readonly WaitForSeconds lifespan = new WaitForSeconds(BeatsManager.secondsPerBeat);
+    protected Animator animator;
 
     private void Awake()
     {
@@ -15,7 +16,6 @@ public class Fireball : MonoBehaviour
     {
         StartCoroutine(DestroyGameObjectTimer());
         animator.enabled = true;
-        animator.Play("FireballAnimation");
     }
 
     private IEnumerator DestroyGameObjectTimer()

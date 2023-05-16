@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Minotaur : MonoBehaviour
 {
+    #region Enum States
     private enum MinotaurState
     {
         Idle,
@@ -24,6 +25,7 @@ public class Minotaur : MonoBehaviour
         RFireball,
         LRFireball
     }
+    #endregion
 
     [Header("General")]
     [SerializeField] private int health = 100;
@@ -43,6 +45,7 @@ public class Minotaur : MonoBehaviour
     private Animator animator;
     private Queue<MinotaurAttacks> currentComboSet = new();
     private Queue<MinotaurAttacks> queuedAttacks = new();
+    private Queue<GameObject> queuedFireballs = new();
 
     #region Unity Functions
     private void Awake()
@@ -190,8 +193,7 @@ public class Minotaur : MonoBehaviour
     {
         animator.Play(anim);
         SFXManager.Instance.PlayOneShot(sfx);
-        GameManager.Instance.ActivateIndicator(tile);
-        GameManager.Instance.ActivateFireball(tile);
+        GameManager.Instance.ShootFireball(tile, queuedFireballs.Dequeue());
         yield return new WaitForSeconds(0.18f);
         if (!GameManager.Instance.Player.isReflect)
             GameManager.Instance.CheckPlayerTakeDamage(damage, tile);
@@ -220,6 +222,7 @@ public class Minotaur : MonoBehaviour
     {
         animator.Play("WindupProjectile");
         queuedAttacks.Enqueue(tile == 0 ? MinotaurAttacks.RFireball : MinotaurAttacks.LFireball);
+        queuedFireballs.Enqueue(GameManager.Instance.SpawnFireball(tile));
     }
     #endregion
 

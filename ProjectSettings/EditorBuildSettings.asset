@@ -29,4 +29,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainGameplayScene.unity
     guid: 30f6be687fa53ac40abf914c6219edb5
+  - enabled: 1
+    path: Assets/Scenes/MainGameplayScene_ConQuest.unity
+    guid: 69d8d9f1b24976f46b655406ee12f9b1
   m_configObjects: {}

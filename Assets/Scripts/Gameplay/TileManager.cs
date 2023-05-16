@@ -8,6 +8,7 @@ public class TileManager : MonoBehaviour
     [SerializeField] private GameObject attackIndicatorPrefab;
 
     [Header("Fireball FX")]
+    [SerializeField] private CircularSpawner[] fireballSpawners;
     [SerializeField] private GameObject fireballPrefab;
     [SerializeField] private GameObject explosionPrefab;
     [SerializeField] private GameObject reflectFireballPrefab;
@@ -17,7 +18,6 @@ public class TileManager : MonoBehaviour
     public int currentTile = 1;
 
     private GameObject[] attackIndicators;
-    private GameObject[] fireballs;
     private GameObject[] explosions;
     private GameObject[] reflectFireball;
     private GameObject[] groundSmash;
@@ -27,10 +27,6 @@ public class TileManager : MonoBehaviour
         attackIndicators = new GameObject[tiles.Length];
         for(int i = 0; i < tiles.Length; i++)
             attackIndicators[i] = Instantiate(attackIndicatorPrefab, tiles[i].transform);
-
-        fireballs = new GameObject[tiles.Length];
-        for (int i = 0; i < tiles.Length; i++)
-            fireballs[i] = Instantiate(fireballPrefab, tiles[i].transform);
 
         explosions = new GameObject[tiles.Length];
         for (int i = 0; i < tiles.Length; i++)
@@ -60,9 +56,21 @@ public class TileManager : MonoBehaviour
         if (CheckValidTile(num)) attackIndicators[num].SetActive(true);
     }
 
-    public void ActivateFireball(int num)
+    public GameObject SpawnFireball(int num)
     {
-        if (CheckValidTile(num)) fireballs[num].SetActive(true);
+        if (!CheckValidTile(num)) return null;
+
+        GameObject newFireball = Instantiate(fireballPrefab);
+        fireballSpawners[num].AddObject(newFireball);
+        return newFireball;
+    }
+
+    public void ShootFireball(int num, GameObject fireball)
+    {
+        if (!CheckValidTile(num)) return;
+
+        fireballSpawners[num].RemoveObject(fireball);
+        fireball.GetComponent<Fireball>().OnShoot();
     }
 
     public void ActivateExplosion(int num)

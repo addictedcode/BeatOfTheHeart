@@ -36,6 +36,7 @@ public class CircularSpawner : MonoBehaviour
         {
             m_ObjectList[i].transform.position = new Vector3(transform.position.x + m_DistanceFromCenter, transform.position.y, transform.position.z);
             m_ObjectList[i].transform.RotateAround(transform.position, Vector3.forward, AngleStep * ( i + 1 ));
+            m_ObjectList[i].transform.localRotation = Quaternion.identity;
         }
     }
 }
