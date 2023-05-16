@@ -184,7 +184,7 @@ public class Minotaur : MonoBehaviour
     {
         animator.Play(anim);
         SFXManager.Instance.PlayOneShot(sfx);
-        GameManager.Instance.ActivateIndicator(tile);
+        GameManager.Instance.TriggerIndicator(tile);
         yield return new WaitForSeconds(0.18f);
         GameManager.Instance.CheckPlayerTakeDamage(damage, tile);
     }
@@ -216,6 +216,7 @@ public class Minotaur : MonoBehaviour
             animator.Play("LeftWindup");
             queuedAttacks.Enqueue(MinotaurAttacks.LSmash);
         }
+        GameManager.Instance.SpawnIndicator(tile);
     }
 
     private void WindupProjectile(int tile)

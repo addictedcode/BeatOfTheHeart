@@ -53,7 +53,8 @@ public class GameManager : MonoBehaviour
             player.TakeDamage(damage);
     }
 
-    public void ActivateIndicator(int num) => tileManager.ActivateIndicator(num);
+    public void SpawnIndicator(int num) => tileManager.SpawnIndicator(num);
+    public void TriggerIndicator(int num) => tileManager.PopIndicator(num);
     public GameObject SpawnFireball(int num) => tileManager.SpawnFireball(num);
     public void ShootFireball(int num, GameObject fireball) => tileManager.ShootFireball(num, fireball);
     public void ActivateExplosion(int num) => tileManager.ActivateExplosion(num);

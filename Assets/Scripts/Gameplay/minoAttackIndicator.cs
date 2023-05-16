@@ -4,17 +4,23 @@ using UnityEngine;
 public class minoAttackIndicator : MonoBehaviour
 {
     private readonly WaitForSeconds lifespan = new(0.55f);
+    Animator animator;
 
-    private void OnEnable()
+    private void Awake()
     {
-        StartCoroutine(DisableGameObjectTimer());
-        GetComponentInChildren<Animator>().enabled = true;
+        animator = GetComponentInChildren<Animator>();
     }
 
-    private IEnumerator DisableGameObjectTimer()
+    public void OnTrigger()
+    {
+        StartCoroutine(DestroyGameObjectTimer());
+        animator.enabled = true;
+        animator.Play("targetAnim");
+    }
+
+    private IEnumerator DestroyGameObjectTimer()
     {
         yield return lifespan;
-        gameObject.SetActive(false);
-        GetComponentInChildren<Animator>().enabled = false;
+        Destroy(gameObject);
     }
 }

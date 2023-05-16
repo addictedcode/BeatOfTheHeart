@@ -5,6 +5,7 @@ using UnityEngine;
 public class TileManager : MonoBehaviour
 {
     [SerializeField] private Transform[] tiles;
+    [SerializeField] private ScalingSpawner[] attackIndicatorSpawners;
     [SerializeField] private GameObject attackIndicatorPrefab;
 
     [Header("Fireball FX")]
@@ -17,17 +18,12 @@ public class TileManager : MonoBehaviour
 
     public int currentTile = 1;
 
-    private GameObject[] attackIndicators;
     private GameObject[] explosions;
     private GameObject[] reflectFireball;
     private GameObject[] groundSmash;
 
     private void Awake()
     {
-        attackIndicators = new GameObject[tiles.Length];
-        for(int i = 0; i < tiles.Length; i++)
-            attackIndicators[i] = Instantiate(attackIndicatorPrefab, tiles[i].transform);
-
         explosions = new GameObject[tiles.Length];
         for (int i = 0; i < tiles.Length; i++)
             explosions[i] = Instantiate(explosionPrefab, tiles[i].transform);
@@ -51,9 +47,16 @@ public class TileManager : MonoBehaviour
 
     public bool CheckValidSideTile(int dir) => currentTile + dir >= 0 && currentTile + dir < tiles.Length;
     public bool CheckValidTile(int tile) => tile >= 0 && tile < tiles.Length;
-    public void ActivateIndicator(int num)
+    public void SpawnIndicator(int num)
     {
-        if (CheckValidTile(num)) attackIndicators[num].SetActive(true);
+        if (!CheckValidTile(num)) return;
+        GameObject newAttackIndicator = Instantiate(attackIndicatorPrefab);
+        attackIndicatorSpawners[num].AddObject(newAttackIndicator);
+    }
+    public void PopIndicator(int num)
+    {
+        if (!CheckValidTile(num)) return;
+        attackIndicatorSpawners[num].RemoveObject().GetComponent<minoAttackIndicator>()?.OnTrigger();
     }
 
     public GameObject SpawnFireball(int num)
