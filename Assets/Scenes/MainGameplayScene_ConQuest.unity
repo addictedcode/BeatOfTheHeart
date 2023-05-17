@@ -1361,8 +1361,13 @@ MonoBehaviour:
   meleeDamage: 1
   projectileDamage: 2
   specialDamage: 2
-  minotaurComboSOs:
-  - {fileID: 11400000, guid: 74a538a54a8069c4ea32d38b0ff5000b, type: 2}
+  minotaurPhaseComboInfoList:
+  - comboList: {fileID: 11400000, guid: a4d07be85a33e1045b10b6731609ab05, type: 2}
+    HPThreshold: 1
+  - comboList: {fileID: 11400000, guid: 3009c17ce30fce94fb32814c80119913, type: 2}
+    HPThreshold: 0.74
+  - comboList: {fileID: 11400000, guid: 7520a591bb411364e9b98fb735a9929e, type: 2}
+    HPThreshold: 0.24
   minotaurState: 0
 --- !u!95 &695080072
 Animator:
@@ -1487,8 +1492,13 @@ MonoBehaviour:
   meleeDamage: 1
   projectileDamage: 2
   specialDamage: 2
-  minotaurComboSOs:
-  - {fileID: 11400000, guid: 74a538a54a8069c4ea32d38b0ff5000b, type: 2}
+  minotaurPhaseComboInfoList:
+  - comboList: {fileID: 11400000, guid: a4d07be85a33e1045b10b6731609ab05, type: 2}
+    HPThreshold: 1
+  - comboList: {fileID: 11400000, guid: 3009c17ce30fce94fb32814c80119913, type: 2}
+    HPThreshold: 0.74
+  - comboList: {fileID: 11400000, guid: 7520a591bb411364e9b98fb735a9929e, type: 2}
+    HPThreshold: 0.24
   minotaurState: 0
 --- !u!95 &747032216
 Animator:
@@ -1733,8 +1743,13 @@ MonoBehaviour:
   meleeDamage: 1
   projectileDamage: 2
   specialDamage: 2
-  minotaurComboSOs:
-  - {fileID: 11400000, guid: 74a538a54a8069c4ea32d38b0ff5000b, type: 2}
+  minotaurPhaseComboInfoList:
+  - comboList: {fileID: 11400000, guid: a4d07be85a33e1045b10b6731609ab05, type: 2}
+    HPThreshold: 1
+  - comboList: {fileID: 11400000, guid: 3009c17ce30fce94fb32814c80119913, type: 2}
+    HPThreshold: 0.74
+  - comboList: {fileID: 11400000, guid: 7520a591bb411364e9b98fb735a9929e, type: 2}
+    HPThreshold: 0.24
   minotaurState: 0
 --- !u!95 &838692118
 Animator:

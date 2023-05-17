@@ -28,16 +28,17 @@ public class Minotaur : MonoBehaviour
     #endregion
 
     [Header("General")]
+    private int maxHealth = 100;
     [SerializeField] private int health = 100;
     [SerializeField] private int meleeDamage = 1;
     [SerializeField] private int projectileDamage = 1;
     [SerializeField] private int specialDamage = 2;
 
-    [SerializeField] private MinotaurComboSO[] minotaurComboSOs;
+    [Header("Combo")]
+    [SerializeField] private MinotaurPhaseComboInfo[] minotaurPhaseComboInfoList;
+    private int currentMinotaurPhaseComboInfoIndex = 0;
 
     private bool isCombat = false;
-
-    private int currentCombo;
     public int Health => health;
 
     //Debugging States
@@ -50,6 +51,7 @@ public class Minotaur : MonoBehaviour
     #region Unity Functions
     private void Awake()
     {
+        maxHealth = health;
         animator = GetComponent<Animator>();
         BeatsManager.OnBeat += DoMove;
     }
@@ -229,6 +231,7 @@ public class Minotaur : MonoBehaviour
     public void TakeDamage(int damage)
     {
         health -= damage;
+        UpdateMinotaurPhase();
         if (health <= 0) Death();
     }
 
@@ -247,7 +250,19 @@ public class Minotaur : MonoBehaviour
     #endregion
 
     #region Combo
-    private void LoadCombo(int set) => minotaurComboSOs[set].combo.ForEach(o => currentComboSet.Enqueue(o));
-    private void LoadRandomCombo() => LoadCombo(Random.Range(0, minotaurComboSOs.Length));
+    private void LoadCombo(int set) => minotaurPhaseComboInfoList[currentMinotaurPhaseComboInfoIndex].comboList.comboList[set].combo.ForEach(o => currentComboSet.Enqueue(o));
+    private void LoadRandomCombo() => LoadCombo(Random.Range(0, minotaurPhaseComboInfoList[currentMinotaurPhaseComboInfoIndex].comboList.comboList.Count));
+
+    private void UpdateMinotaurPhase()
+    {
+        //Check if last phase
+        if (currentMinotaurPhaseComboInfoIndex + 1 >= minotaurPhaseComboInfoList.Length) return;
+
+        float HPThreshold = minotaurPhaseComboInfoList[currentMinotaurPhaseComboInfoIndex + 1].HPThreshold;
+        if (health <= (float)maxHealth * HPThreshold)
+        {
+            currentMinotaurPhaseComboInfoIndex++;
+        }
+    }
     #endregion
 }
