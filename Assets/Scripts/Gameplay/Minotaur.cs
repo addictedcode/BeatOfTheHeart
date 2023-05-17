@@ -158,19 +158,15 @@ public class Minotaur : MonoBehaviour
         {
             case MinotaurAttacks.LSmash:
                 StartCoroutine(DoMeleeAttack(meleeDamage, 1, "LeftSwing", "Slam"));
-                GameManager.Instance.ActivateGroundSmash(1);
                 break;
             case MinotaurAttacks.RSmash:
                 StartCoroutine(DoMeleeAttack(meleeDamage, 0, "RightSwing", "Slam"));
-                GameManager.Instance.ActivateGroundSmash(0);
                 break;
             case MinotaurAttacks.LFireball:
                 StartCoroutine(DoProjectileAttack(projectileDamage, 1, "Idle", "Fireball"));
-                GameManager.Instance.ActivateExplosion(1);
                 break;
             case MinotaurAttacks.RFireball:
                 StartCoroutine(DoProjectileAttack(projectileDamage, 0, "Idle", "Fireball"));
-                GameManager.Instance.ActivateExplosion(0);
                 break;
             case MinotaurAttacks.Idle:
                 animator.Play("Idle");
@@ -185,6 +181,7 @@ public class Minotaur : MonoBehaviour
         animator.Play(anim);
         SFXManager.Instance.PlayOneShot(sfx);
         GameManager.Instance.TriggerIndicator(tile);
+        GameManager.Instance.SpawnGroundSmash(tile);
         yield return new WaitForSeconds(0.18f);
         GameManager.Instance.CheckPlayerTakeDamage(damage, tile);
     }
@@ -194,6 +191,7 @@ public class Minotaur : MonoBehaviour
         animator.Play(anim);
         SFXManager.Instance.PlayOneShot(sfx);
         GameManager.Instance.ShootFireball(tile, queuedFireballs.Dequeue());
+        GameManager.Instance.SpawnExplosion(tile);
         yield return new WaitForSeconds(0.18f);
         if (!GameManager.Instance.Player.isReflect)
             GameManager.Instance.CheckPlayerTakeDamage(damage, tile);

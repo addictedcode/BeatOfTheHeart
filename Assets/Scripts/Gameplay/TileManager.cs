@@ -18,23 +18,13 @@ public class TileManager : MonoBehaviour
 
     public int currentTile = 1;
 
-    private GameObject[] explosions;
     private GameObject[] reflectFireball;
-    private GameObject[] groundSmash;
 
     private void Awake()
     {
-        explosions = new GameObject[tiles.Length];
-        for (int i = 0; i < tiles.Length; i++)
-            explosions[i] = Instantiate(explosionPrefab, tiles[i].transform);
-
         reflectFireball = new GameObject[tiles.Length];
         for (int i = 0; i < tiles.Length; i++)
             reflectFireball[i] = Instantiate(reflectFireballPrefab, tiles[i].transform);
-
-        groundSmash = new GameObject[tiles.Length];
-        for (int i = 0; i < tiles.Length; i++)
-            groundSmash[i] = Instantiate(groundSmashPrefab, tiles[i].transform);
     }
 
     public void MoveToTile(int dir)
@@ -76,9 +66,10 @@ public class TileManager : MonoBehaviour
         fireball.GetComponent<Fireball>().OnShoot();
     }
 
-    public void ActivateExplosion(int num)
+    public void SpawnExplosion(int num)
     {
-        if (CheckValidTile(num)) explosions[num].SetActive(true);
+        if (!CheckValidTile(num)) return;
+        Instantiate(explosionPrefab, tiles[num].transform);
     }
 
     public void ActivateReflectFireball(int num)
@@ -86,8 +77,9 @@ public class TileManager : MonoBehaviour
         if (CheckValidTile(num)) reflectFireball[num].SetActive(true);
     }
 
-    public void ActivateGroundSmash(int num)
+    public void SpawnGroundSmash(int num)
     {
-        if (CheckValidTile(num)) groundSmash[num].SetActive(true);
+        if (!CheckValidTile(num)) return;
+        Instantiate(groundSmashPrefab, tiles[num].transform);
     }
 }

@@ -14,13 +14,13 @@ public class Explosion : MonoBehaviour
 
     private void OnEnable()
     {
-        StartCoroutine(DisableGameObjectTimer());
+        StartCoroutine(DestroyGameObjectTimer());
     }
 
-    private IEnumerator DisableGameObjectTimer()
+    private IEnumerator DestroyGameObjectTimer()
     {
         ps.Play();
         yield return lifespan;
-        gameObject.SetActive(false);
+        Destroy(gameObject);
     }
 }
