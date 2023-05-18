@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
 
     //[SerializeField] private TileManager tileManager;
     [SerializeField] private Forte player;
+    [SerializeField] private GateMinigame gateMinigame;
     //[SerializeField] private Minotaur minotaur;
 
     private TileManager tileManager;
@@ -87,6 +88,8 @@ public class GameManager : MonoBehaviour
 
     public void StartTransition()
     {
+
+
         phasesManager.currentPhaseState = PhaseState.Transition;
         phasesManager.Phases[phasesManager.currentPhase].camera.transform.SetParent(player.transform);
         player.PlayAnimation("PC_Transition1"); 
@@ -107,7 +110,6 @@ public class GameManager : MonoBehaviour
 
         //MusicManager.player.StopMusic();
         //SFXManager.Instance.PlayOneShot("Lose");
-        PlayerInput.enabled = false;
         phasesManager.currentPhaseState = PhaseState.CombatEnd;
 
         if (isVictory)
@@ -119,6 +121,12 @@ public class GameManager : MonoBehaviour
 
                 IEnumerator Delay()
                 {
+                    gateMinigame.PlayMinigame(0);
+                    yield return gateMinigame.UpdateMinigame();
+
+                    PlayerInput.SwitchCurrentActionMap("Player");
+                    PlayerInput.enabled = false;
+
                     yield return new WaitForSeconds(2.0f);
                     StartTransition();
                 }
