@@ -88,8 +88,6 @@ public class GameManager : MonoBehaviour
 
     public void StartTransition()
     {
-
-
         phasesManager.currentPhaseState = PhaseState.Transition;
         phasesManager.Phases[phasesManager.currentPhase].camera.transform.SetParent(player.transform);
         player.PlayAnimation("PC_Transition1"); 
@@ -121,10 +119,13 @@ public class GameManager : MonoBehaviour
 
                 IEnumerator Delay()
                 {
-                    gateMinigame.PlayMinigame(0);
-                    yield return gateMinigame.UpdateMinigame();
+                    if (gateMinigame.HasMinigame(PhasesManager.Instance.currentPhase))
+                    {
+                        gateMinigame.PlayMinigame(PhasesManager.Instance.currentPhase);
+                        yield return gateMinigame.UpdateMinigame();
 
-                    PlayerInput.SwitchCurrentActionMap("Player");
+                        PlayerInput.SwitchCurrentActionMap("Player");
+                    }
                     PlayerInput.enabled = false;
 
                     yield return new WaitForSeconds(2.0f);

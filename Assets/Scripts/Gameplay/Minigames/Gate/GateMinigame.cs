@@ -21,6 +21,11 @@ public class GateMinigame : MonoBehaviour
         None, Up, Down, Left, Right
     }
 
+    public bool HasMinigame(int comboListIndex)
+    {
+        return m_ComboList.Count > comboListIndex;
+    }
+
     public void PlayMinigame(int comboListIndex)
     {
         m_CurrentComboListIndex = comboListIndex;
