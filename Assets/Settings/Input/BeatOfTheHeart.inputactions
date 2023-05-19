@@ -11,7 +11,7 @@
                     "id": "3f5b23e8-37a6-4564-a5fd-aa02634b09b1",
                     "expectedControlType": "Axis",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Press",
                     "initialStateCheck": true
                 },
                 {
@@ -837,7 +837,7 @@
                     "id": "ef76f5b2-96bb-43fc-91ba-ab8fca08ff7f",
                     "expectedControlType": "Vector2",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Press",
                     "initialStateCheck": true
                 }
             ],
