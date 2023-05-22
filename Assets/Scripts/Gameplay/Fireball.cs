@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Fireball : MonoBehaviour
 {
-    private readonly WaitForSeconds lifespan = new(0.5f);
+    private readonly WaitForSeconds lifespan = new(0.75f);
     private Animator animator;
 
     private void Awake()
@@ -11,16 +11,16 @@ public class Fireball : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-    private void OnEnable()
+    public void OnShoot()
     {
-        StartCoroutine(DisableGameObjectTimer());
+        StartCoroutine(DestroyGameObjectTimer());
         animator.enabled = true;
+        animator.Play("FireballAnimation");
     }
 
-    private IEnumerator DisableGameObjectTimer()
+    private IEnumerator DestroyGameObjectTimer()
     {
         yield return lifespan;
-        gameObject.SetActive(false);
-        animator.enabled = false;
+        Destroy(gameObject);
     }
 }

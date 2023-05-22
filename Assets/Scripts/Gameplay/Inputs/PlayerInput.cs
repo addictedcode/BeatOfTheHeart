@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 public class PlayerInput : MonoBehaviour
 {
     private Forte player;
+    [SerializeField] private GateMinigame gateMinigame;
     private bool hadInputThisBeat = false;
 
     private void Awake()
@@ -79,5 +80,22 @@ public class PlayerInput : MonoBehaviour
             //Punish
             GameManager.Instance.ResetComboMeter();
         }
+    }
+
+    public void OnDirection(InputValue value)
+    {
+        if (hadInputThisBeat)
+            return; //Maybe add consequence
+
+        Vector2 direction = value.Get<Vector2>();
+        if (BeatsManager.CalculateIfTimeIsInWindow(MusicManager.audioSource.time))
+        {
+            gateMinigame.OnDirection(direction);
+        }
+        else
+        {
+            gateMinigame.OnFailedInput();
+        }
+        hadInputThisBeat = true;
     }
 }

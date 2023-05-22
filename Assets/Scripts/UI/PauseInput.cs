@@ -110,6 +110,7 @@ public class PauseInput : MonoBehaviour
 
     public void OnReturnToMainMenuPress()
     {
+        Time.timeScale = 1;
         Destroy(SFXManager.Instance.gameObject);
         Destroy(GameManager.Instance.gameObject);
         MusicManager.OnStopMusic.Invoke();

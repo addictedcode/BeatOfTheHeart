@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Minotaur : MonoBehaviour
 {
+    #region Enum States
     private enum MinotaurState
     {
         Idle,
@@ -24,16 +25,20 @@ public class Minotaur : MonoBehaviour
         RFireball,
         LRFireball
     }
+    #endregion
 
     [Header("General")]
+    private int maxHealth = 100;
     [SerializeField] private int health = 100;
     [SerializeField] private int meleeDamage = 1;
     [SerializeField] private int projectileDamage = 1;
     [SerializeField] private int specialDamage = 2;
 
-    [SerializeField] private MinotaurComboSO[] minotaurComboSOs;
+    [Header("Combo")]
+    [SerializeField] private MinotaurPhaseComboInfo[] minotaurPhaseComboInfoList;
+    private int currentMinotaurPhaseComboInfoIndex = 0;
 
-    private int currentCombo;
+    private bool isCombat = false;
     public int Health => health;
 
     //Debugging States
@@ -41,18 +46,14 @@ public class Minotaur : MonoBehaviour
     private Animator animator;
     private Queue<MinotaurAttacks> currentComboSet = new();
     private Queue<MinotaurAttacks> queuedAttacks = new();
+    private Queue<GameObject> queuedFireballs = new();
 
     #region Unity Functions
     private void Awake()
     {
+        maxHealth = health;
         animator = GetComponent<Animator>();
         BeatsManager.OnBeat += DoMove;
-    }
-
-    private void Start()
-    {
-        animator.Play("Spawn");
-        SFXManager.Instance.PlayOneShot("Spawn");
     }
 
     private void OnDestroy()
@@ -62,14 +63,24 @@ public class Minotaur : MonoBehaviour
 
     public void StartMinotaur()
     {
-        animator.Play("Idle");
+        isCombat = false;
+        animator.Play("Spawn");
+        SFXManager.Instance.PlayOneShot("Spawn");
     }
+
+    public void StartCombat()
+    {
+        isCombat = true;
+    }
+
+
     #endregion
 
     #region Actions
     //Runs whenever On Beat is invoked
     private void DoMove(float num)
     {
+        if (!isCombat) return;
         //If has nothing queued up, load a random combo
         if (currentComboSet.Count <= 0 && queuedAttacks.Count <= 0)
         {
@@ -149,19 +160,15 @@ public class Minotaur : MonoBehaviour
         {
             case MinotaurAttacks.LSmash:
                 StartCoroutine(DoMeleeAttack(meleeDamage, 1, "LeftSwing", "Slam"));
-                GameManager.Instance.ActivateGroundSmash(1);
                 break;
             case MinotaurAttacks.RSmash:
                 StartCoroutine(DoMeleeAttack(meleeDamage, 0, "RightSwing", "Slam"));
-                GameManager.Instance.ActivateGroundSmash(0);
                 break;
             case MinotaurAttacks.LFireball:
                 StartCoroutine(DoProjectileAttack(projectileDamage, 1, "Idle", "Fireball"));
-                GameManager.Instance.ActivateExplosion(1);
                 break;
             case MinotaurAttacks.RFireball:
                 StartCoroutine(DoProjectileAttack(projectileDamage, 0, "Idle", "Fireball"));
-                GameManager.Instance.ActivateExplosion(0);
                 break;
             case MinotaurAttacks.Idle:
                 animator.Play("Idle");
@@ -175,7 +182,8 @@ public class Minotaur : MonoBehaviour
     {
         animator.Play(anim);
         SFXManager.Instance.PlayOneShot(sfx);
-        GameManager.Instance.ActivateIndicator(tile);
+        GameManager.Instance.TriggerIndicator(tile);
+        GameManager.Instance.SpawnGroundSmash(tile);
         yield return new WaitForSeconds(0.18f);
         GameManager.Instance.CheckPlayerTakeDamage(damage, tile);
     }
@@ -184,8 +192,8 @@ public class Minotaur : MonoBehaviour
     {
         animator.Play(anim);
         SFXManager.Instance.PlayOneShot(sfx);
-        GameManager.Instance.ActivateIndicator(tile);
-        GameManager.Instance.ActivateFireball(tile);
+        GameManager.Instance.ShootFireball(tile, queuedFireballs.Dequeue());
+        GameManager.Instance.SpawnExplosion(tile);
         yield return new WaitForSeconds(0.18f);
         if (!GameManager.Instance.Player.isReflect)
             GameManager.Instance.CheckPlayerTakeDamage(damage, tile);
@@ -208,12 +216,14 @@ public class Minotaur : MonoBehaviour
             animator.Play("LeftWindup");
             queuedAttacks.Enqueue(MinotaurAttacks.LSmash);
         }
+        GameManager.Instance.SpawnIndicator(tile);
     }
 
     private void WindupProjectile(int tile)
     {
         animator.Play("WindupProjectile");
         queuedAttacks.Enqueue(tile == 0 ? MinotaurAttacks.RFireball : MinotaurAttacks.LFireball);
+        queuedFireballs.Enqueue(GameManager.Instance.SpawnFireball(tile));
     }
     #endregion
 
@@ -221,12 +231,13 @@ public class Minotaur : MonoBehaviour
     public void TakeDamage(int damage)
     {
         health -= damage;
+        UpdateMinotaurPhase();
         if (health <= 0) Death();
     }
 
     private void Death()
     {
-        GameManager.Instance.EndGame(true);
+        GameManager.Instance.EndCombat(true);
         animator.Play("Death");
         Destroy(this);
     }
@@ -239,7 +250,19 @@ public class Minotaur : MonoBehaviour
     #endregion
 
     #region Combo
-    private void LoadCombo(int set) => minotaurComboSOs[set].combo.ForEach(o => currentComboSet.Enqueue(o));
-    private void LoadRandomCombo() => LoadCombo(Random.Range(0, minotaurComboSOs.Length));
+    private void LoadCombo(int set) => minotaurPhaseComboInfoList[currentMinotaurPhaseComboInfoIndex].comboList.comboList[set].combo.ForEach(o => currentComboSet.Enqueue(o));
+    private void LoadRandomCombo() => LoadCombo(Random.Range(0, minotaurPhaseComboInfoList[currentMinotaurPhaseComboInfoIndex].comboList.comboList.Count));
+
+    private void UpdateMinotaurPhase()
+    {
+        //Check if last phase
+        if (currentMinotaurPhaseComboInfoIndex + 1 >= minotaurPhaseComboInfoList.Length) return;
+
+        float HPThreshold = minotaurPhaseComboInfoList[currentMinotaurPhaseComboInfoIndex + 1].HPThreshold;
+        if (health <= (float)maxHealth * HPThreshold)
+        {
+            currentMinotaurPhaseComboInfoIndex++;
+        }
+    }
     #endregion
 }
