@@ -3163,6 +3163,7 @@ MonoBehaviour:
   endCanvas: {fileID: 104432212}
   victoryText: {fileID: 751997531}
   defeatText: {fileID: 438220904}
+  playerComboSettings: {fileID: 11400000, guid: 7fd80264be4fc0840a3406dc1f2cd9ca, type: 2}
   GameState: 0
 --- !u!4 &2135332381
 Transform:

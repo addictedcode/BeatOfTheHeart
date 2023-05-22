@@ -23,7 +23,10 @@ public class PlayerInput : MonoBehaviour
 
     private void OnHalfBeat(float time)
     {
-        hadInputThisBeat = false;
+        if (hadInputThisBeat)
+            hadInputThisBeat = false;
+        else
+            GameManager.Instance.ResetComboMeter();
     }
 
     public void OnDodge(InputValue value)

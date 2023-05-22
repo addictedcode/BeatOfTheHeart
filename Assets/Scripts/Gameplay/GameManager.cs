@@ -79,7 +79,7 @@ public class GameManager : MonoBehaviour
             return;
 
         PlayerComboLevel level = playerComboSettings.Levels[PlayerComboCurrentLevel];
-        if (PlayerComboCount >= level.Threshold)
+        if (PlayerComboCount > level.Threshold)
             PlayerComboCurrentLevel++;
     }
 

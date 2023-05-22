@@ -8,12 +8,15 @@ using UnityEngine.UI;
 public class ComboMeterUI : MonoBehaviour
 {
     [SerializeField] private PlayerComboSettingsSO comboSettings;
+    [SerializeField] private Image backgroundFill;
     [SerializeField] private Image radialFill;
     [SerializeField] private TMP_Text comboText;
     [SerializeField] private Animator comboMeterAnimator;
 
     private void OnEnable()
     {
+        backgroundFill.color = comboSettings.MissComboColor;
+        
         BeatsManager.OnBeat += UpdateUI;
         BeatsManager.OnBeat += AnimateUI;
     }
@@ -26,8 +29,13 @@ public class ComboMeterUI : MonoBehaviour
 
     public void UpdateUI(float num)
     {
-        int comboCount = GameManager.Instance.PlayerComboCount;
-        int comboLevel = GameManager.Instance.PlayerComboCurrentLevel;
+        int comboCount = 0;
+        int comboLevel = 0;
+        if (GameManager.Instance != null)
+        {
+            comboCount = GameManager.Instance.PlayerComboCount;
+            comboLevel = GameManager.Instance.PlayerComboCurrentLevel;
+        }
 
         if (comboSettings.CheckIfAtMaxLevel(comboLevel))
         {
