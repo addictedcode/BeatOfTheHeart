@@ -17,17 +17,17 @@ public class ComboMeterUI : MonoBehaviour
     {
         backgroundFill.color = comboSettings.MissComboColor;
         
-        BeatsManager.OnBeat += UpdateUI;
+        GameManager.OnComboMeterUpdated += UpdateUI;
         BeatsManager.OnBeat += AnimateUI;
     }
 
     private void OnDisable()
     {
-        BeatsManager.OnBeat -= UpdateUI;
+        GameManager.OnComboMeterUpdated -= UpdateUI;
         BeatsManager.OnBeat -= AnimateUI;
     }
 
-    public void UpdateUI(float num)
+    public void UpdateUI()
     {
         int comboCount = 0;
         int comboLevel = 0;

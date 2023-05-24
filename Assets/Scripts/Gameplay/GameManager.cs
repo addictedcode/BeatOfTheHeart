@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -40,6 +41,8 @@ public class GameManager : MonoBehaviour
     
     public int PlayerComboCount { get; private set; }
     public int PlayerComboCurrentLevel { get; private set; }
+    
+    public static Action OnComboMeterUpdated;
 
     private void Awake()
     {
@@ -74,19 +77,23 @@ public class GameManager : MonoBehaviour
     public void IncrementComboCount()
     {
         PlayerComboCount++;
-        
-        if (playerComboSettings.CheckIfAtMaxLevel(PlayerComboCurrentLevel))
-            return;
 
-        PlayerComboLevel level = playerComboSettings.Levels[PlayerComboCurrentLevel];
-        if (PlayerComboCount > level.Threshold)
-            PlayerComboCurrentLevel++;
+        if (!playerComboSettings.CheckIfAtMaxLevel(PlayerComboCurrentLevel))
+        {
+            PlayerComboLevel level = playerComboSettings.Levels[PlayerComboCurrentLevel];
+            if (PlayerComboCount > level.Threshold)
+                PlayerComboCurrentLevel++;
+        }
+
+        OnComboMeterUpdated?.Invoke();
     }
 
     public void ResetComboMeter()
     {
         PlayerComboCount = 0;
         PlayerComboCurrentLevel = 0;
+        
+        OnComboMeterUpdated?.Invoke();
     }
 
     public float GetPlayerComboDamageMultiplier()
