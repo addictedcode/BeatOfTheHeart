@@ -5,12 +5,12 @@ using UnityEngine;
 public class GateMinigameArrow : MonoBehaviour
 {
     [SerializeField] private GameObject m_unlitArrow;
-    [SerializeField] private GameObject m_litArrow;
+    [SerializeField] private SpriteRenderer m_litArrow;
 
     public void ToggleLitArrow(bool flag)
     {
         m_unlitArrow.SetActive(!flag);
-        m_litArrow.SetActive(flag);
+        m_litArrow.enabled = flag;
     }
 
     public void ChangeDirection(Directions dir)
