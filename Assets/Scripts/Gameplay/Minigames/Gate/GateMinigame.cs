@@ -2,9 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum Directions
+{
+    None, Up, Left, Down, Right
+}
+
 public class GateMinigame : MonoBehaviour
 {
     [SerializeField] private List<DirectionsList> m_ComboList;
+    [SerializeField] private List<GateMinigameBoard> m_BoardList;
     private int m_CurrentComboIndex = 0;
     private int m_CurrentComboListIndex = 0;
 
@@ -14,11 +20,6 @@ public class GateMinigame : MonoBehaviour
     struct DirectionsList
     {
         public Directions[] list;
-    }
-
-    enum Directions
-    {
-        None, Up, Down, Left, Right
     }
 
     public bool HasMinigame(int comboListIndex)
@@ -37,11 +38,18 @@ public class GateMinigame : MonoBehaviour
     public void ResetMinigame()
     {
         m_MinigameFinished = false;
+        m_BoardList[m_CurrentComboListIndex].gameObject.SetActive(true);
+        m_BoardList[m_CurrentComboListIndex].ClearArrows();
+        foreach (Directions dir in m_ComboList[m_CurrentComboListIndex].list)
+        {
+            m_BoardList[m_CurrentComboListIndex].GenerateArrow(dir);
+        }
     }
 
     public void ResetCombo()
     {
         m_CurrentComboIndex = 0;
+        m_BoardList[m_CurrentComboListIndex].UnlitArrows();
     }
 
     public IEnumerator UpdateMinigame()
@@ -87,8 +95,8 @@ public class GateMinigame : MonoBehaviour
 
         if (direction == m_ComboList[m_CurrentComboListIndex].list[m_CurrentComboIndex])
         {
+            m_BoardList[m_CurrentComboListIndex].LitArrow(m_CurrentComboIndex);
             m_CurrentComboIndex++;
-            Debug.Log(direction);
         }
         else
             OnFailedInput();
@@ -97,7 +105,6 @@ public class GateMinigame : MonoBehaviour
     public void OnFailedInput()
     {
         ResetCombo();
-        Debug.Log("Failed");
     }
 
     public void UpdateToMinigameControls()
