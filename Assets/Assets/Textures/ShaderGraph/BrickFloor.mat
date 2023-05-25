@@ -88,10 +88,10 @@ Material:
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
-    - _Dirt_Pixelation: 23.7
+    - _Dirt_Pixelation: 1
     - _DstBlend: 0
     - _EnvironmentReflections: 1
-    - _Float: 22.6
+    - _Float: 1
     - _Float_1: 2.79
     - _GlossMapScale: 0
     - _Glossiness: 0

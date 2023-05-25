@@ -2,13 +2,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 [Serializable]
 public struct Phase
 {
     public Minotaur minotaur;
     public TileManager tileManager;
-    public Camera camera;
+    public CinemachineVirtualCamera camera;
+    public GateMinigameBoard board;
 }
 public enum PhaseState
 {
@@ -40,7 +42,9 @@ public class PhasesManager : MonoBehaviour
     {
         Phases[currentPhase].minotaur.gameObject.SetActive(false);
         Phases[currentPhase].tileManager.gameObject.SetActive(false);
-        Phases[currentPhase].camera.gameObject.SetActive(false);
+
+        //Phases[currentPhase].camera.gameObject.SetActive(false);
+        Phases[currentPhase].camera.Priority = 0;
 
         if (newPhase >= phases.Count)
         {
@@ -55,8 +59,9 @@ public class PhasesManager : MonoBehaviour
                                             phases[currentPhase].tileManager);
         Phases[currentPhase].minotaur.gameObject.SetActive(true);
         Phases[currentPhase].tileManager.gameObject.SetActive(true);
-        Phases[currentPhase].camera.gameObject.SetActive(true);
 
+        Phases[currentPhase].camera.gameObject.SetActive(true);
+        Phases[currentPhase].camera.Priority = 10;
 
         Phases[currentPhase].minotaur.StartMinotaur();
         Phases[currentPhase].tileManager.MoveToTile(0); 

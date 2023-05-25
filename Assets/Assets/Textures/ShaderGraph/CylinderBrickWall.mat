@@ -80,7 +80,7 @@ Material:
     m_Floats:
     - _AlphaClip: 0
     - _Blend: 0
-    - _Brick_Pixelation: 25.96
+    - _Brick_Pixelation: 26.5
     - _BumpScale: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
@@ -92,7 +92,9 @@ Material:
     - _DstBlend: 0
     - _EnvironmentReflections: 1
     - _Float: 12.35
-    - _Float_1: 201.7
+    - _Float_1: 20.29
+    - _Float_2: 1.14
+    - _Float_3: 15.9
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0

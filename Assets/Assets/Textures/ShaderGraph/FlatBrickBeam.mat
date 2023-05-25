@@ -92,7 +92,9 @@ Material:
     - _DstBlend: 0
     - _EnvironmentReflections: 1
     - _Float: 49
-    - _Float_1: 2.79
+    - _Float_1: 10
+    - _Float_2: 0.2
+    - _Float_3: 2.18
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0

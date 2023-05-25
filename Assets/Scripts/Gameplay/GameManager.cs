@@ -130,7 +130,7 @@ public class GameManager : MonoBehaviour
     public void StartTransition()
     {
         phasesManager.currentPhaseState = PhaseState.Transition;
-        phasesManager.Phases[phasesManager.currentPhase].camera.transform.SetParent(player.transform);
+        //phasesManager.Phases[phasesManager.currentPhase].camera.transform.SetParent(player.transform);
         player.PlayAnimation("PC_Transition1"); 
         phasesManager.currentPhase++;
 
@@ -142,6 +142,11 @@ public class GameManager : MonoBehaviour
 
             PlayGameAfterDelay(2.0f); // to accomodate for Minotaur's death animation
         }
+    }
+
+    public void StartMinigame()
+    {
+
     }
 
     public void EndCombat(bool isVictory)
@@ -160,9 +165,15 @@ public class GameManager : MonoBehaviour
 
                 IEnumerator Delay()
                 {
+                    yield return new WaitForSeconds(2.0f);
+                    
                     if (gateMinigame.HasMinigame(PhasesManager.Instance.currentPhase))
                     {
                         gateMinigame.PlayMinigame(PhasesManager.Instance.currentPhase);
+
+                        if (phasesManager.Phases[phasesManager.currentPhase].board != null)
+                            phasesManager.Phases[phasesManager.currentPhase].camera.LookAt = phasesManager.Phases[phasesManager.currentPhase].board.transform;
+
                         yield return gateMinigame.UpdateMinigame();
 
                         PlayerInput.SwitchCurrentActionMap("Player");
