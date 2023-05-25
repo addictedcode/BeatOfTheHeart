@@ -140,13 +140,34 @@ public class GameManager : MonoBehaviour
         {
             yield return new WaitForSeconds(5);
 
-            PlayGameAfterDelay(2.0f); // to accomodate for Minotaur's death animation
+            PlayGameAfterDelay(3.0f); // to accomodate for Minotaur's death animation
         }
     }
 
-    public void StartMinigame()
+    public IEnumerator StartMinigame()
     {
+        // accomodate for mino's death anim
+        yield return new WaitForSeconds(2.0f);
 
+        if (gateMinigame.HasMinigame(PhasesManager.Instance.currentPhase))
+        {
+            // play an animation here for establishing gate minigame
+            yield return new WaitForSeconds(1.0f);
+            if (phasesManager.Phases[phasesManager.currentPhase].board != null)
+                phasesManager.Phases[phasesManager.currentPhase].camera.LookAt = phasesManager.Phases[phasesManager.currentPhase].board.transform;
+
+            
+            yield return new WaitForSeconds(1.0f);
+            gateMinigame.PlayMinigame(PhasesManager.Instance.currentPhase);
+
+            yield return gateMinigame.UpdateMinigame();
+
+            PlayerInput.SwitchCurrentActionMap("Player");
+        }
+        PlayerInput.enabled = false;
+
+        yield return new WaitForSeconds(2.0f);
+        StartTransition();
     }
 
     public void EndCombat(bool isVictory)
@@ -161,28 +182,7 @@ public class GameManager : MonoBehaviour
             if (phasesManager.currentPhase + 1 < phasesManager.Phases.Count)
             {
                 //transition logic here
-                StartCoroutine(Delay());
-
-                IEnumerator Delay()
-                {
-                    yield return new WaitForSeconds(2.0f);
-                    
-                    if (gateMinigame.HasMinigame(PhasesManager.Instance.currentPhase))
-                    {
-                        gateMinigame.PlayMinigame(PhasesManager.Instance.currentPhase);
-
-                        if (phasesManager.Phases[phasesManager.currentPhase].board != null)
-                            phasesManager.Phases[phasesManager.currentPhase].camera.LookAt = phasesManager.Phases[phasesManager.currentPhase].board.transform;
-
-                        yield return gateMinigame.UpdateMinigame();
-
-                        PlayerInput.SwitchCurrentActionMap("Player");
-                    }
-                    PlayerInput.enabled = false;
-
-                    yield return new WaitForSeconds(2.0f);
-                    StartTransition();
-                }
+                StartCoroutine(StartMinigame());
             }
             else
             {
