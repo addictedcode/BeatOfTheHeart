@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Game Settings")]
     [SerializeField] private PlayerComboSettingsSO playerComboSettings;
+    [SerializeField] private ComboMusicPlayer comboMusicPlayer;
     
     public Forte Player => player;
     public Minotaur Minotaur => minotaur;
@@ -85,6 +86,7 @@ public class GameManager : MonoBehaviour
                 PlayerComboCurrentLevel++;
         }
 
+        comboMusicPlayer.OnComboIncrement(PlayerComboCount);
         OnComboMeterUpdated?.Invoke();
     }
 
@@ -92,7 +94,8 @@ public class GameManager : MonoBehaviour
     {
         PlayerComboCount = 0;
         PlayerComboCurrentLevel = 0;
-        
+
+        comboMusicPlayer.OnComboReset();
         OnComboMeterUpdated?.Invoke();
     }
 
