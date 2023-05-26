@@ -50,6 +50,7 @@ public class Minotaur : MonoBehaviour
 
     [Header("Animations")]
     [SerializeField] private AnimationClip spawnAnim;
+    [SerializeField] private AnimationClip deathAnim;
 
     #region Unity Functions
     private void Awake()
@@ -241,7 +242,7 @@ public class Minotaur : MonoBehaviour
     private void Death()
     {
         GameManager.Instance.EndCombat(true);
-        animator.Play("Death");
+        animator.Play(deathAnim.name);
         Destroy(this);
     }
 
