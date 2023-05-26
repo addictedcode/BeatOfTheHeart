@@ -48,6 +48,9 @@ public class Minotaur : MonoBehaviour
     private Queue<MinotaurAttacks> queuedAttacks = new();
     private Queue<GameObject> queuedFireballs = new();
 
+    [Header("Animations")]
+    [SerializeField] private AnimationClip spawnAnim;
+
     #region Unity Functions
     private void Awake()
     {
@@ -64,7 +67,7 @@ public class Minotaur : MonoBehaviour
     public void StartMinotaur()
     {
         isCombat = false;
-        animator.Play("Spawn");
+        animator.Play(spawnAnim.name);
         SFXManager.Instance.PlayOneShot("Spawn");
     }
 
