@@ -164,11 +164,11 @@ public class GameManager : MonoBehaviour
             gateMinigame.PlayMinigame(PhasesManager.Instance.currentPhase);
 
             yield return gateMinigame.UpdateMinigame();
-
+            gateMinigame.OpenGate();
             PlayerInput.SwitchCurrentActionMap("Player");
         }
-        PlayerInput.enabled = false;
 
+        PlayerInput.enabled = false;
         yield return new WaitForSeconds(2.0f);
         StartTransition();
     }

@@ -111,4 +111,9 @@ public class GateMinigame : MonoBehaviour
     {
         GameManager.Instance.PlayerInput.SwitchCurrentActionMap("GateMinigame");
     }
+
+    public void OpenGate()
+    {
+        m_BoardList[m_CurrentComboListIndex].OpenGate();
+    }
 }

@@ -6,6 +6,7 @@ public class GateMinigameBoard : MonoBehaviour
 {
     [SerializeField] private GameObject m_arrowPrefab;
     private List<GateMinigameArrow> m_arrows = new();
+    [SerializeField] private GameObject gate;
 
     public void GenerateArrow(Directions dir)
     {
@@ -38,5 +39,10 @@ public class GateMinigameBoard : MonoBehaviour
             Destroy(arrow.gameObject);
         }
         m_arrows.Clear();
+    }
+
+    public void OpenGate()
+    {
+        gate.GetComponent<Animator>().enabled = true;
     }
 }
