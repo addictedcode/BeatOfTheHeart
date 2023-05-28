@@ -11,20 +11,17 @@ public class ComboMeterUI : MonoBehaviour
     [SerializeField] private Image backgroundFill;
     [SerializeField] private Image radialFill;
     [SerializeField] private TMP_Text comboText;
-    [SerializeField] private Animator comboMeterAnimator;
 
     private void OnEnable()
     {
         backgroundFill.color = comboSettings.MissComboColor;
         
         GameManager.OnComboMeterUpdated += UpdateUI;
-        BeatsManager.OnBeat += AnimateUI;
     }
 
     private void OnDisable()
     {
         GameManager.OnComboMeterUpdated -= UpdateUI;
-        BeatsManager.OnBeat -= AnimateUI;
     }
 
     public void UpdateUI()
@@ -75,12 +72,5 @@ public class ComboMeterUI : MonoBehaviour
             float totalBeats = nextLevelThreshold - prevLevelThreshold;
             radialFill.fillAmount = currentBeats / totalBeats;
         }
-    }
-
-    public void AnimateUI(float num)
-    {
-        // comboMeterAnimator.SetTrigger("Beat"); // Goes somewhat offbeat
-
-        comboMeterAnimator.enabled = true; // Following player hp method
     }
 }

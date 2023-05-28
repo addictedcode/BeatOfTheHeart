@@ -12,7 +12,8 @@ public class BorderUI : MonoBehaviour
     
     [Header("Combo Settings")]
     [SerializeField] private PlayerComboSettingsSO comboSettings;
-    [SerializeField] private bool matchColorWithComboMeter;
+    [SerializeField] private bool matchColorWithComboMeter = true;
+    [SerializeField] private bool useLevelOneColorOnMiss = false;
     
     private Animator animator;
     
@@ -32,7 +33,8 @@ public class BorderUI : MonoBehaviour
 
     private void OnDisable()
     {
-        GameManager.OnComboMeterUpdated -= UpdateBorderColor;
+        if (matchColorWithComboMeter)
+            GameManager.OnComboMeterUpdated -= UpdateBorderColor;
     }
 
     public void PlayBeatAnimation()
@@ -57,8 +59,11 @@ public class BorderUI : MonoBehaviour
         }
         else if (comboCount <= 0)
         {
-            mainBorder.color = comboSettings.MissComboColor;
-            subBorder.color = comboSettings.MissComboColor;
+            Color missColor = useLevelOneColorOnMiss
+                ? comboSettings.Levels[comboLevel].MeterColor
+                : comboSettings.MissComboColor;
+            mainBorder.color = missColor;
+            subBorder.color = missColor;
         }
         else
         {

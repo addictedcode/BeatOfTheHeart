@@ -54,7 +54,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fillImage: {fileID: 7954124248965497561}
   bgImage: {fileID: 7954124249475223842}
-  testHP: 4
 --- !u!1 &7954124248965497561
 GameObject:
   m_ObjectHideFlags: 0
@@ -67,6 +66,8 @@ GameObject:
   - component: {fileID: 7954124248965497540}
   - component: {fileID: 7954124248965497543}
   - component: {fileID: 7954124248965497541}
+  - component: {fileID: 501948147250016442}
+  - component: {fileID: 8516363685677665762}
   m_Layer: 5
   m_Name: heartsfill
   m_TagString: Untagged
@@ -134,13 +135,13 @@ MonoBehaviour:
   m_PixelsPerUnitMultiplier: 1
 --- !u!95 &7954124248965497541
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7954124248965497561}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 80c2314094d9a1745978cca8d88ac09e, type: 2}
   m_CullingMode: 0
@@ -151,7 +152,47 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &501948147250016442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7954124248965497561}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40a7c3eea1ae84c4ea9cb5a5e9afd612, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8516363685677665762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7954124248965497561}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e486e47ba13d59f419375d56855a3a9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnBeat:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 501948147250016442}
+        m_TargetAssemblyTypeName: PlayAnimationState, Assembly-CSharp
+        m_MethodName: PlayAnimationByTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Beat
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7954124249475223842
 GameObject:
   m_ObjectHideFlags: 0
@@ -164,6 +205,8 @@ GameObject:
   - component: {fileID: 7954124249475223854}
   - component: {fileID: 7954124249475223841}
   - component: {fileID: 7954124249475223840}
+  - component: {fileID: 8058184985481016474}
+  - component: {fileID: 1119360631530542413}
   m_Layer: 5
   m_Name: heartsfillBG
   m_TagString: Untagged
@@ -231,13 +274,13 @@ MonoBehaviour:
   m_PixelsPerUnitMultiplier: 1
 --- !u!95 &7954124249475223840
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7954124249475223842}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 53d71ed30653a914f99de1c2d813024f, type: 2}
   m_CullingMode: 0
@@ -248,7 +291,47 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &8058184985481016474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7954124249475223842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40a7c3eea1ae84c4ea9cb5a5e9afd612, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1119360631530542413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7954124249475223842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e486e47ba13d59f419375d56855a3a9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnBeat:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8058184985481016474}
+        m_TargetAssemblyTypeName: PlayAnimationState, Assembly-CSharp
+        m_MethodName: PlayAnimationByTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Beat
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7954124250697460864
 GameObject:
   m_ObjectHideFlags: 0

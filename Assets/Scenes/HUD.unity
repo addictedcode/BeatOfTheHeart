@@ -952,6 +952,7 @@ MonoBehaviour:
   subBorder: {fileID: 342451171}
   comboSettings: {fileID: 11400000, guid: 7fd80264be4fc0840a3406dc1f2cd9ca, type: 2}
   matchColorWithComboMeter: 1
+  useLevelOneColorOnMiss: 0
 --- !u!1 &1944865332
 GameObject:
   m_ObjectHideFlags: 0
@@ -1054,6 +1055,8 @@ GameObject:
   - component: {fileID: 2122786342}
   - component: {fileID: 2122786344}
   - component: {fileID: 2122786343}
+  - component: {fileID: 2122786346}
+  - component: {fileID: 2122786345}
   m_Layer: 5
   m_Name: ComboMeter
   m_TagString: Untagged
@@ -1091,7 +1094,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2122786341}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 726a2a816848db448b926f22917b9656, type: 2}
   m_CullingMode: 0
@@ -1120,7 +1123,45 @@ MonoBehaviour:
   backgroundFill: {fileID: 853799725}
   radialFill: {fileID: 542367899}
   comboText: {fileID: 556205629}
-  comboMeterAnimator: {fileID: 2122786343}
+--- !u!114 &2122786345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2122786341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e486e47ba13d59f419375d56855a3a9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnBeat:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2122786346}
+        m_TargetAssemblyTypeName: PlayAnimationState, Assembly-CSharp
+        m_MethodName: PlayAnimationByTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Beat
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &2122786346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2122786341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40a7c3eea1ae84c4ea9cb5a5e9afd612, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1502808863790058230
 PrefabInstance:
   m_ObjectHideFlags: 0
