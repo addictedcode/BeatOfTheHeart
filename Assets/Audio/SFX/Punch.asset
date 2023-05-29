@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c1560a9b9c20a6945918038e2fe9af60, type: 3}
-  m_Name: Slam
+  m_Name: Punch
   m_EditorClassIdentifier: 
-  clip: {fileID: 8300000, guid: c66b3edf213f1124c9a7ad72eedad0bb, type: 3}
+  clip: {fileID: 8300000, guid: c1e15feb1db1ccf4a89d4b894a631236, type: 3}
   volume: 0.5
   pitch: 1
   loop: 0

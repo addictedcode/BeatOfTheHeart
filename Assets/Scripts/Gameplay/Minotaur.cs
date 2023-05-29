@@ -172,10 +172,10 @@ public class Minotaur : MonoBehaviour
         switch (attack)
         {
             case MinotaurAttacks.LSmash:
-                StartCoroutine(DoMeleeAttack(meleeDamage, 1, "LeftSwing", "Slam"));
+                StartCoroutine(DoMeleeAttack(meleeDamage, 1, "LeftSwing", "Punch"));
                 break;
             case MinotaurAttacks.RSmash:
-                StartCoroutine(DoMeleeAttack(meleeDamage, 0, "RightSwing", "Slam"));
+                StartCoroutine(DoMeleeAttack(meleeDamage, 0, "RightSwing", "Punch"));
                 break;
             case MinotaurAttacks.LFireball:
                 StartCoroutine(DoProjectileAttack(projectileDamage, 1, "Idle", "Fireball"));
@@ -229,6 +229,7 @@ public class Minotaur : MonoBehaviour
             animator.Play("LeftWindup");
             queuedAttacks.Enqueue(MinotaurAttacks.LSmash);
         }
+        SFXManager.Instance.PlayOneShot("Punch_Windup");
         GameManager.Instance.SpawnIndicator(tile);
     }
 
