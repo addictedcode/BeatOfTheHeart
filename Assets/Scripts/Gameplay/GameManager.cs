@@ -165,6 +165,7 @@ public class GameManager : MonoBehaviour
 
             yield return gateMinigame.UpdateMinigame();
             gateMinigame.OpenGate();
+            SFXManager.Instance.PlayOneShot("Open_Gate_Sound");
             PlayerInput.SwitchCurrentActionMap("Player");
         }
 
