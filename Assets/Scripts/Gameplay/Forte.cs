@@ -60,18 +60,28 @@ public class Forte : MonoBehaviour
 
     public void Attack()
     {
-        animator.Play("PC_Anger");
         int totalDamage = Mathf.RoundToInt(attackDamage * GameManager.Instance.GetPlayerComboDamageMultiplier());
         GameManager.Instance.Minotaur.TakeDamage(totalDamage);
         AddSuperMeterValue(attackAddSuper);
+        AttackAnimation();
+    }
+
+    public void AttackAnimation()
+    {
+        animator.Play("PC_Anger");
         SFXManager.Instance.PlayOneShot("Attack");
     }
 
     public void Reflect()
     {
-        animator.Play("PC_Happy");
+        ReflectAnimation();
         isReflect = true;
         AddSuperMeterValue(reflectAddSuper);
+    }
+
+    public void ReflectAnimation()
+    {
+        animator.Play("PC_Happy");
         SFXManager.Instance.PlayOneShot("Reflect");
         StartCoroutine(turnOffReflectCoroutine());
     }

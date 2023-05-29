@@ -72,18 +72,22 @@ public class GateMinigame : MonoBehaviour
         if (value.y >= 1)
         {
             direction = Directions.Up;
+            GameManager.Instance.Player.AttackAnimation();
         }
         else if (value.y <= -1)
         {
             direction = Directions.Down;
+            GameManager.Instance.Player.ReflectAnimation();
         }
         else if (value.x >= 1)
         {
             direction = Directions.Right;
+            GameManager.Instance.Player.Move(1);
         }
         else if (value.x <= -1)
         {
             direction = Directions.Left;
+            GameManager.Instance.Player.Move(-1);
         }
         CheckDirectionInput(direction);
     }
