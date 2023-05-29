@@ -93,7 +93,7 @@ public class Forte : MonoBehaviour
         health -= damage;
         if (health <= 0) Death();
 
-        SFXManager.Instance.PlayOneShot("Hurt");
+        SFXManager.Instance.PlayOneShot("Player_Hurt");
     }
 
     private void Death()

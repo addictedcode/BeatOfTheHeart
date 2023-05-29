@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c1560a9b9c20a6945918038e2fe9af60, type: 3}
-  m_Name: Hurt
+  m_Name: Player_Hurt
   m_EditorClassIdentifier: 
-  clip: {fileID: 8300000, guid: c5d9555084875a7469c07fa4c7305f63, type: 3}
-  volume: 0.75
+  clip: {fileID: 8300000, guid: 9022db8fc230b2644974fc91be4264a6, type: 3}
+  volume: 0.5
   pitch: 1
   loop: 0
   source: {fileID: 0}
