@@ -105,6 +105,7 @@ public class GateMinigame : MonoBehaviour
     public void OnFailedInput()
     {
         ResetCombo();
+        SFXManager.Instance.PlayOneShot("Miss");
     }
 
     public void UpdateToMinigameControls()

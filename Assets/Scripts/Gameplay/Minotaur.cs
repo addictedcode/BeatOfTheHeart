@@ -245,6 +245,7 @@ public class Minotaur : MonoBehaviour
     {
         health -= damage;
         StartCoroutine(Flash());
+        SFXManager.Instance.PlayOneShot("Boss_Hurt");
         UpdateMinotaurPhase();
         if (health <= 0) Death();
     }
