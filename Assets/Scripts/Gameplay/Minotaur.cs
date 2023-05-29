@@ -235,6 +235,7 @@ public class Minotaur : MonoBehaviour
     public void TakeDamage(int damage)
     {
         health -= damage;
+        SFXManager.Instance.PlayOneShot("Boss_Hurt");
         UpdateMinotaurPhase();
         if (health <= 0) Death();
     }
