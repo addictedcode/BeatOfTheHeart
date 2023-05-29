@@ -208,9 +208,9 @@ public class Minotaur : MonoBehaviour
         GameManager.Instance.ShootFireball(tile, queuedFireballs.Dequeue());
         GameManager.Instance.SpawnExplosion(tile);
         yield return new WaitForSeconds(0.18f);
-        if (!GameManager.Instance.Player.isReflect)
+        if (!GameManager.Instance.Player.isReflect && GameManager.Instance.TileManager.currentTile == tile)
             GameManager.Instance.CheckPlayerTakeDamage(damage, tile);
-        else
+        else if (GameManager.Instance.TileManager.currentTile == tile)
         {
             GameManager.Instance.ActivateReflectFireball(tile);
             TakeDamage(GameManager.Instance.Player.GetReflectDamage());
