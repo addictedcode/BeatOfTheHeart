@@ -237,6 +237,7 @@ public class Minotaur : MonoBehaviour
     {
         animator.Play("WindupProjectile");
         queuedAttacks.Enqueue(tile == 0 ? MinotaurAttacks.RFireball : MinotaurAttacks.LFireball);
+        SFXManager.Instance.PlayOneShot("Fireball_Windup");
         queuedFireballs.Enqueue(GameManager.Instance.SpawnFireball(tile));
     }
     #endregion
