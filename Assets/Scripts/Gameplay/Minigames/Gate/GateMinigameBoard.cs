@@ -21,6 +21,7 @@ public class GateMinigameBoard : MonoBehaviour
         if (m_arrows.Count > index)
         {
             m_arrows[index].ToggleLitArrow(true);
+            m_arrows[index].PlayVFX();
         }
     }
 
