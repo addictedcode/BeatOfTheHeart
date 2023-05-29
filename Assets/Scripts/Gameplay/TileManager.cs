@@ -18,15 +18,6 @@ public class TileManager : MonoBehaviour
 
     public int currentTile = 1;
 
-    private GameObject[] reflectFireball;
-
-    private void Awake()
-    {
-        reflectFireball = new GameObject[tiles.Length];
-        for (int i = 0; i < tiles.Length; i++)
-            reflectFireball[i] = Instantiate(reflectFireballPrefab, tiles[i].transform);
-    }
-
     public void MoveToTile(int dir)
     {
         if (CheckValidSideTile(dir))
@@ -74,7 +65,10 @@ public class TileManager : MonoBehaviour
 
     public void ActivateReflectFireball(int num)
     {
-        if (CheckValidTile(num)) reflectFireball[num].SetActive(true);
+        if (CheckValidTile(num))
+        {
+            Instantiate(reflectFireballPrefab, tiles[num].transform).GetComponent<Fireball>().OnShoot();
+        }
     }
 
     public void SpawnGroundSmash(int num)
