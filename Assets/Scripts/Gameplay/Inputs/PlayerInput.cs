@@ -45,7 +45,7 @@ public class PlayerInput : MonoBehaviour
             else
             {
                 //Punish
-                GameManager.Instance.ResetComboMeter();
+                PunishMissInput();
             }
         }
     }
@@ -64,7 +64,7 @@ public class PlayerInput : MonoBehaviour
         else
         {
             //Punish
-            GameManager.Instance.ResetComboMeter();
+            PunishMissInput();
         }
     }
 
@@ -81,7 +81,7 @@ public class PlayerInput : MonoBehaviour
         else
         {
             //Punish
-            GameManager.Instance.ResetComboMeter();
+            PunishMissInput();
         }
     }
 
@@ -99,6 +99,13 @@ public class PlayerInput : MonoBehaviour
         {
             gateMinigame.OnFailedInput();
         }
+        hadInputThisBeat = true;
+    }
+
+    private void PunishMissInput()
+    {
+        GameManager.Instance.ResetComboMeter();
+        SFXManager.Instance.PlayOneShot("Miss");
         hadInputThisBeat = true;
     }
 }
