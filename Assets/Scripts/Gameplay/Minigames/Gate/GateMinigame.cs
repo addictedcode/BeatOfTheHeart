@@ -100,6 +100,7 @@ public class GateMinigame : MonoBehaviour
         if (direction == m_ComboList[m_CurrentComboListIndex].list[m_CurrentComboIndex])
         {
             m_BoardList[m_CurrentComboListIndex].LitArrow(m_CurrentComboIndex);
+            SFXManager.Instance.PlayOneShot("Minigame_Correct");
             m_CurrentComboIndex++;
         }
         else

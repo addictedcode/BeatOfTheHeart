@@ -271,6 +271,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2c0882b6b92e1c447914e9f53672bcc2, type: 2}
   - {fileID: 11400000, guid: dde959860bc29734e9e61b272260489c, type: 2}
   - {fileID: 11400000, guid: 416004147722a744f98cfa7d1e24a96b, type: 2}
+  - {fileID: 11400000, guid: 8abc9646b0cac3b41ba06481a1782b68, type: 2}
   mixerGroup: {fileID: 3180144793009473500, guid: 1de9963637e33e042b0ac30a4b307f84, type: 2}
 --- !u!1 &1814582735
 GameObject:
