@@ -109,6 +109,7 @@ public class Forte : MonoBehaviour
     private void Death()
     {
         animator.Play("PC_Death");
+        SFXManager.Instance.PlayOneShot("Death_Riff");
         GameManager.Instance.EndCombat(false);
     }
 

@@ -256,6 +256,7 @@ public class Minotaur : MonoBehaviour
     {
         GameManager.Instance.EndCombat(true);
         animator.Play(deathAnim.name);
+        SFXManager.Instance.PlayOneShot("Win_Riff");
         Destroy(this);
     }
 
