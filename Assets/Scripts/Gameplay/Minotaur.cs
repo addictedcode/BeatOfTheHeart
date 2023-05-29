@@ -52,12 +52,21 @@ public class Minotaur : MonoBehaviour
     [SerializeField] private AnimationClip spawnAnim;
     [SerializeField] private AnimationClip deathAnim;
 
+    [Header("VFX")] 
+    [SerializeField] private Renderer renderer;
+    [SerializeField] private ParticleSystem hitVFX;
+    [SerializeField] private Material originalMat;
+    [SerializeField] private Material hitMat;
+    
+
     #region Unity Functions
     private void Awake()
     {
         maxHealth = health;
         animator = GetComponent<Animator>();
         BeatsManager.OnBeat += DoMove;
+        renderer = GetComponent<Renderer>();
+        originalMat = renderer.material;
     }
 
     private void OnDestroy()
@@ -235,6 +244,7 @@ public class Minotaur : MonoBehaviour
     public void TakeDamage(int damage)
     {
         health -= damage;
+        StartCoroutine(Flash());
         UpdateMinotaurPhase();
         if (health <= 0) Death();
     }
@@ -268,5 +278,18 @@ public class Minotaur : MonoBehaviour
             currentMinotaurPhaseComboInfoIndex++;
         }
     }
+    #endregion
+
+
+    #region VFX
+
+    IEnumerator Flash()
+    {
+        renderer.material = hitMat;
+        yield return new WaitForSeconds(.1f);
+        renderer.material = originalMat;
+        
+    }
+
     #endregion
 }
