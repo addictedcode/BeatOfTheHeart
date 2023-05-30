@@ -57,6 +57,8 @@ public class Minotaur : MonoBehaviour
     [SerializeField] private ParticleSystem hitVFX;
     [SerializeField] private Material originalMat;
     [SerializeField] private Material hitMat;
+
+    public bool isFinalPhase = false;
     
 
     #region Unity Functions
@@ -255,9 +257,19 @@ public class Minotaur : MonoBehaviour
     private void Death()
     {
         GameManager.Instance.EndCombat(true);
-        animator.Play(deathAnim.name);
-        SFXManager.Instance.PlayOneShot("Win_Riff");
-        Destroy(this);
+
+        if (isFinalPhase)
+        {
+            isCombat = false;
+            animator.Play("WindupProjectile");
+        }
+        else
+        {
+            animator.Play(deathAnim.name);
+            SFXManager.Instance.PlayOneShot("Win_Riff");
+            Destroy(this);
+        }
+        
     }
 
     public void PlayerDeath()

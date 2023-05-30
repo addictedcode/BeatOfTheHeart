@@ -135,7 +135,7 @@ public class GameManager : MonoBehaviour
         phasesManager.currentPhaseState = PhaseState.Transition;
         //phasesManager.Phases[phasesManager.currentPhase].camera.transform.SetParent(player.transform);
         player.PlayAnimation("PC_Transition1"); 
-        phasesManager.currentPhase++;
+        
 
         StartCoroutine(Delay());
 
@@ -152,6 +152,8 @@ public class GameManager : MonoBehaviour
         // accomodate for mino's death anim
         yield return new WaitForSeconds(2.0f);
 
+        int previousPhase = PhasesManager.Instance.currentPhase;
+
         if (gateMinigame.HasMinigame(PhasesManager.Instance.currentPhase))
         {
             // play an animation here for establishing gate minigame
@@ -164,6 +166,7 @@ public class GameManager : MonoBehaviour
             gateMinigame.PlayMinigame(PhasesManager.Instance.currentPhase);
 
             yield return gateMinigame.UpdateMinigame();
+            phasesManager.currentPhase++;
             gateMinigame.OpenGate();
             SFXManager.Instance.PlayOneShot("Open_Gate_Sound");
             PlayerInput.SwitchCurrentActionMap("Player");
@@ -171,7 +174,18 @@ public class GameManager : MonoBehaviour
 
         PlayerInput.enabled = false;
         yield return new WaitForSeconds(2.0f);
-        StartTransition();
+
+        if (phasesManager.currentPhase < phasesManager.Phases.Count)
+        {
+            //transition logic here
+            StartTransition();
+        }
+        else
+        {
+            phasesManager.Phases[previousPhase].minotaur.GetComponent<Animator>().Play("Death3");
+            EndGame(true);
+        }
+        
     }
 
     public void EndCombat(bool isVictory)
@@ -183,16 +197,7 @@ public class GameManager : MonoBehaviour
 
         if (isVictory)
         {
-            if (phasesManager.currentPhase + 1 < phasesManager.Phases.Count)
-            {
-                //transition logic here
-                StartCoroutine(StartMinigame());
-            }
-            else
-            {
-                EndGame(isVictory);
-            }
-
+            StartCoroutine(StartMinigame());
         }
         else
         {
