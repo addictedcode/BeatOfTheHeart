@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Bossmat
+  m_Name: BossmatHit
   m_Shader: {fileID: -6465566751694194690, guid: ce04c02b945681e4caa33153cefa4aa8, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -54,5 +54,5 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     m_Colors:
-    - _ColorEmission: {r: 0, g: 0, b: 0, a: 0}
+    - _ColorEmission: {r: 1.1892071, g: 1.1892071, b: 1.1892071, a: 0}
   m_BuildTextureStacks: []
