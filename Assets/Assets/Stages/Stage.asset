@@ -16,5 +16,4 @@ MonoBehaviour:
   timeBeforeGameActuallyStarts: 2.5
   gameScene:
   - HUD
-  - MainGameplayScene_ConQuest
   - Pause

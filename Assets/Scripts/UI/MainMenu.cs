@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,6 +12,8 @@ public class MainMenu : MonoBehaviour
 
     [SerializeField] private MusicFile mainMenuMusic;
 
+    [SerializeField] private CinemachineVirtualCamera mainMenuVC;
+
     private void Start()
     {
         MusicManager.player.PlayMusic(mainMenuMusic);
@@ -17,9 +21,15 @@ public class MainMenu : MonoBehaviour
 
     public void OnStartPress()
     {
-        SceneLoader.onFinishSceneLoad += FinishSceneLoad;
+        
+        //SceneLoader.onFinishSceneLoad += FinishSceneLoad;
         SceneLoader.LoadScenesWithLoadingBar(gameStage.gameScene, true);
         SceneManager.UnloadSceneAsync(gameObject.scene);
+
+        MusicManager.player.StopMusic();
+        MusicManager.player.PlayMusicAfterDelay(gameStage.musicFile, gameStage.timeBeforeGameActuallyStarts);
+        GameManager.Instance.StartGameplay(gameStage.timeBeforeGameActuallyStarts, mainMenuVC);
+
     }
 
     private void FinishSceneLoad()
