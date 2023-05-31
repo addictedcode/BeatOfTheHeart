@@ -46,6 +46,7 @@ public class GameManager : MonoBehaviour
     public int PlayerComboCurrentLevel { get; private set; }
 
     [SerializeField] private GameObject GameLights;
+    [SerializeField] private GameObject AnimatorParent;
 
 
     public static Action OnComboMeterUpdated;
@@ -118,7 +119,7 @@ public class GameManager : MonoBehaviour
         GameState = GameState.Playing;
         player.gameObject.SetActive(true);
         // play transition to gameplay here
-        GameLights.SetActive(true); // play lights animation here
+        AnimatorParent.GetComponent<Animator>().enabled = true;
 
         // delayed to allow for spawn animation to play
         StartCoroutine(Delay());
