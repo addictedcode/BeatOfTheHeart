@@ -1,13 +1,15 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using UnityEngine;
 
 public enum GameState
 {
     Playing,
     GameOver,
-    Paused
+    Paused,
+    MainMenu
 }
 
 public class GameManager : MonoBehaviour
@@ -42,7 +44,10 @@ public class GameManager : MonoBehaviour
     
     public int PlayerComboCount { get; private set; }
     public int PlayerComboCurrentLevel { get; private set; }
-    
+
+    [SerializeField] private GameObject GameLights;
+
+
     public static Action OnComboMeterUpdated;
 
     private void Awake()
@@ -53,7 +58,7 @@ public class GameManager : MonoBehaviour
             Instance = this;
         DontDestroyOnLoad(gameObject);
 
-
+        GameState = GameState.MainMenu;
         phasesManager = PhasesManager.Instance;
     }
 
@@ -104,11 +109,32 @@ public class GameManager : MonoBehaviour
         bool atMaxLevel = playerComboSettings.CheckIfAtMaxLevel(PlayerComboCurrentLevel);
         return atMaxLevel ? playerComboSettings.MaxDamageMultiplier : playerComboSettings.Levels[PlayerComboCurrentLevel].DamageMultipler;
     }
-    
+
     #endregion
 
+
+    public void StartGameplay(float delay, CinemachineVirtualCamera mainMenuVC)
+    {
+        GameState = GameState.Playing;
+        player.gameObject.SetActive(true);
+        // play transition to gameplay here
+        GameLights.SetActive(true); // play lights animation here
+
+        // delayed to allow for spawn animation to play
+        StartCoroutine(Delay());
+
+        IEnumerator Delay()
+        {
+            yield return new WaitForSeconds(2.0f);
+            mainMenuVC.Priority = 0;
+            PlayGameAfterDelay(delay);
+        }
+    }
     public void PlayGameAfterDelay(float delay)
     {
+
+        player.gameObject.SetActive(true);
+        GameLights.SetActive(true);
         PlayerInput.enabled = false;
         phasesManager.InitPhase(phasesManager.currentPhase);
         phasesManager.currentPhaseState = PhaseState.Spawning;

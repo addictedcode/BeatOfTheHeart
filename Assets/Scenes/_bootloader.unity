@@ -155,6 +155,7 @@ MonoBehaviour:
   m_scenes:
   - Audio
   - MainMenu
+  - MainGameplayScene_ConQuest
 --- !u!4 &510659441
 Transform:
   m_ObjectHideFlags: 0
