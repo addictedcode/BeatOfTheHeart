@@ -95,6 +95,11 @@ public class Forte : MonoBehaviour
     {
         animator.Play(anim);
     }
+
+    public void flipSprite(bool isFlipped)
+    {
+        GetComponent<SpriteRenderer>().flipX = isFlipped;
+    }
     #endregion
 
     #region Health

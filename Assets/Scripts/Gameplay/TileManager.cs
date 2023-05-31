@@ -21,7 +21,10 @@ public class TileManager : MonoBehaviour
     public void MoveToTile(int dir)
     {
         if (CheckValidSideTile(dir))
+        {
             GameManager.Instance.Player.transform.position = tiles[currentTile += dir].transform.position;
+            GameManager.Instance.Player.flipSprite(currentTile == 1);
+        }
         else
             Debug.Log("Failed Jump");
     }
