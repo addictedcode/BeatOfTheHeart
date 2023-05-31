@@ -257,7 +257,7 @@ public class Minotaur : MonoBehaviour
     private void Death()
     {
         GameManager.Instance.EndCombat(true);
-
+        StartCoroutine(Flash());
         if (isFinalPhase)
         {
             isCombat = false;
@@ -267,6 +267,7 @@ public class Minotaur : MonoBehaviour
         {
             animator.Play(deathAnim.name);
             SFXManager.Instance.PlayOneShot("Win_Riff");
+            ReturnOriginalMaterial();
             Destroy(this);
         }
         
@@ -307,5 +308,9 @@ public class Minotaur : MonoBehaviour
         
     }
 
+    public void ReturnOriginalMaterial()
+    {
+        renderer.material = originalMat;
+    }
     #endregion
 }
