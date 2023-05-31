@@ -24,15 +24,18 @@ public class UIHoverChangeBongosColor : MonoBehaviour
     private void OnEnter()
     {
         bongos.GetComponent<SpriteRenderer>().color = onHoverEnter;
+        bongos.GetComponent<Animator>().speed = .25f;
     }
 
     private void OnExit()
     {
         bongos.GetComponent<SpriteRenderer>().color = Color.white;
+        bongos.GetComponent<Animator>().speed = 1f;
     }
 
     public void OnClick()
     {
+        bongos.GetComponent<Animator>().speed = 1f;
         bongos.GetComponent<Animator>().Play("BongoClick");
     }
 }

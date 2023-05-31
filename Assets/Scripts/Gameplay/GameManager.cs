@@ -47,6 +47,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private GameObject GameLights;
     [SerializeField] private GameObject AnimatorParent;
+    public CinemachineVirtualCamera currentVC;
 
 
     public static Action OnComboMeterUpdated;
@@ -120,6 +121,8 @@ public class GameManager : MonoBehaviour
         player.gameObject.SetActive(true);
         // play transition to gameplay here
         AnimatorParent.GetComponent<Animator>().enabled = true;
+        currentVC = mainMenuVC;
+        currentVC.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 1;
 
         // delayed to allow for spawn animation to play
         StartCoroutine(Delay());
@@ -127,7 +130,10 @@ public class GameManager : MonoBehaviour
         IEnumerator Delay()
         {
             yield return new WaitForSeconds(2.0f);
+            currentVC.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 0;
+
             mainMenuVC.Priority = 0;
+
             PlayGameAfterDelay(delay);
         }
     }
@@ -138,6 +144,7 @@ public class GameManager : MonoBehaviour
         GameLights.SetActive(true);
         PlayerInput.enabled = false;
         phasesManager.InitPhase(phasesManager.currentPhase);
+        currentVC = phasesManager.Phases[phasesManager.currentPhase].camera;
         phasesManager.currentPhaseState = PhaseState.Spawning;
 
         // delayed to allow for spawn animation to play
