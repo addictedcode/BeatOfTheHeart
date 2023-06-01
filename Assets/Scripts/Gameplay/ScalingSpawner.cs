@@ -13,6 +13,8 @@ public class ScalingSpawner : MonoBehaviour
         m_ObjectList.Push( newObject );
         newObject.transform.SetParent(transform);
         newObject.transform.localPosition = Vector3.zero;
+        newObject.transform.rotation = newObject.transform.parent.rotation;
+        Debug.Log(newObject.transform.rotation);
         newObject.transform.localScale = new Vector3(
             m_ScaleIncreaseIncrement * m_ObjectList.Count, 
             m_ScaleIncreaseIncrement * m_ObjectList.Count, 
