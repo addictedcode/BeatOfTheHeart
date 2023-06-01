@@ -21,6 +21,7 @@ public class ComboMusicPlayer : MonoBehaviour
         foreach (ComboMusic comboMusic in comboMusicList) 
         {
             AudioSource audioSource = gameObject.AddComponent<AudioSource>();
+            audioSource.volume = .4f;
             audioSource.clip = comboMusic.clip;
             audioSource.loop = true;
             audioSource.outputAudioMixerGroup = mixerGroup;

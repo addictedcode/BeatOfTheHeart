@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
     private Minotaur minotaur;
 
     private PhasesManager phasesManager;
+    public PhasesManager PM => phasesManager;
 
     [Header("End Screen")]
     [SerializeField] private GameObject endCanvas;
