@@ -9,7 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad2c1315029da85488ee5c2cacceac31, type: 3}
-  m_Name: Combo4
+  m_Script: {fileID: 11500000, guid: b004f0db35e15554d9cc4aab3ffe3fcf, type: 3}
+  m_Name: ComboListPhase3C
   m_EditorClassIdentifier: 
-  combo: 01000000020000000100000002000000
+  comboList:
+  - {fileID: 11400000, guid: e439b15f3c7d10f4684add80908fb41e, type: 2}
+  - {fileID: 11400000, guid: 54c19f4006dd98941843653f2506e2ee, type: 2}

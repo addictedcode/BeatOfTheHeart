@@ -2308,8 +2308,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99fa79ee20f9fbb45a807a0ade4668e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 9999
-  attackDamage: 50
+  health: 4
+  attackDamage: 1
   reflectDamage: 5
   attackAddSuper: 3
   reflectAddSuper: 10
@@ -2952,17 +2952,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 612bf3ebc81ee24468be16c9a9258e0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 200
+  health: 300
   meleeDamage: 1
   projectileDamage: 2
   specialDamage: 2
   minotaurPhaseComboInfoList:
-  - comboList: {fileID: 11400000, guid: a4d07be85a33e1045b10b6731609ab05, type: 2}
-    HPThreshold: 1
-  - comboList: {fileID: 11400000, guid: 3009c17ce30fce94fb32814c80119913, type: 2}
-    HPThreshold: 0.74
   - comboList: {fileID: 11400000, guid: 7520a591bb411364e9b98fb735a9929e, type: 2}
-    HPThreshold: 0.24
+    HPThreshold: 1
+  - comboList: {fileID: 11400000, guid: ced3a675071c2114d9de0b2f3c593689, type: 2}
+    HPThreshold: 0.5
+  - comboList: {fileID: 11400000, guid: 8570ecf0478a7754a84fa5aee62ca92d, type: 2}
+    HPThreshold: 0.25
   minotaurState: 0
   spawnAnim: {fileID: 7400000, guid: b7307c9ae9b4b724fa64a405fb78c1b2, type: 2}
   deathAnim: {fileID: 7400000, guid: 3b2b0bd837235244281fb9aa0ab7ad85, type: 2}
@@ -3132,7 +3132,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &747032214
 Transform:
   m_ObjectHideFlags: 0
@@ -3165,12 +3165,10 @@ MonoBehaviour:
   projectileDamage: 2
   specialDamage: 2
   minotaurPhaseComboInfoList:
-  - comboList: {fileID: 11400000, guid: a4d07be85a33e1045b10b6731609ab05, type: 2}
+  - comboList: {fileID: 11400000, guid: 5ae46a4b08579c4449af9cd4577e5d92, type: 2}
     HPThreshold: 1
-  - comboList: {fileID: 11400000, guid: 3009c17ce30fce94fb32814c80119913, type: 2}
-    HPThreshold: 0.74
-  - comboList: {fileID: 11400000, guid: 7520a591bb411364e9b98fb735a9929e, type: 2}
-    HPThreshold: 0.24
+  - comboList: {fileID: 11400000, guid: 9bce12862179180409c785e063593e42, type: 2}
+    HPThreshold: 0.4
   minotaurState: 0
   spawnAnim: {fileID: 7400000, guid: 27f8a8d0930c678489c3439ceaa42966, type: 2}
   deathAnim: {fileID: 7400000, guid: b70be36e8fa597e4095ff3c2cc8bf168, type: 2}
@@ -3598,10 +3596,10 @@ MonoBehaviour:
   projectileDamage: 2
   specialDamage: 2
   minotaurPhaseComboInfoList:
-  - comboList: {fileID: 11400000, guid: db34084aae3823c4797ea83b6dccd705, type: 2}
+  - comboList: {fileID: 11400000, guid: a4d07be85a33e1045b10b6731609ab05, type: 2}
     HPThreshold: 1
   - comboList: {fileID: 11400000, guid: db34084aae3823c4797ea83b6dccd705, type: 2}
-    HPThreshold: 0.29
+    HPThreshold: 0.3
   minotaurState: 0
   spawnAnim: {fileID: 7400000, guid: 9ecef049d6bb77a448950099af43a07f, type: 2}
   deathAnim: {fileID: 7400000, guid: a24c07384b3264447ac5e245d897e96c, type: 2}
@@ -6070,7 +6068,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1608471261}
-  m_LocalRotation: {x: -0.023242634, y: 0.037721917, z: 0.0008776188, w: 0.9990176}
+  m_LocalRotation: {x: -0.023242654, y: 0.037721884, z: 0.00087761873, w: 0.9990176}
   m_LocalPosition: {x: 1.454, y: -1.95, z: -11.833}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

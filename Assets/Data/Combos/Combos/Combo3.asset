@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad2c1315029da85488ee5c2cacceac31, type: 3}
   m_Name: Combo3
   m_EditorClassIdentifier: 
-  combo: 0400000002000000040000000200000001000000
+  combo: 02000000020000000300000003000000
