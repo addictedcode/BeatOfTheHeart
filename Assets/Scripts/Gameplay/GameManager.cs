@@ -173,6 +173,8 @@ public class GameManager : MonoBehaviour
             phasesManager.currentPhaseState = PhaseState.Combat;
             PlayerInput.enabled = true;
             minotaur.StartCombat();
+
+            SceneLoader.SetAllowSceneActivation(true);
         }
     }
 

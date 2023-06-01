@@ -24,6 +24,12 @@ public static class SceneLoader
         _ = LoadLoadingBarAsync(shouldWait);
     }
 
+    public static void LoadScenes(List<string> scenes, bool shouldWait)
+    {
+        currentScenes = scenes;
+        _ = LoadAsync(shouldWait);
+    }
+
     static async Task LoadLoadingBarAsync(bool shouldWait)
     {
         SceneManager.LoadScene("LoadingScene", LoadSceneMode.Additive);
@@ -49,6 +55,30 @@ public static class SceneLoader
 
         onFinishSceneLoad?.Invoke();
         SceneManager.UnloadSceneAsync("LoadingScene");
+    }
+
+    static async Task LoadAsync(bool shouldWait)
+    {
+        currentOps.Clear();
+        foreach (var scene in currentScenes)
+        {
+            var currentOp = SceneManager.LoadSceneAsync(scene, LoadSceneMode.Additive);
+            currentOp.allowSceneActivation = false;
+            currentOps.Add(currentOp);
+        }
+        onStartSceneLoad.Invoke();
+
+        if (!shouldWait)
+        {
+            SetAllowSceneActivation(true);
+        }
+
+        while (!CheckCurrentOpsIsDone())
+        {
+            await Task.Delay(10);
+        }
+
+        onFinishSceneLoad?.Invoke();
     }
 
     public static bool CheckCurrentOpsIsDone()

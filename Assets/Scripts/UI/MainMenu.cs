@@ -23,8 +23,8 @@ public class MainMenu : MonoBehaviour
     {
         
         //SceneLoader.onFinishSceneLoad += FinishSceneLoad;
-        SceneLoader.LoadScenesWithLoadingBar(gameStage.gameScene, true);
         SceneManager.UnloadSceneAsync(gameObject.scene);
+        SceneLoader.LoadScenes(gameStage.gameScene, true);
 
         MusicManager.player.StopMusic();
         MusicManager.player.PlayMusicAfterDelay(gameStage.musicFile, gameStage.timeBeforeGameActuallyStarts);
