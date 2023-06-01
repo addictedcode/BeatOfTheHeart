@@ -39,4 +39,13 @@ public class CircularSpawner : MonoBehaviour
             m_ObjectList[i].transform.localRotation = Quaternion.identity;
         }
     }
+
+    public void ClearAll()
+    {
+        foreach (GameObject gameObject in m_ObjectList)
+        {
+            Destroy(gameObject);
+        }
+        m_ObjectList.Clear();
+    }
 }

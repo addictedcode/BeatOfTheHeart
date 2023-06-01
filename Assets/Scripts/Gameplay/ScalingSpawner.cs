@@ -24,4 +24,13 @@ public class ScalingSpawner : MonoBehaviour
     {
         return m_ObjectList.Pop();
     }
+
+    public void ClearAll()
+    {
+        while (m_ObjectList.Count > 0)
+        {
+            Destroy(m_ObjectList.Pop());
+        }
+        m_ObjectList.Clear();
+    }
 }

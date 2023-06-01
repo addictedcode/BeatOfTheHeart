@@ -200,6 +200,8 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator StartMinigame()
     {
+        tileManager.ClearAll();
+
         // accomodate for mino's death anim
         yield return new WaitForSeconds(1.5f);
 

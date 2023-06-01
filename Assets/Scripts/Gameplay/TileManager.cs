@@ -43,6 +43,14 @@ public class TileManager : MonoBehaviour
         attackIndicatorSpawners[num].RemoveObject().GetComponent<minoAttackIndicator>()?.OnTrigger();
     }
 
+    public void ClearAll()
+    {
+        attackIndicatorSpawners[0].ClearAll();
+        attackIndicatorSpawners[1].ClearAll();
+        fireballSpawners[0].ClearAll();
+        fireballSpawners[1].ClearAll();
+    }
+
     public GameObject SpawnFireball(int num)
     {
         if (!CheckValidTile(num)) return null;
