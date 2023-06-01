@@ -177,7 +177,7 @@ public class GameManager : MonoBehaviour
         {
             yield return new WaitForSeconds(5);
 
-            PlayGameAfterDelay(3.0f); // to accomodate for Minotaur's death animation
+            PlayGameAfterDelay(4.5f); // to accomodate for Minotaur's death animation
         }
     }
 
