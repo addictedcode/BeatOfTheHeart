@@ -119,7 +119,6 @@ public class GameManager : MonoBehaviour
     public void StartGameplay(float delay, CinemachineVirtualCamera mainMenuVC)
     {
         GameState = GameState.Playing;
-        player.gameObject.SetActive(true);
         // play transition to gameplay here
         AnimatorParent.GetComponent<Animator>().enabled = true;
         currentVC = mainMenuVC;
@@ -202,7 +201,7 @@ public class GameManager : MonoBehaviour
     public IEnumerator StartMinigame()
     {
         // accomodate for mino's death anim
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(1.5f);
 
         int previousPhase = PhasesManager.Instance.currentPhase;
 

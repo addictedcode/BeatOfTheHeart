@@ -1255,15 +1255,31 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 547052820}
-  - component: {fileID: 547052819}
+  - component: {fileID: 547052821}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!95 &547052819
+  m_IsActive: 1
+--- !u!4 &547052820
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 547052818}
+  m_LocalRotation: {x: -0.44552872, y: -0.050522897, z: 0.00918752, w: 0.89379376}
+  m_LocalPosition: {x: -10.448141, y: 11.408013, z: 2.7582455}
+  m_LocalScale: {x: 6.2503, y: 6.2502995, z: 6.250299}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1063029235}
+  m_Father: {fileID: 1477984467}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: -52.702, y: -9.355, z: 5.82}
+--- !u!95 &547052821
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0
@@ -1273,7 +1289,7 @@ Animator:
   m_GameObject: {fileID: 547052818}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 80c2314094d9a1745978cca8d88ac09e, type: 2}
+  m_Controller: {fileID: 9100000, guid: 8dcde2823cc1263428aa962554dc6292, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1284,22 +1300,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!4 &547052820
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 547052818}
-  m_LocalRotation: {x: -0, y: 0.99458885, z: -0, w: 0.103889875}
-  m_LocalPosition: {x: -0.42623228, y: -0.91400003, z: -14.234706}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1063029235}
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 168.074, z: 0}
 --- !u!1 &554101364
 GameObject:
   m_ObjectHideFlags: 0
@@ -1561,7 +1561,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 616280663}
   m_LocalRotation: {x: 0.11618328, y: -0, z: -0, w: 0.99322784}
-  m_LocalPosition: {x: -10.304, y: 6.359, z: -5.115}
+  m_LocalPosition: {x: -10.304, y: 6.218, z: -5.148}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2797,7 +2797,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Beat of the <color=red>Heart
+  m_text: 'Beat of the <color=red>Heart</color=red>
+
+    <size=12>@CONQuest 2023'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 25deaf47937ee20429446966fd08331d, type: 2}
   m_sharedMaterial: {fileID: -773882370182637941, guid: 25deaf47937ee20429446966fd08331d, type: 2}
@@ -2831,7 +2833,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -2918,17 +2920,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1063029232}
-  m_LocalRotation: {x: 0.3655639, y: 0.028453212, z: -0.011180951, w: 0.93028414}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.035, y: 0.035, z: 0.035}
+  m_LocalRotation: {x: 0.36555687, y: 0.027871588, z: -0.011409506, w: 0.93030167}
+  m_LocalPosition: {x: 0, y: 0, z: -0.657}
+  m_LocalScale: {x: 0.058513, y: 0.058513, z: 0.058513}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 547052820}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 42.906, y: 3.504, z: 0}
+  m_LocalEulerAnglesHint: {x: 42.906, y: 3.406, z: -0.067}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -0.085, y: 0.13}
   m_SizeDelta: {x: 30, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &1072192509
@@ -4096,8 +4098,9 @@ Transform:
   - {fileID: 1643296003}
   - {fileID: 1564888164}
   - {fileID: 616280664}
+  - {fileID: 547052820}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1477984468
 MonoBehaviour:
