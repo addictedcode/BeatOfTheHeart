@@ -25,8 +25,8 @@ public class PlayerInput : MonoBehaviour
     {
         if (hadInputThisBeat)
             hadInputThisBeat = false;
-        //else
-        //    GameManager.Instance.ResetComboMeter();
+        else if(GameManager.Instance.PM.currentPhaseState == PhaseState.Combat)
+            GameManager.Instance.ResetComboMeter();
     }
 
     public void OnDodge(InputValue value)
