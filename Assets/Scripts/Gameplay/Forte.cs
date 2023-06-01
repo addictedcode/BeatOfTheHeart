@@ -128,6 +128,11 @@ public class Forte : MonoBehaviour
     {
         int totalDamage = Mathf.RoundToInt(reflectDamage * GameManager.Instance.GetPlayerComboDamageMultiplier());
         return totalDamage;
-}
+    }
     private void AddSuperMeterValue(int value) => superMeterValue = Mathf.Clamp(superMeterValue += value, 0, maxSuperMeter);
+
+    //public void ResetTilePosition()
+    //{
+    //    GameManager.Instance.PM.
+    //}
 }

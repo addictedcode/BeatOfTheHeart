@@ -147,12 +147,30 @@ public class GameManager : MonoBehaviour
         phasesManager.InitPhase(phasesManager.currentPhase);
         currentVC = phasesManager.Phases[phasesManager.currentPhase].camera;
         phasesManager.currentPhaseState = PhaseState.Spawning;
+        player.GetComponent<Animator>().applyRootMotion = false;
+        switch (phasesManager.currentPhase)
+        {
+            case 0:
+                player.PlayAnimation("LandingTransition1");
+                break;
+            case 1:
+                player.PlayAnimation("LandingTransition2");
+                break;
+            case 2:
+                player.PlayAnimation("LandingTransition3");
+                break;
+            default:
+                break;
+        }
+
 
         // delayed to allow for spawn animation to play
         StartCoroutine(Delay());
         IEnumerator Delay()
         {
             yield return new WaitForSeconds(delay);
+            player.PlayAnimation("Idle");
+            player.GetComponent<Animator>().applyRootMotion = true;
             phasesManager.currentPhaseState = PhaseState.Combat;
             PlayerInput.enabled = true;
             minotaur.StartCombat();
@@ -169,15 +187,14 @@ public class GameManager : MonoBehaviour
     {
         phasesManager.currentPhaseState = PhaseState.Transition;
         //phasesManager.Phases[phasesManager.currentPhase].camera.transform.SetParent(player.transform);
-        player.PlayAnimation("PC_Transition1"); 
+        player.PlayAnimation("JumpTransition"); 
         
 
         StartCoroutine(Delay());
 
         IEnumerator Delay()
         {
-            yield return new WaitForSeconds(5);
-
+            yield return new WaitForSeconds(1.25f);
             PlayGameAfterDelay(4.5f); // to accomodate for Minotaur's death animation
         }
     }
