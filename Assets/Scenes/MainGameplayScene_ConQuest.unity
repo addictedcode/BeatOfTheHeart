@@ -1055,7 +1055,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 224811858}
-  m_LocalRotation: {x: 0.31519967, y: 0.19490421, z: -0.066312656, w: 0.92642546}
+  m_LocalRotation: {x: -0.07003851, y: 0.0069387504, z: 0.00048718796, w: 0.99752}
   m_LocalPosition: {x: 1.46, y: -0.90300006, z: -7.518999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2268,6 +2268,7 @@ GameObject:
   - component: {fileID: 643060540}
   - component: {fileID: 643060539}
   - component: {fileID: 643060538}
+  - component: {fileID: 643060544}
   m_Layer: 0
   m_Name: Player Character
   m_TagString: Untagged
@@ -2474,7 +2475,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
+  m_SpriteSortPoint: 1
 --- !u!4 &643060543
 Transform:
   m_ObjectHideFlags: 0
@@ -2490,6 +2491,18 @@ Transform:
   m_Father: {fileID: 636332613}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &643060544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 643060537}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a303803a3d2d1b043af85598089c866b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &650465435
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4907,8 +4920,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   comboMusicList:
-  - clip: {fileID: 8300000, guid: 74bafd989c7fc9a4593cab5002a178d0, type: 3}
-    comboCount: 5
+  - clip: {fileID: 8300000, guid: 293963f9c539d334da4583d8e795109a, type: 3}
+    comboCount: 4
+    audioSource: {fileID: 0}
+  - clip: {fileID: 8300000, guid: d7f44e8364c60e74ba81cfac50e1a318, type: 3}
+    comboCount: 16
     audioSource: {fileID: 0}
   mixerGroup: {fileID: 8187382163567079722, guid: 1de9963637e33e042b0ac30a4b307f84, type: 2}
 --- !u!4 &1208596806
@@ -5297,9 +5313,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ComboList:
-  - list: 01000000020000000300000004000000
-  - list: 01000000020000000300000004000000
-  - list: 01000000020000000300000004000000
+  - list: 0100000001000000030000000300000002000000040000000200000004000000
+  - list: 0300000002000000010000000400000003000000020000000100000004000000
+  - list: 0100000003000000040000000200000001000000030000000400000002000000
   m_BoardList:
   - {fileID: 886059302}
   - {fileID: 1534164089}
@@ -6177,7 +6193,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1608471261}
-  m_LocalRotation: {x: -0.023242634, y: 0.037721917, z: 0.0008776188, w: 0.9990176}
+  m_LocalRotation: {x: -0.023242654, y: 0.037721884, z: 0.00087761873, w: 0.9990176}
   m_LocalPosition: {x: 1.454, y: -1.95, z: -11.833}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

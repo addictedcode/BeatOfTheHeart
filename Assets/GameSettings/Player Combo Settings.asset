@@ -17,15 +17,15 @@ MonoBehaviour:
     damageMultipler: 1
     meterColor: {r: 1, g: 1, b: 1, a: 1}
   - threshold: 16
-    damageMultipler: 1.25
+    damageMultipler: 1.5
     meterColor: {r: 1, g: 0.99260557, b: 0.3915094, a: 1}
   - threshold: 32
-    damageMultipler: 1.5
-    meterColor: {r: 0.39215684, g: 0.87894046, b: 1, a: 1}
+    damageMultipler: 2
+    meterColor: {r: 0, g: 0.40511465, b: 1, a: 1}
   hasUniqueTextOnMiss: 0
   uniqueMissText: MISS
   missComboColor: {r: 0.4339623, g: 0.4339623, b: 0.4339623, a: 1}
-  hasUniqueTextOnMax: 0
+  hasUniqueTextOnMax: 1
   uniqueMaxText: MAX
-  maxComboColor: {r: 1, g: 0.39215687, b: 0.98039216, a: 1}
-  maxDamageMultiplier: 2
+  maxComboColor: {r: 1, g: 0.020399556, b: 0, a: 1}
+  maxDamageMultiplier: 2.5

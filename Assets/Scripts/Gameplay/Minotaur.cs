@@ -270,7 +270,7 @@ public class Minotaur : MonoBehaviour
         if (isFinalPhase)
         {
             isCombat = false;
-            animator.Play("WindupProjectile");
+            animator.Play("Stunned");
         }
         else
         {
