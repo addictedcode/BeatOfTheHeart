@@ -2308,8 +2308,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99fa79ee20f9fbb45a807a0ade4668e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 4
-  attackDamage: 1
+  health: 9999
+  attackDamage: 25
   reflectDamage: 5
   attackAddSuper: 3
   reflectAddSuper: 10
@@ -2918,6 +2918,7 @@ GameObject:
   - component: {fileID: 695080073}
   - component: {fileID: 695080072}
   - component: {fileID: 695080071}
+  - component: {fileID: 695080074}
   m_Layer: 0
   m_Name: Minotaur Boss
   m_TagString: Untagged
@@ -3044,6 +3045,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &695080074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 695080069}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a303803a3d2d1b043af85598089c866b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &726082135
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3126,6 +3139,7 @@ GameObject:
   - component: {fileID: 747032217}
   - component: {fileID: 747032216}
   - component: {fileID: 747032215}
+  - component: {fileID: 747032218}
   m_Layer: 0
   m_Name: Minotaur Boss
   m_TagString: Untagged
@@ -3250,6 +3264,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &747032218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 747032213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a303803a3d2d1b043af85598089c866b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &751997531
 GameObject:
   m_ObjectHideFlags: 0
@@ -3572,6 +3598,7 @@ GameObject:
   - component: {fileID: 838692119}
   - component: {fileID: 838692118}
   - component: {fileID: 838692117}
+  - component: {fileID: 838692121}
   m_Layer: 0
   m_Name: Minotaur Boss
   m_TagString: Untagged
@@ -3696,6 +3723,18 @@ Transform:
   m_Father: {fileID: 358163603}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -26.331, y: -3.908, z: 3.978}
+--- !u!114 &838692121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 838692116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a303803a3d2d1b043af85598089c866b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &886059301 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 414720681712025795, guid: 2abcb5b393eb70a4eb781e4ffb3feb49, type: 3}
@@ -3724,6 +3763,7 @@ GameObject:
   - component: {fileID: 891541619}
   - component: {fileID: 891541618}
   - component: {fileID: 891541617}
+  - component: {fileID: 891541620}
   m_Layer: 0
   m_Name: cm
   m_TagString: Untagged
@@ -3807,6 +3847,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &891541620
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 891541615}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_NoiseProfile: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
+  m_PivotOffset: {x: 1, y: 1, z: 1}
+  m_AmplitudeGain: 0
+  m_FrequencyGain: 2
+  mNoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!1001 &897977800
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5383,6 +5440,7 @@ GameObject:
   - component: {fileID: 1334399276}
   - component: {fileID: 1334399275}
   - component: {fileID: 1334399274}
+  - component: {fileID: 1334399277}
   m_Layer: 0
   m_Name: cm
   m_TagString: Untagged
@@ -5466,6 +5524,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1334399277
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1334399272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_NoiseProfile: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
+  m_PivotOffset: {x: 1, y: 1, z: 1}
+  m_AmplitudeGain: 0
+  m_FrequencyGain: 2
+  mNoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!1 &1351697963
 GameObject:
   m_ObjectHideFlags: 0
@@ -6068,7 +6143,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1608471261}
-  m_LocalRotation: {x: -0.023242654, y: 0.037721884, z: 0.00087761873, w: 0.9990176}
+  m_LocalRotation: {x: -0.023242634, y: 0.037721917, z: 0.0008776188, w: 0.9990176}
   m_LocalPosition: {x: 1.454, y: -1.95, z: -11.833}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

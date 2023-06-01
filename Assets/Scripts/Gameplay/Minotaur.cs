@@ -28,8 +28,8 @@ public class Minotaur : MonoBehaviour
     #endregion
 
     [Header("General")]
-    private int maxHealth = 100;
-    [SerializeField] private int health = 100;
+    private float maxHealth = 100;
+    [SerializeField] private float health = 100;
     [SerializeField] private int meleeDamage = 1;
     [SerializeField] private int projectileDamage = 1;
     [SerializeField] private int specialDamage = 2;
@@ -39,7 +39,7 @@ public class Minotaur : MonoBehaviour
     private int currentMinotaurPhaseComboInfoIndex = 0;
 
     private bool isCombat = false;
-    public int Health => health;
+    public float Health => health;
 
     //Debugging States
     [SerializeField] private MinotaurState minotaurState = MinotaurState.Idle;
@@ -180,10 +180,10 @@ public class Minotaur : MonoBehaviour
                 StartCoroutine(DoMeleeAttack(meleeDamage, 0, "RightSwing", "Punch"));
                 break;
             case MinotaurAttacks.LFireball:
-                StartCoroutine(DoProjectileAttack(projectileDamage, 1, "Idle", "Fireball"));
+                StartCoroutine(DoProjectileAttack(projectileDamage, 1, "LeftFireballShoot", "Fireball"));
                 break;
             case MinotaurAttacks.RFireball:
-                StartCoroutine(DoProjectileAttack(projectileDamage, 0, "Idle", "Fireball"));
+                StartCoroutine(DoProjectileAttack(projectileDamage, 0, "RightFireballShoot", "Fireball"));
                 break;
             case MinotaurAttacks.Idle:
                 animator.Play("Idle");
@@ -237,7 +237,16 @@ public class Minotaur : MonoBehaviour
 
     private void WindupProjectile(int tile)
     {
-        animator.Play("WindupProjectile");
+
+        if (tile == 0)
+        {
+            animator.Play("RightWindupFireball");
+        }
+        else
+        {
+            animator.Play("LeftWindupFireball");
+        }
+        //animator.Play("WindupProjectile");
         queuedAttacks.Enqueue(tile == 0 ? MinotaurAttacks.RFireball : MinotaurAttacks.LFireball);
         SFXManager.Instance.PlayOneShot("Fireball_Windup");
         queuedFireballs.Enqueue(GameManager.Instance.SpawnFireball(tile));
@@ -290,7 +299,7 @@ public class Minotaur : MonoBehaviour
         if (currentMinotaurPhaseComboInfoIndex + 1 >= minotaurPhaseComboInfoList.Length) return;
 
         float HPThreshold = minotaurPhaseComboInfoList[currentMinotaurPhaseComboInfoIndex + 1].HPThreshold;
-        if (health <= (float)maxHealth * HPThreshold)
+        if (health <= maxHealth * HPThreshold)
         {
             currentMinotaurPhaseComboInfoIndex++;
         }
