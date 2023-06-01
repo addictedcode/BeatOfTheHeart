@@ -11,6 +11,7 @@ public class ScreenShaker : MonoBehaviour
     public void ShakeScreen(float delay)
     {
         GameManager.Instance.currentVC.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>().m_AmplitudeGain = 1;
+        StopAllCoroutines();
         StartCoroutine(Delay(delay));
         
         IEnumerator Delay(float time)

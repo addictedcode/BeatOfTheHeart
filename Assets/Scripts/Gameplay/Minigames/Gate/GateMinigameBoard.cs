@@ -22,6 +22,7 @@ public class GateMinigameBoard : MonoBehaviour
         {
             m_arrows[index].ToggleLitArrow(true);
             m_arrows[index].PlayVFX();
+            GetComponent<ScreenShaker>().ShakeScreen(.1f);
         }
     }
 
@@ -39,11 +40,13 @@ public class GateMinigameBoard : MonoBehaviour
         {
             Destroy(arrow.gameObject);
         }
+        GetComponent<ScreenShaker>().ShakeScreen(.2f);
         m_arrows.Clear();
     }
 
     public void OpenGate()
     {
         gate.GetComponent<Animator>().enabled = true;
+        GetComponent<ScreenShaker>().ShakeScreen(.5f);
     }
 }
