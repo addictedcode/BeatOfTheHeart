@@ -952,7 +952,7 @@ MonoBehaviour:
   subBorder: {fileID: 342451171}
   comboSettings: {fileID: 11400000, guid: 7fd80264be4fc0840a3406dc1f2cd9ca, type: 2}
   matchColorWithComboMeter: 1
-  useLevelOneColorOnMiss: 0
+  useLevelOneColorOnMiss: 1
 --- !u!1 &1944865332
 GameObject:
   m_ObjectHideFlags: 0

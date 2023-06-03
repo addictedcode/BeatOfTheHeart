@@ -24,10 +24,10 @@ public class playerHPUI : MonoBehaviour
         bgImage.GetComponent<Animator>().enabled = true;
     }
 
-    public void setHP(int HP)
+    public void setHP(float HP)
     {
-        fillImage.GetComponent<Image>().fillAmount = .25f * HP;
-        bgImage.GetComponent<Image>().fillAmount = 1f -  .25f * HP;
+        fillImage.GetComponent<Image>().fillAmount = HP / 16f;
+        bgImage.GetComponent<Image>().fillAmount = 1 - HP/16f;
     }
 
     void Update()

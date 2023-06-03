@@ -7,7 +7,7 @@ public static class BeatsManager
 {
     public static uint BPM = 120;
     public static float secondsPerBeat = 0.5f;
-    public static float windowBeatTime = 0.1f;
+    public static float windowBeatTime = 0.15f;
     public static float offsetBeatTime = -0.07f;
 
     public static Action<float> OnBeat;

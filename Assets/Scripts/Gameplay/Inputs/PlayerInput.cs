@@ -14,6 +14,9 @@ public class PlayerInput : MonoBehaviour
     {
         player = GetComponent<Forte>();
         BeatsManager.OnHalfBeat += OnHalfBeat;
+
+        // DEBUG
+        BeatsManager.OnBeat += Debug_RandomMove;
     }
 
     private void OnDestroy()
@@ -21,11 +24,23 @@ public class PlayerInput : MonoBehaviour
         BeatsManager.OnHalfBeat -= OnHalfBeat;
     }
 
+    private void Debug_RandomMove(float time)
+    {
+        int randAction = UnityEngine.Random.Range(0, 4);
+
+        if (randAction == 0)
+            Debug_OnAttack();
+        else if (randAction == 1)
+            Debug_OnReflect();
+        else
+            Debug_OnDodge();
+    }
+
     private void OnHalfBeat(float time)
     {
         if (hadInputThisBeat)
             hadInputThisBeat = false;
-        else if(GameManager.Instance.PM.currentPhaseState == PhaseState.Combat)
+        else if (GameManager.Instance.PM.currentPhaseState == PhaseState.Combat)
             GameManager.Instance.ResetComboMeter();
     }
 
@@ -50,6 +65,12 @@ public class PlayerInput : MonoBehaviour
         }
     }
 
+    public void Debug_OnDodge()
+    {
+        hadInputThisBeat = true;
+        player.Move(UnityEngine.Random.Range(0.0f, 1.0f) > 0.5f ? 1 : -1);
+    }
+
     public void OnAttack()
     {
         if (hadInputThisBeat)
@@ -68,6 +89,12 @@ public class PlayerInput : MonoBehaviour
         }
     }
 
+    public void Debug_OnAttack()
+    {
+        hadInputThisBeat = true;
+        player.Attack();
+    }
+
     public void OnReflect()
     {
         if (hadInputThisBeat)
@@ -83,6 +110,12 @@ public class PlayerInput : MonoBehaviour
             //Punish
             PunishMissInput();
         }
+    }
+
+    public void Debug_OnReflect()
+    {
+        hadInputThisBeat = true;
+        player.Reflect();
     }
 
     public void OnDirection(InputValue value)
